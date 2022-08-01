@@ -1,19 +1,21 @@
 import React from "react";
 import { HStack } from "@chakra-ui/react";
-import Button from "ui/components/Button/Button";
 import Input from "ui/components/Input/Input";
+import { BiSend } from "react-icons/bi";
+import { theme } from "utils/theme";
+import Box from "ui/components/Box/Box";
 
 const Post: React.FC = () => {
 	return (
 		<HStack>
 			<Input placeholder="Hi!" />
-			<Button
+			<Box
 				onClick={() => {
 					console.log("onClick");
 				}}
 			>
-				post
-			</Button>
+				<BiSend color={theme.color.blue} size="32px" />
+			</Box>
 		</HStack>
 	);
 };
