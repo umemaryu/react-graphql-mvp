@@ -3,8 +3,9 @@ import React, { ReactNode } from "react";
 
 interface Props {
 	children: ReactNode;
-	mb: number;
-	w: string;
+	mb?: number;
+	spacing?: number;
+	w?: string;
 }
 
 const VStack: React.FC<Props> = ({ children, ...props }) => (

@@ -4,8 +4,11 @@ import React, { ReactNode } from "react";
 interface Props {
 	children: ReactNode;
 	textAlign?: "center";
+	w?: string;
+	pt?: number;
 	mt?: number;
 	mb?: number;
+	border?: string;
 	onClick?: () => void;
 }
 

@@ -1,4 +1,4 @@
-import { ResponsiveValue, Text as ChakraText } from "@chakra-ui/react";
+import { Text as ChakraText } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 
 interface Props {
@@ -7,14 +7,21 @@ interface Props {
 	textAlign?: "center";
 	mt?: number;
 	mb?: number;
-	fontSize?: {
-		sm: string;
-		md: string;
-		lg: string;
-	};
+	fontSize?:
+		| {
+				sm: string;
+				md: string;
+				lg: string;
+		  }
+		| string;
 	borderBottom?: string;
+	borderLeft?: string;
+	borderRight?: string;
 	display?: string;
 	cursor?: string;
+	bg?: string;
+	h?: string;
+	lineHeight?: string;
 	onClick?: () => void;
 }
 

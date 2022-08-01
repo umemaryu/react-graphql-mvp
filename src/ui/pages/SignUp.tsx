@@ -11,12 +11,6 @@ import { theme } from "utils/theme";
 
 const SignUp: React.FC = () => {
 	const list = [
-		{ text: "Email", type: "email", placeholder: "mail@example.com" },
-		{
-			text: "Password(min 6 characters)",
-			type: "password",
-			placeholder: "abc123",
-		},
 		{
 			text: "First name",
 			placeholder: "First name",
@@ -28,6 +22,12 @@ const SignUp: React.FC = () => {
 		{
 			text: "City",
 			placeholder: "City",
+		},
+		{ text: "Email", type: "email", placeholder: "mail@example.com" },
+		{
+			text: "Password(min 6 characters)",
+			type: "password",
+			placeholder: "abc123",
 		},
 	];
 	return (

@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 
 interface Props {
 	children: ReactNode;
-	mb: number;
+	mb?: number;
 	isFullWidth?: boolean;
 	onClick: () => void;
 }
