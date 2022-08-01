@@ -13,8 +13,12 @@ interface Props {
 		lg: string;
 	};
 	borderBottom?: string;
+	borderLeft?: string;
 	display?: string;
 	cursor?: string;
+	bg?: string;
+	h?: string;
+	lineHeight?: string;
 	onClick?: () => void;
 }
 

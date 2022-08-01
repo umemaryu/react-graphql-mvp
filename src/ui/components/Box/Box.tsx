@@ -6,6 +6,7 @@ interface Props {
 	textAlign?: "center";
 	mt?: number;
 	mb?: number;
+	border?: string;
 	onClick?: () => void;
 }
 

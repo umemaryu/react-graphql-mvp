@@ -3,8 +3,11 @@ import React, { ReactNode } from "react";
 
 interface Props {
 	children: ReactNode;
-	borderRadius: number;
+	borderRadius?: number;
 	border: string;
+	w?: string;
+	h?: string;
+	mt?: number;
 }
 
 const Container: React.FC<Props> = ({ children, ...props }) => (

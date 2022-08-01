@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 
 interface Props {
 	children: ReactNode;
-	h: string;
+	h?: string;
 }
 
 const Center: React.FC<Props> = ({ children, ...props }) => (
