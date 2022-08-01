@@ -11,7 +11,7 @@ interface Props {
 	page: "Profile" | "Browse" | "Account";
 }
 
-const Wall: React.FC<Props> = ({ children, page }) => {
+const WallContainer: React.FC<Props> = ({ children, page }) => {
 	const list = ["Profile", "Browse", "Account"];
 	const w = "40vw";
 	const textH = "40px";
@@ -20,13 +20,14 @@ const Wall: React.FC<Props> = ({ children, page }) => {
 			<Center>
 				<VStack mb={100} w={theme.w.mobile}>
 					<Grid templateColumns="repeat(3, 1fr)" w={w}>
-						{list.map((ele) => (
+						{list.map((ele, index) => (
 							<Text
 								key={ele}
 								bg={ele === page ? "blue.100" : "initial"}
 								h={textH}
 								lineHeight={textH}
 								borderLeft={theme.border}
+								borderRight={index == list.length - 1 ? theme.border : ""}
 								borderBottom={theme.border}
 								textAlign={"center"}
 							>
@@ -41,4 +42,4 @@ const Wall: React.FC<Props> = ({ children, page }) => {
 	);
 };
 
-export default Wall;
+export default WallContainer;
