@@ -1,19 +1,12 @@
-import { Input as ChakraInput, Text } from "@chakra-ui/react";
-import React, { ChangeEvent } from "react";
+import { Input as ChakraInput } from "@chakra-ui/react";
+import React from "react";
 
 interface Props {
-	value: string;
-	text: string;
-	placeholder?: string;
-	mb?: number;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	type: React.HTMLInputTypeAttribute;
+	placeholder: string;
 }
 
-const Input: React.FC<Props> = ({ mb, text, ...props }) => (
-	<>
-		<Text mb={1}>{text}</Text>
-		<ChakraInput size="lg" {...props} />
-	</>
+const Input: React.FC<Props> = ({ ...props }) => (
+	<ChakraInput size="lg" {...props} />
 );
-
 export default Input;
