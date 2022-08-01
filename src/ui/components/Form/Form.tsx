@@ -5,7 +5,6 @@ import FormHelperText from "ui/components/Form/FormHelperText";
 import FormLabel from "ui/components/Form/FormLabel";
 import Input from "ui/components/Input/Input";
 import Box from "ui/components/Box/Box";
-import { Fragment } from "react";
 
 interface Props {
 	list: IFormList[];

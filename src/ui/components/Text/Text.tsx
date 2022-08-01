@@ -1,4 +1,4 @@
-import { ResponsiveValue, Text as ChakraText } from "@chakra-ui/react";
+import { Text as ChakraText } from "@chakra-ui/react";
 import React, { ReactNode } from "react";
 
 interface Props {
