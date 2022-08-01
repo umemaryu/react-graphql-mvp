@@ -5,9 +5,7 @@ import Text from "ui/components/Text/Text";
 import { theme } from "utils/theme";
 import Box from "ui/components/Box/Box";
 
-interface Props {}
-
-const UserInfo: React.FC<Props> = ({}) => {
+const UserInfo: React.FC = () => {
 	const list = ["First name", "Country", "City", "Email"];
 	return (
 		<Box>
