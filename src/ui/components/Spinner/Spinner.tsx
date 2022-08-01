@@ -5,8 +5,8 @@ interface Props {
 	size: string;
 }
 
-const Spinner: React.FC<Props> = () => {
-	return <ChakraSpinner />;
+const Spinner: React.FC<Props> = ({ ...props }) => {
+	return <ChakraSpinner {...props} />;
 };
 
 export default Spinner;
