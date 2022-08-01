@@ -1,9 +1,8 @@
 import React from "react";
-import { HStack } from "@chakra-ui/react";
 import Input from "ui/components/Input/Input";
 import { BiSend } from "react-icons/bi";
-import { theme } from "utils/theme";
 import Box from "ui/components/Box/Box";
+import HStack from "ui/components/Stack/HStack";
 
 const Post: React.FC = () => {
 	return (
@@ -14,7 +13,7 @@ const Post: React.FC = () => {
 					console.log("onClick");
 				}}
 			>
-				<BiSend color={theme.color.blue} size="32px" />
+				<BiSend cursor={"pointer"} />
 			</Box>
 		</HStack>
 	);

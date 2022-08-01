@@ -4,6 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
 import Spinner from "ui/components/Spinner/Spinner";
 import { IconContext } from "react-icons";
+import { theme } from "utils/theme";
 
 type AppProviderProps = {
 	children: React.ReactNode;
@@ -23,7 +24,7 @@ export const AppProvider = ({ children }: AppProviderProps) => (
 			)}
 		>
 			<ChakraProvider>
-				<IconContext.Provider value={{}}>
+				<IconContext.Provider value={{ color: theme.color.blue, size: "32px" }}>
 					<Router>{children}</Router>
 				</IconContext.Provider>
 			</ChakraProvider>

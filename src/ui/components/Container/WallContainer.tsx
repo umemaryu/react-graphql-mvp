@@ -27,11 +27,12 @@ const WallContainer: React.FC<Props> = ({ children, page }) => {
 						{list.map((ele, index) => (
 							<Text
 								key={ele}
+								cursor="pointer"
 								bg={ele === page ? "blue.100" : "initial"}
 								h={textH}
 								lineHeight={textH}
 								borderLeft={theme.border}
-								borderRight={index == list.length - 1 ? theme.border : ""}
+								borderRight={index === list.length - 1 ? theme.border : ""}
 								borderBottom={theme.border}
 								textAlign={"center"}
 							>

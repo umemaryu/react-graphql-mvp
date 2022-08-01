@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 interface Props {
 	children: ReactNode;
 	mb?: number;
+	spacing?: number;
 	w?: string;
 }
 

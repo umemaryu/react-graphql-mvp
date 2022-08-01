@@ -1,4 +1,3 @@
-import { VStack } from "@chakra-ui/react";
 import React from "react";
 import Box from "ui/components/Box/Box";
 import Button from "ui/components/Button/Button";
@@ -6,6 +5,7 @@ import Center from "ui/components/Center/Center";
 import WallContainer from "ui/components/Container/WallContainer";
 import UserInfo from "ui/components/List/UserInfo";
 import Post from "ui/components/Post/Post";
+import VStack from "ui/components/Stack/VStack";
 import Text from "ui/components/Text/Text";
 import { theme } from "utils/theme";
 

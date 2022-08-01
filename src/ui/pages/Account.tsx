@@ -3,6 +3,7 @@ import Box from "ui/components/Box/Box";
 import Button from "ui/components/Button/Button";
 import WallContainer from "ui/components/Container/WallContainer";
 import Form from "ui/components/Form/Form";
+import Text from "ui/components/Text/Text";
 import { theme } from "utils/theme";
 
 const Account: React.FC = () => {
@@ -31,14 +32,9 @@ const Account: React.FC = () => {
 				>
 					Update Password
 				</Button>
-				<Button
-					onClick={() => {
-						console.log("onClick");
-					}}
-					isFullWidth
-				>
+				<Text cursor="pointer" textAlign="center">
 					Sign Out
-				</Button>
+				</Text>
 			</Box>
 		</WallContainer>
 	);
