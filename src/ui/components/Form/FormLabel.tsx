@@ -5,6 +5,7 @@ interface Props {
 	children: ReactNode;
 }
 
-export const FormLabel: React.FC<Props> = ({ children, ...props }) => (
+const FormLabel: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraFormLabel {...props}>{children}</ChakraFormLabel>
 );
+export default FormLabel;

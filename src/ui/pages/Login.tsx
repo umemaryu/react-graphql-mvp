@@ -1,11 +1,12 @@
-import { FormControl, FormLabel } from "@chakra-ui/react";
 import React from "react";
 import Box from "ui/components/Box/Box";
 import Button from "ui/components/Button/Button";
 import Center from "ui/components/Center/Center";
 import Container from "ui/components/Container/Container";
 import Divider from "ui/components/Divider/Divider";
-import { FormHelperText } from "ui/components/Form/FormHelperText";
+import FormControl from "ui/components/Form/FormControl";
+import FormHelperText from "ui/components/Form/FormHelperText";
+import FormLabel from "ui/components/Form/FormLabel";
 import Input from "ui/components/Input/Input";
 import VStack from "ui/components/Stack/VStack";
 import Text from "ui/components/Text/Text";
@@ -28,7 +29,7 @@ const Login: React.FC = () => {
 								<Input {...ele} />
 							</Box>
 						))}
-						<Box mt={theme.m.sm} mb={theme.m.sm}>
+						<Box textAlign="center" mt={theme.m.sm} mb={theme.m.sm}>
 							<FormHelperText>Wrong something.</FormHelperText>
 						</Box>
 					</FormControl>
