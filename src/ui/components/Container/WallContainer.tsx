@@ -13,13 +13,17 @@ interface Props {
 
 const WallContainer: React.FC<Props> = ({ children, page }) => {
 	const list = ["Profile", "Browse", "Account"];
-	const w = "40vw";
 	const textH = "40px";
 	return (
-		<Container w={w} border={theme.border} h={"60vh"} mt={theme.m.lg}>
+		<Container
+			w={theme.w.wall}
+			border={theme.border}
+			h={"60vh"}
+			mt={theme.m.lg}
+		>
 			<Center>
-				<VStack mb={100} w={theme.w.mobile}>
-					<Grid templateColumns="repeat(3, 1fr)" w={w}>
+				<VStack mb={100}>
+					<Grid templateColumns="repeat(3, 1fr)" w={theme.w.wall}>
 						{list.map((ele, index) => (
 							<Text
 								key={ele}

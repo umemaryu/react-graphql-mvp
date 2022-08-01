@@ -7,13 +7,16 @@ interface Props {
 	textAlign?: "center";
 	mt?: number;
 	mb?: number;
-	fontSize?: {
-		sm: string;
-		md: string;
-		lg: string;
-	};
+	fontSize?:
+		| {
+				sm: string;
+				md: string;
+				lg: string;
+		  }
+		| string;
 	borderBottom?: string;
 	borderLeft?: string;
+	borderRight?: string;
 	display?: string;
 	cursor?: string;
 	bg?: string;

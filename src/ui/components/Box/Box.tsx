@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 interface Props {
 	children: ReactNode;
 	textAlign?: "center";
+	pt?: number;
 	mt?: number;
 	mb?: number;
 	border?: string;
