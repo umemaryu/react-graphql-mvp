@@ -9,7 +9,7 @@ import VStack from "ui/components/Stack/VStack";
 import Text from "ui/components/Text/Text";
 import { theme } from "utils/theme";
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
 	const list = [
 		{ text: "Email", type: "email", placeholder: "mail@example.com" },
 		{
@@ -17,11 +17,23 @@ const Login: React.FC = () => {
 			type: "password",
 			placeholder: "abc123",
 		},
+		{
+			text: "First name",
+			placeholder: "First name",
+		},
+		{
+			text: "Country",
+			placeholder: "Country",
+		},
+		{
+			text: "City",
+			placeholder: "City",
+		},
 	];
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
-				<Text fontSize={theme.fs.h3}>Login</Text>
+				<Text fontSize={theme.fs.h3}>SignUp</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form list={list} />
 					<Button
@@ -31,7 +43,7 @@ const Login: React.FC = () => {
 							console.log("onClick");
 						}}
 					>
-						Login
+						Resister
 					</Button>
 					<Divider mb={theme.m.sm} />
 					<Box textAlign="center">
@@ -44,7 +56,7 @@ const Login: React.FC = () => {
 								console.log("onClick");
 							}}
 						>
-							Sign up
+							Login
 						</Text>
 					</Box>
 				</Container>
@@ -53,4 +65,4 @@ const Login: React.FC = () => {
 	);
 };
 
-export default Login;
+export default SignUp;
