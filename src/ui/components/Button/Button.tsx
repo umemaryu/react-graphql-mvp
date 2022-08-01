@@ -6,8 +6,8 @@ interface Props {
 	children: ReactNode;
 }
 
-const Button: React.FC<Props> = ({ children, ...props }) => {
-	return <ChakraButton {...props}>{children}</ChakraButton>;
-};
+const Button: React.FC<Props> = ({ children, ...props }) => (
+	<ChakraButton {...props}>{children}</ChakraButton>
+);
 
 export default Button;
