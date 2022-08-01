@@ -2,7 +2,7 @@ import { Input as ChakraInput } from "@chakra-ui/react";
 import React from "react";
 
 interface Props {
-	type: React.HTMLInputTypeAttribute;
+	type?: React.HTMLInputTypeAttribute;
 	placeholder: string;
 }
 
