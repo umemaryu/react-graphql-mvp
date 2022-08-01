@@ -4,10 +4,7 @@ import Button from "ui/components/Button/Button";
 import Center from "ui/components/Center/Center";
 import Container from "ui/components/Container/Container";
 import Divider from "ui/components/Divider/Divider";
-import FormControl from "ui/components/Form/FormControl";
-import FormHelperText from "ui/components/Form/FormHelperText";
-import FormLabel from "ui/components/Form/FormLabel";
-import Input from "ui/components/Input/Input";
+import Form from "ui/components/Form/Form";
 import VStack from "ui/components/Stack/VStack";
 import Text from "ui/components/Text/Text";
 import { theme } from "utils/theme";
@@ -15,24 +12,18 @@ import { theme } from "utils/theme";
 const Login: React.FC = () => {
 	const list = [
 		{ text: "Email", type: "email", placeholder: "mail@example.com" },
-		{ text: "Password", type: "password", placeholder: "abc123" },
+		{
+			text: "Password(min 6 characters)",
+			type: "password",
+			placeholder: "abc123",
+		},
 	];
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
-					<FormControl>
-						{list.map((ele) => (
-							<Box mt={theme.m.sm} mb={theme.m.sm}>
-								<FormLabel>{ele.text}</FormLabel>
-								<Input {...ele} />
-							</Box>
-						))}
-						<Box textAlign="center" mt={theme.m.sm} mb={theme.m.sm}>
-							<FormHelperText>Wrong something.</FormHelperText>
-						</Box>
-					</FormControl>
+					<Form list={list} />
 					<Button
 						isFullWidth
 						mb={theme.m.sm}
