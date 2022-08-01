@@ -12,8 +12,8 @@ import { theme } from "utils/theme";
 const SignUp: React.FC = () => {
 	const list = [
 		{
-			text: "First name",
-			placeholder: "First name",
+			text: "Nick name",
+			placeholder: "Nick name",
 		},
 		{
 			text: "Country",

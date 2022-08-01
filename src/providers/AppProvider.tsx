@@ -11,13 +11,7 @@ type AppProviderProps = {
 };
 
 export const AppProvider = ({ children }: AppProviderProps) => (
-	<React.Suspense
-		fallback={
-			<div className="flex items-center justify-center w-screen h-screen">
-				<Spinner size="xl" />
-			</div>
-		}
-	>
+	<React.Suspense fallback={<Spinner size="xl" />}>
 		<ErrorBoundary
 			FallbackComponent={() => (
 				<h2>Something went wrong, please reload page</h2>
