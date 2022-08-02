@@ -5,7 +5,7 @@ const Profile = React.lazy(() => import("ui/pages/Profile"));
 const Browse = React.lazy(() => import("ui/pages/Browse"));
 const { Account } = lazyImport(() => import("features/auth"), "Account");
 
-export const privateRoutes = [
+export const protectedRoutes = [
 	{
 		path: "/profile",
 		element: <Profile />,
