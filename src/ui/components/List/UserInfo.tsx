@@ -6,7 +6,7 @@ import { theme } from "utils/theme";
 import Box from "ui/components/Box/Box";
 
 const UserInfo: React.FC = () => {
-	const list = ["First name", "Country", "City", "Email"];
+	const list = ["Nick name", "Country", "City", "Email"];
 	return (
 		<Box>
 			{list.map((ele) => (
