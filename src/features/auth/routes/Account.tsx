@@ -6,7 +6,7 @@ import { Form } from "components/Form/Form";
 import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
 
-const Account: React.FC = () => {
+export const Account: React.FC = () => {
 	const list = [
 		{
 			text: "New password(min 6 characters)",
@@ -39,5 +39,3 @@ const Account: React.FC = () => {
 		</WallContainer>
 	);
 };
-
-export default Account;
