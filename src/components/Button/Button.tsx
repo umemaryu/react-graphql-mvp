@@ -8,7 +8,11 @@ interface Props {
 	onClick: () => void;
 }
 
-const Button: React.FC<Props> = ({ children, isFullWidth, ...props }) => (
+export const Button: React.FC<Props> = ({
+	children,
+	isFullWidth,
+	...props
+}) => (
 	<ChakraButton
 		w={isFullWidth ? "100%" : "initial"}
 		colorScheme={"blue"}
@@ -17,5 +21,3 @@ const Button: React.FC<Props> = ({ children, isFullWidth, ...props }) => (
 		{children}
 	</ChakraButton>
 );
-
-export default Button;

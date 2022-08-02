@@ -6,7 +6,6 @@ interface Props {
 	placeholder: string;
 }
 
-const Input: React.FC<Props> = ({ ...props }) => (
+export const Input: React.FC<Props> = ({ ...props }) => (
 	<ChakraInput size="lg" {...props} />
 );
-export default Input;

@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
 import { theme } from "utils/theme";
-import Center from "components/Center/Center";
-import Container from "components/Container/Container";
-import Text from "components/Text/Text";
-import VStack from "components/Stack/VStack";
-import Grid from "components/Grid/Grid";
+import { Center } from "components/Center/Center";
+import { Container } from "components/Container/Container";
+import { Text } from "components/Text/Text";
+import { VStack } from "components/Stack/VStack";
+import { Grid } from "components/Grid/Grid";
 
 interface Props {
 	children: ReactNode;
 	page: "Profile" | "Browse" | "Account";
 }
 
-const WallContainer: React.FC<Props> = ({ children, page }) => {
+export const WallContainer: React.FC<Props> = ({ children, page }) => {
 	const list = ["Profile", "Browse", "Account"];
 	const textH = "40px";
 	return (
@@ -46,5 +46,3 @@ const WallContainer: React.FC<Props> = ({ children, page }) => {
 		</Container>
 	);
 };
-
-export default WallContainer;

@@ -6,8 +6,6 @@ interface Props {
 	w: string;
 }
 
-const Flex: React.FC<Props> = ({ children, ...props }) => (
+export const Flex: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraFlex {...props}>{children}</ChakraFlex>
 );
-
-export default Flex;

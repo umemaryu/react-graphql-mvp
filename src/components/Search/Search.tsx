@@ -1,10 +1,10 @@
 import React from "react";
-import Input from "components/Input/Input";
+import { Input } from "components/Input/Input";
 import { BiSearchAlt } from "react-icons/bi";
-import Box from "components/Box/Box";
-import HStack from "components/Stack/HStack";
+import { Box } from "components/Box/Box";
+import { HStack } from "components/Stack/HStack";
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
 	return (
 		<HStack>
 			<Input placeholder="mail@example.com" />
@@ -18,5 +18,3 @@ const Search: React.FC = () => {
 		</HStack>
 	);
 };
-
-export default Search;

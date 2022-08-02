@@ -10,8 +10,6 @@ interface Props {
 	mt?: number;
 }
 
-const Container: React.FC<Props> = ({ children, ...props }) => (
+export const Container: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraContainer {...props}>{children}</ChakraContainer>
 );
-
-export default Container;

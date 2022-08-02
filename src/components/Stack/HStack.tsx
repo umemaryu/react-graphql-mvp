@@ -8,8 +8,6 @@ interface Props {
 	w?: string;
 }
 
-const HStack: React.FC<Props> = ({ children, ...props }) => (
+export const HStack: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraHStack {...props}>{children}</ChakraHStack>
 );
-
-export default HStack;

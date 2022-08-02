@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import * as React from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
-import Spinner from "components/Spinner/Spinner";
+import { Spinner } from "components/Spinner/Spinner";
 import { IconContext } from "react-icons";
 import { theme } from "utils/theme";
 

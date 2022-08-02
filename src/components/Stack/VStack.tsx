@@ -8,8 +8,6 @@ interface Props {
 	w?: string;
 }
 
-const VStack: React.FC<Props> = ({ children, ...props }) => (
+export const VStack: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraVStack {...props}>{children}</ChakraVStack>
 );
-
-export default VStack;

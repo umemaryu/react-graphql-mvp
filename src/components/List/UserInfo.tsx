@@ -1,11 +1,11 @@
 import React from "react";
-import Flex from "components/Flex/Flex";
-import Spacer from "components/Flex/Spacer";
-import Text from "components/Text/Text";
+import { Flex } from "components/Flex/Flex";
+import { Spacer } from "components/Flex/Spacer";
+import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
-import Box from "components/Box/Box";
+import { Box } from "components/Box/Box";
 
-const UserInfo: React.FC = () => {
+export const UserInfo: React.FC = () => {
 	const list = ["Nick name", "Country", "City", "Email"];
 	return (
 		<Box>
@@ -19,5 +19,3 @@ const UserInfo: React.FC = () => {
 		</Box>
 	);
 };
-
-export default UserInfo;

@@ -6,8 +6,6 @@ interface Props {
 	h?: string;
 }
 
-const Center: React.FC<Props> = ({ children, ...props }) => (
+export const Center: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraCenter {...props}>{children}</ChakraCenter>
 );
-
-export default Center;

@@ -7,8 +7,6 @@ interface Props {
 	w: string;
 }
 
-const Grid: React.FC<Props> = ({ children, ...props }) => (
+export const Grid: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraGrid {...props}>{children}</ChakraGrid>
 );
-
-export default Grid;

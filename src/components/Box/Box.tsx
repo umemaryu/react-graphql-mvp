@@ -12,8 +12,6 @@ interface Props {
 	onClick?: () => void;
 }
 
-const Box: React.FC<Props> = ({ children, ...props }) => (
+export const Box: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraBox {...props}>{children}</ChakraBox>
 );
-
-export default Box;

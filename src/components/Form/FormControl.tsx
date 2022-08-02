@@ -5,8 +5,6 @@ interface Props {
 	children: ReactNode;
 }
 
-const FormControl: React.FC<Props> = ({ children, ...props }) => (
+export const FormControl: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraFormControl {...props}>{children}</ChakraFormControl>
 );
-
-export default FormControl

@@ -25,8 +25,6 @@ interface Props {
 	onClick?: () => void;
 }
 
-const Text: React.FC<Props> = ({ children, ...props }) => (
+export const Text: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraText {...props}>{children}</ChakraText>
 );
-
-export default Text;

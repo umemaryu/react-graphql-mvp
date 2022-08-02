@@ -5,6 +5,6 @@ interface Props {
 	mb: number;
 }
 
-const Divider: React.FC<Props> = ({ ...props }) => <ChakraDivider {...props} />;
-
-export default Divider;
+export const Divider: React.FC<Props> = ({ ...props }) => (
+	<ChakraDivider {...props} />
+);

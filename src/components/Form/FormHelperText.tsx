@@ -5,7 +5,6 @@ interface Props {
 	children: ReactNode;
 }
 
-const FormHelperText: React.FC<Props> = ({ children, ...props }) => (
+export const FormHelperText: React.FC<Props> = ({ children, ...props }) => (
 	<ChakraFormHelperText {...props}>{children}</ChakraFormHelperText>
 );
-export default FormHelperText;
