@@ -1,7 +1,8 @@
 import React from "react";
+import { lazyImport } from "utils/lazyImport";
 
-const Login = React.lazy(() => import("ui/pages/Login"));
-const SignUp = React.lazy(() => import("ui/pages/SignUp"));
+const { Login } = lazyImport(() => import("features/auth"), "Login");
+const { SignUp } = lazyImport(() => import("features/auth"), "SignUp");
 
 export const publicRoutes = [
 	{

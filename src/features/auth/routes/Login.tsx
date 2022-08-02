@@ -9,20 +9,8 @@ import { VStack } from "components/Stack/VStack";
 import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
 
-const SignUp: React.FC = () => {
+export const Login: React.FC = () => {
 	const list = [
-		{
-			text: "Nick name",
-			placeholder: "Nick name",
-		},
-		{
-			text: "Country",
-			placeholder: "Country",
-		},
-		{
-			text: "City",
-			placeholder: "City",
-		},
 		{ text: "Email", type: "email", placeholder: "mail@example.com" },
 		{
 			text: "Password(min 6 characters)",
@@ -33,7 +21,7 @@ const SignUp: React.FC = () => {
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
-				<Text fontSize={theme.fs.h3}>SignUp</Text>
+				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form list={list} />
 					<Button
@@ -43,7 +31,7 @@ const SignUp: React.FC = () => {
 							console.log("onClick");
 						}}
 					>
-						Resister
+						Login
 					</Button>
 					<Divider mb={theme.m.sm} />
 					<Box textAlign="center">
@@ -56,7 +44,7 @@ const SignUp: React.FC = () => {
 								console.log("onClick");
 							}}
 						>
-							Login
+							Sign up
 						</Text>
 					</Box>
 				</Container>
@@ -64,5 +52,3 @@ const SignUp: React.FC = () => {
 		</Center>
 	);
 };
-
-export default SignUp;
