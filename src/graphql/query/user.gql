@@ -1,0 +1,58 @@
+query FetchUserById($id: Int!) {
+	fetchUserById(id: $id) {
+		email
+		country
+		city
+		nickName
+		posts {
+			id
+			body
+			createdAt
+			user {
+				email
+			}
+		}
+	}
+}
+
+query FetchUserByEmail($email: String!) {
+	fetchUserByEmail(email: $email) {
+		email
+		country
+		city
+		nickName
+		posts {
+			id
+			body
+			createdAt
+			user {
+				email
+			}
+		}
+	}
+}
+
+mutation CreateUser(
+	$email: String!
+	$password: String!
+	$country: String!
+	$city: String!
+	$nickName: String!
+) {
+	createUser(
+		email: $email
+		password: $password
+		country: $country
+		city: $city
+		nickName: $nickName
+	) {
+		token
+	}
+}
+
+mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
+	updatePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+}
+mutation updateTokenToNull($id: Int!) {
+	updateTokenToNull(id: $id)
+}
