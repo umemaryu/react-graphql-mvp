@@ -1,14 +1,14 @@
 import React from "react";
-import WallContainer from "ui/components/Container/WallContainer";
-import Box from "ui/components/Box/Box";
-import UserInfo from "ui/components/List/UserInfo";
-import Text from "ui/components/Text/Text";
+import { WallContainer } from "components/Container/WallContainer";
+import { Box } from "components/Box/Box";
+import { UserInfo } from "components/List/UserInfo";
+import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
-import Post from "ui/components/Post/Post";
-import Search from "ui/components/Search/Search";
-import VStack from "ui/components/Stack/VStack";
+import { Post } from "components/Post/Post";
+import { Search } from "components/Search/Search";
+import { VStack } from "components/Stack/VStack";
 
-const Browse: React.FC = () => {
+export const Browse: React.FC = () => {
 	return (
 		<WallContainer page="Browse">
 			<Box pt={theme.m.md}>

@@ -2,8 +2,8 @@ import { useRoutes } from "react-router-dom";
 import React from "react";
 
 import { publicRoutes } from "routes/public";
-import { privateRoutes } from "routes/private";
-import Home from "ui/pages/Home";
+import { protectedRoutes } from "routes/protected";
+import { Home } from "ui/pages/Home";
 
 export const AppRoutes = () => {
 	const commonRoutes = [{ path: "/", element: <Home /> }];
@@ -11,7 +11,7 @@ export const AppRoutes = () => {
 	const element = useRoutes([
 		...publicRoutes,
 		...commonRoutes,
-		...privateRoutes,
+		...protectedRoutes,
 	]);
 
 	return <>{element}</>;
