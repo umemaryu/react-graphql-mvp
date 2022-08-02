@@ -6,3 +6,13 @@ generates:
       - typescript
       - typescript-operations
       - typescript-react-apollo
+  src/server/codegen.ts:
+    config:
+      useIndexSignature: true
+      contextType: graphql/models#Context
+      mappers:
+        Post: graphql/models#UserPost
+        User: graphql/models#UserModel
+    plugins:
+      - typescript
+      - typescript-resolvers

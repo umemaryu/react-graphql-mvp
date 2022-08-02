@@ -8,8 +8,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"generate": "graphql-codegen",
-		"server": "nodemon  src/server/index.js",
-		"server generate": "nodemon  src/server/index.js"
+		"server": "nodemon  src/server/index.js"
 	},
 	"dependencies": {
 		"@apollo/client": "^3.6.9",
