@@ -1,9 +1,9 @@
 import React from "react";
-import Flex from "ui/components/Flex/Flex";
-import Spacer from "ui/components/Flex/Spacer";
-import Text from "ui/components/Text/Text";
+import Flex from "components/Flex/Flex";
+import Spacer from "components/Flex/Spacer";
+import Text from "components/Text/Text";
 import { theme } from "utils/theme";
-import Box from "ui/components/Box/Box";
+import Box from "components/Box/Box";
 
 const UserInfo: React.FC = () => {
 	const list = ["Nick name", "Country", "City", "Email"];

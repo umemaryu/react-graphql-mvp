@@ -1,12 +1,12 @@
 import React from "react";
-import Box from "ui/components/Box/Box";
-import Button from "ui/components/Button/Button";
-import Center from "ui/components/Center/Center";
-import Container from "ui/components/Container/Container";
-import Divider from "ui/components/Divider/Divider";
-import Form from "ui/components/Form/Form";
-import VStack from "ui/components/Stack/VStack";
-import Text from "ui/components/Text/Text";
+import Box from "components/Box/Box";
+import Button from "components/Button/Button";
+import Center from "components/Center/Center";
+import Container from "components/Container/Container";
+import Divider from "components/Divider/Divider";
+import Form from "components/Form/Form";
+import VStack from "components/Stack/VStack";
+import Text from "components/Text/Text";
 import { theme } from "utils/theme";
 
 const Login: React.FC = () => {

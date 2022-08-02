@@ -1,10 +1,10 @@
 import { IFormList } from "interface/IFormList";
 import { theme } from "utils/theme";
-import FormControl from "ui/components/Form/FormControl";
-import FormHelperText from "ui/components/Form/FormHelperText";
-import FormLabel from "ui/components/Form/FormLabel";
-import Input from "ui/components/Input/Input";
-import Box from "ui/components/Box/Box";
+import FormControl from "components/Form/FormControl";
+import FormHelperText from "components/Form/FormHelperText";
+import FormLabel from "components/Form/FormLabel";
+import Input from "components/Input/Input";
+import Box from "components/Box/Box";
 
 interface Props {
 	list: IFormList[];

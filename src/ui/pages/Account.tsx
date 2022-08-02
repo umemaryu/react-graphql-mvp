@@ -1,9 +1,9 @@
 import React from "react";
-import Box from "ui/components/Box/Box";
-import Button from "ui/components/Button/Button";
-import WallContainer from "ui/components/Container/WallContainer";
-import Form from "ui/components/Form/Form";
-import Text from "ui/components/Text/Text";
+import Box from "components/Box/Box";
+import Button from "components/Button/Button";
+import WallContainer from "components/Container/WallContainer";
+import Form from "components/Form/Form";
+import Text from "components/Text/Text";
 import { theme } from "utils/theme";
 
 const Account: React.FC = () => {
