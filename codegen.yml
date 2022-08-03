@@ -1,7 +1,7 @@
-schema: src/graphql/schema.gql
-documents: src/graphql/query/*.gql
+schema: src/gql/schema.gql
+documents: src/gql/query/*.gql
 generates:
-  src/graphql/codegen.ts:
+  src/gql/codegen.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -9,10 +9,10 @@ generates:
   src/server/codegen.ts:
     config:
       useIndexSignature: true
-      contextType: graphql/models#Context
+      contextType: gql/models#Context
       mappers:
-        Post: graphql/models#UserPost
-        User: graphql/models#UserModel
+        Post: gql/models#UserPost
+        User: gql/models#UserModel
     plugins:
       - typescript
       - typescript-resolvers
