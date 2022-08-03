@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { ApolloServer } from "apollo-server";
+import { ApolloError, ApolloServer, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
+import { Context } from "gql/models";
 import { MutationCreateUserArgs } from "server/codegen";
 
 const createToken = () => {
@@ -17,7 +18,26 @@ const syncedTypeDefs = readFileSync("src/gql/schema.gql", "utf8");
 const typeDefs = `${syncedTypeDefs}`;
 const prisma = new PrismaClient();
 const resolvers = {
-	Query: {},
+	Query: {
+		fetchUserByToken: async (
+			_parent: unknown,
+			_args: unknown,
+			context: Context
+		) => {
+			try {
+				const user = await prisma.user.findFirst({
+					where: { token: context.token },
+				});
+				if (!user || context.token === "")
+					throw new ValidationError("Invalid token");
+				return user;
+			} catch (e) {
+				if (e instanceof Error || e instanceof ApolloError)
+					throw new Error(e.message);
+				else throw new Error("unknown Error");
+			}
+		},
+	},
 	Mutation: {
 		createUser: async (_parent: unknown, args: MutationCreateUserArgs) => {
 			try {
@@ -45,7 +65,16 @@ const resolvers = {
 	},
 };
 
-const server = new ApolloServer({ resolvers, typeDefs });
+const server = new ApolloServer({
+	resolvers,
+	typeDefs,
+	context: ({ req }) => {
+		const token = req.headers.authorization
+			? req.headers.authorization.substr(7)
+			: "";
+		return { token };
+	},
+});
 server
 	.listen(4000, () => {})
 	.then(({ url }) => {
