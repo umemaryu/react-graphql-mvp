@@ -31,7 +31,7 @@ type Mutation {
 		city: String!
 		nickName: String!
 	): User!
-	updatePassword(oldPassword: String!, newPassword: String!): Boolean!
+	updatePassword(oldPassword: String!, newPassword: String!, id: Int!): Boolean!
 	updateTokenToNull(id: Int!): Boolean!
 	createPost(authorId: Int!): Boolean!
 }

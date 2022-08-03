@@ -50,8 +50,12 @@ mutation CreateUser(
 	}
 }
 
-mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
-	updatePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+mutation UpdatePassword(
+	$oldPassword: String!
+	$newPassword: String!
+	$id: Int!
+) {
+	updatePassword(oldPassword: $oldPassword, newPassword: $newPassword, id: $id)
 }
 mutation updateTokenToNull($id: Int!) {
 	updateTokenToNull(id: $id)

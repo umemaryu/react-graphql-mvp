@@ -1,7 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
-import { QueryFetchUserByEmailArgs } from "gql/codegen";
+import {
+	MutationUpdatePasswordArgs,
+	QueryFetchUserByEmailArgs,
+} from "gql/codegen";
 import { Context } from "gql/models";
 import { MutationCreateUserArgs, Resolvers } from "server/codegen";
 
@@ -69,6 +72,23 @@ const resolvers: Resolvers = {
 				},
 			});
 			return res;
+		},
+		updatePassword: async (
+			_parent: unknown,
+			args: MutationUpdatePasswordArgs
+		) => {
+			if (args.oldPassword.length < 6 || args.newPassword.length < 6)
+				throw new UserInputError("The password must be over 6 characters");
+			const user = await prisma.user.findUniqueOrThrow({
+				where: { id: args.id },
+			});
+			if (user.password !== args.oldPassword)
+				throw new UserInputError("old password is wrong");
+			await prisma.user.update({
+				where: { id: args.id },
+				data: { password: args.newPassword },
+			});
+			return true;
 		},
 	},
 };

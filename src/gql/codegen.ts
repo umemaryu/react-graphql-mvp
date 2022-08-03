@@ -39,6 +39,7 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdatePasswordArgs = {
+  id: Scalars['Int'];
   newPassword: Scalars['String'];
   oldPassword: Scalars['String'];
 };
@@ -114,6 +115,7 @@ export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __type
 export type UpdatePasswordMutationVariables = Exact<{
   oldPassword: Scalars['String'];
   newPassword: Scalars['String'];
+  id: Scalars['Int'];
 }>;
 
 
@@ -293,8 +295,8 @@ export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutati
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const UpdatePasswordDocument = gql`
-    mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
-  updatePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+    mutation UpdatePassword($oldPassword: String!, $newPassword: String!, $id: Int!) {
+  updatePassword(oldPassword: $oldPassword, newPassword: $newPassword, id: $id)
 }
     `;
 export type UpdatePasswordMutationFn = Apollo.MutationFunction<UpdatePasswordMutation, UpdatePasswordMutationVariables>;
@@ -314,6 +316,7 @@ export type UpdatePasswordMutationFn = Apollo.MutationFunction<UpdatePasswordMut
  *   variables: {
  *      oldPassword: // value for 'oldPassword'
  *      newPassword: // value for 'newPassword'
+ *      id: // value for 'id'
  *   },
  * });
  */
