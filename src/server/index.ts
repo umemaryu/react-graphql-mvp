@@ -1,8 +1,14 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { ApolloError, ApolloServer, ValidationError } from "apollo-server";
+import { PrismaClient } from "@prisma/client";
+import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
 import { Context } from "gql/models";
 import { MutationCreateUserArgs } from "server/codegen";
+
+const emailValidation = (value: string) => {
+	const reg = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
+	const isValid = reg.test(value);
+	if (!isValid) throw new UserInputError("Invalid Email");
+};
 
 const createToken = () => {
 	const c = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ012345679";
@@ -24,43 +30,31 @@ const resolvers = {
 			_args: unknown,
 			context: Context
 		) => {
-			try {
-				const user = await prisma.user.findFirst({
-					where: { token: context.token },
-				});
-				if (!user || context.token === "")
-					throw new ValidationError("Invalid token");
-				return user;
-			} catch (e) {
-				if (e instanceof Error || e instanceof ApolloError)
-					throw new Error(e.message);
-				else throw new Error("unknown Error");
-			}
+			const user = await prisma.user.findFirst({
+				where: { token: context.token },
+			});
+			if (!user || context.token === "")
+				throw new ValidationError("Invalid token");
+			return user;
 		},
 	},
 	Mutation: {
 		createUser: async (_parent: unknown, args: MutationCreateUserArgs) => {
-			try {
-				if (args.password.length < 6)
-					throw new Error("The password must be over 6 characters");
-				const token = createToken();
-				const res = await prisma.user.create({
-					data: {
-						email: args.email,
-						password: args.password,
-						country: args.country,
-						city: args.city,
-						nickName: args.nickName,
-						token: token,
-					},
-				});
-				return res;
-			} catch (e) {
-				if (e instanceof Prisma.PrismaClientKnownRequestError)
-					throw new Error("The email is already used");
-				else if (e instanceof Error) throw new Error(e.message);
-				throw new Error("unknown Error");
-			}
+			if (args.password.length < 6)
+				throw new UserInputError("The password must be over 6 characters");
+			emailValidation(args.email);
+			const token = createToken();
+			const res = await prisma.user.create({
+				data: {
+					email: args.email,
+					password: args.password,
+					country: args.country,
+					city: args.city,
+					nickName: args.nickName,
+					token: token,
+				},
+			});
+			return res;
 		},
 	},
 };
