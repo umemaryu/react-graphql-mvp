@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
+import { QueryFetchUserByEmailArgs } from "gql/codegen";
 import { Context } from "gql/models";
-import { MutationCreateUserArgs } from "server/codegen";
+import { MutationCreateUserArgs, Resolvers } from "server/codegen";
 
 const emailValidation = (value: string) => {
 	const reg = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
@@ -23,7 +24,7 @@ const createToken = () => {
 const syncedTypeDefs = readFileSync("src/gql/schema.gql", "utf8");
 const typeDefs = `${syncedTypeDefs}`;
 const prisma = new PrismaClient();
-const resolvers = {
+const resolvers: Resolvers = {
 	Query: {
 		fetchUserByToken: async (
 			_parent: unknown,
@@ -35,6 +36,18 @@ const resolvers = {
 			});
 			if (!user || context.token === "")
 				throw new ValidationError("Invalid token");
+			return user;
+		},
+		fetchUserByEmail: async (
+			_parent: unknown,
+			args: QueryFetchUserByEmailArgs
+		) => {
+			emailValidation(args.email);
+			const user = await prisma.user.findFirst({
+				where: { email: args.email },
+			});
+			if (!user)
+				throw new ValidationError("There is no corresponding e-mail address");
 			return user;
 		},
 	},
