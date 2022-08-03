@@ -1,5 +1,5 @@
-query FetchUserById($id: Int!) {
-	fetchUserById(id: $id) {
+query FetchUserByToken {
+	fetchUserByToken {
 		email
 		country
 		city

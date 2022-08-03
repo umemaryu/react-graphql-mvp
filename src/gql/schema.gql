@@ -19,7 +19,7 @@ type Post {
 }
 
 type Query {
-	fetchUserById(id: Int!): User!
+	fetchUserByToken: User!
 	fetchUserByEmail(email: String!): User!
 }
 

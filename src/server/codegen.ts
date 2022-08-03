@@ -61,17 +61,12 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   fetchUserByEmail: User;
-  fetchUserById: User;
+  fetchUserByToken: User;
 };
 
 
 export type QueryFetchUserByEmailArgs = {
   email: Scalars['String'];
-};
-
-
-export type QueryFetchUserByIdArgs = {
-  id: Scalars['Int'];
 };
 
 export type User = {
@@ -197,7 +192,7 @@ export type PostResolvers<ContextType = Context, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   fetchUserByEmail?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryFetchUserByEmailArgs, 'email'>>;
-  fetchUserById?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryFetchUserByIdArgs, 'id'>>;
+  fetchUserByToken?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 }>;
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{

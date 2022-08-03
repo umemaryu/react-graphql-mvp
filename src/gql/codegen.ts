@@ -61,17 +61,12 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   fetchUserByEmail: User;
-  fetchUserById: User;
+  fetchUserByToken: User;
 };
 
 
 export type QueryFetchUserByEmailArgs = {
   email: Scalars['String'];
-};
-
-
-export type QueryFetchUserByIdArgs = {
-  id: Scalars['Int'];
 };
 
 export type User = {
@@ -93,12 +88,10 @@ export type CreatePostMutationVariables = Exact<{
 
 export type CreatePostMutation = { __typename?: 'Mutation', createPost: boolean };
 
-export type FetchUserByIdQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
+export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUserByIdQuery = { __typename?: 'Query', fetchUserById: { __typename?: 'User', email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
 
 export type FetchUserByEmailQueryVariables = Exact<{
   email: Scalars['String'];
@@ -165,9 +158,9 @@ export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
 export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
 export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
-export const FetchUserByIdDocument = gql`
-    query FetchUserById($id: Int!) {
-  fetchUserById(id: $id) {
+export const FetchUserByTokenDocument = gql`
+    query FetchUserByToken {
+  fetchUserByToken {
     email
     country
     city
@@ -185,32 +178,31 @@ export const FetchUserByIdDocument = gql`
     `;
 
 /**
- * __useFetchUserByIdQuery__
+ * __useFetchUserByTokenQuery__
  *
- * To run a query within a React component, call `useFetchUserByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useFetchUserByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFetchUserByTokenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchUserByTokenQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFetchUserByIdQuery({
+ * const { data, loading, error } = useFetchUserByTokenQuery({
  *   variables: {
- *      id: // value for 'id'
  *   },
  * });
  */
-export function useFetchUserByIdQuery(baseOptions: Apollo.QueryHookOptions<FetchUserByIdQuery, FetchUserByIdQueryVariables>) {
+export function useFetchUserByTokenQuery(baseOptions?: Apollo.QueryHookOptions<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FetchUserByIdQuery, FetchUserByIdQueryVariables>(FetchUserByIdDocument, options);
+        return Apollo.useQuery<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>(FetchUserByTokenDocument, options);
       }
-export function useFetchUserByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchUserByIdQuery, FetchUserByIdQueryVariables>) {
+export function useFetchUserByTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FetchUserByIdQuery, FetchUserByIdQueryVariables>(FetchUserByIdDocument, options);
+          return Apollo.useLazyQuery<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>(FetchUserByTokenDocument, options);
         }
-export type FetchUserByIdQueryHookResult = ReturnType<typeof useFetchUserByIdQuery>;
-export type FetchUserByIdLazyQueryHookResult = ReturnType<typeof useFetchUserByIdLazyQuery>;
-export type FetchUserByIdQueryResult = Apollo.QueryResult<FetchUserByIdQuery, FetchUserByIdQueryVariables>;
+export type FetchUserByTokenQueryHookResult = ReturnType<typeof useFetchUserByTokenQuery>;
+export type FetchUserByTokenLazyQueryHookResult = ReturnType<typeof useFetchUserByTokenLazyQuery>;
+export type FetchUserByTokenQueryResult = Apollo.QueryResult<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>;
 export const FetchUserByEmailDocument = gql`
     query FetchUserByEmail($email: String!) {
   fetchUserByEmail(email: $email) {
