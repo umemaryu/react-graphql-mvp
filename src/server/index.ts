@@ -3,6 +3,16 @@ import { ApolloServer } from "apollo-server";
 import { readFileSync } from "fs";
 import { MutationCreateUserArgs } from "server/codegen";
 
+const createToken = () => {
+	const c = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ012345679";
+	const cl = c.length;
+	let r = "";
+	for (let i = 0; i < 32; i++) {
+		r += c[Math.floor(Math.random() * cl)];
+	}
+	return r;
+};
+
 const syncedTypeDefs = readFileSync("src/gql/schema.gql", "utf8");
 const typeDefs = `${syncedTypeDefs}`;
 const prisma = new PrismaClient();
@@ -13,7 +23,7 @@ const resolvers = {
 			try {
 				if (args.password.length < 6)
 					throw new Error("The password must be over 6 characters");
-				const token = "aaaaa";
+				const token = createToken();
 				const res = await prisma.user.create({
 					data: {
 						email: args.email,
