@@ -40,18 +40,19 @@ const resolvers = {
 	},
 	Mutation: {
 		createUser: async (_parent: unknown, args: MutationCreateUserArgs) => {
+			for (let key in args)
+				if (args[key as keyof typeof args] === "")
+					throw new UserInputError(
+						`${args[key as keyof typeof args]} should be filled`
+					);
 			if (args.password.length < 6)
 				throw new UserInputError("The password must be over 6 characters");
 			emailValidation(args.email);
 			const token = createToken();
 			const res = await prisma.user.create({
 				data: {
-					email: args.email,
-					password: args.password,
-					country: args.country,
-					city: args.city,
-					nickName: args.nickName,
 					token: token,
+					...args,
 				},
 			});
 			return res;
