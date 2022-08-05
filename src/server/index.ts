@@ -1,12 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
+import { Context } from "gql/models";
 import {
 	MutationUpdatePasswordArgs,
 	QueryFetchUserByEmailArgs,
 } from "gql/codegen";
-import { Context } from "gql/models";
-import { MutationCreateUserArgs, Resolvers } from "server/codegen";
+import {
+	MutationCreateUserArgs,
+	MutationUpdateTokenToNullArgs,
+	Resolvers,
+} from "server/codegen";
 
 const emailValidation = (value: string) => {
 	const reg = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;
@@ -37,8 +41,7 @@ const resolvers: Resolvers = {
 			const user = await prisma.user.findFirst({
 				where: { token: context.token },
 			});
-			if (!user || context.token === "")
-				throw new ValidationError("Invalid token");
+			if (!user || !context.token) throw new ValidationError("Invalid token");
 			return user;
 		},
 		fetchUserByEmail: async (
@@ -87,6 +90,20 @@ const resolvers: Resolvers = {
 			await prisma.user.update({
 				where: { id: args.id },
 				data: { password: args.newPassword },
+			});
+			return true;
+		},
+		updateTokenToNull: async (
+			_parent: unknown,
+			args: MutationUpdateTokenToNullArgs
+		) => {
+			await prisma.user.update({
+				where: {
+					id: args.id,
+				},
+				data: {
+					token: null,
+				},
 			});
 			return true;
 		},

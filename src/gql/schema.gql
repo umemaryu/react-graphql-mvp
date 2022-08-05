@@ -1,6 +1,6 @@
 type User {
 	id: ID!
-	token: String!
+	token: String
 	email: String!
 	password: String!
 	country: String!

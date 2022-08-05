@@ -79,7 +79,7 @@ export type User = {
   nickName: Scalars['String'];
   password: Scalars['String'];
   posts?: Maybe<Array<Post>>;
-  token: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -204,7 +204,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   nickName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>;
-  token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

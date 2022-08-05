@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id       Int    @id @default(autoincrement())
-  token    String
+  token    String?
   email    String @unique
   password String
   country  String

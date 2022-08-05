@@ -79,7 +79,7 @@ export type User = {
   nickName: Scalars['String'];
   password: Scalars['String'];
   posts?: Maybe<Array<Post>>;
-  token: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
 };
 
 export type CreatePostMutationVariables = Exact<{
@@ -110,7 +110,7 @@ export type CreateUserMutationVariables = Exact<{
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', token: string } };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', token?: string | null } };
 
 export type UpdatePasswordMutationVariables = Exact<{
   oldPassword: Scalars['String'];
