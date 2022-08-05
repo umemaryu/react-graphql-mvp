@@ -12,7 +12,7 @@ export type UserModel = {
 
 export type UserPost = {
 	id: number;
-	authorId: number;
+	senderId: number;
 	body: string;
 	createdAt: number;
 };

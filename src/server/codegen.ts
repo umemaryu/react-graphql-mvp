@@ -25,7 +25,7 @@ export type Mutation = {
 
 
 export type MutationCreatePostArgs = {
-  authorId: Scalars['Int'];
+  senderId: Scalars['Int'];
 };
 
 
@@ -51,10 +51,10 @@ export type MutationUpdateTokenToNullArgs = {
 
 export type Post = {
   __typename?: 'Post';
-  authorId: Scalars['Int'];
   body: Scalars['String'];
   createdAt: Scalars['Int'];
   id: Scalars['ID'];
+  senderId: Scalars['Int'];
   user: User;
   userId: Scalars['Int'];
 };
@@ -175,17 +175,17 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createPost?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'authorId'>>;
+  createPost?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'senderId'>>;
   createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'city' | 'country' | 'email' | 'nickName' | 'password'>>;
   updatePassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationUpdatePasswordArgs, 'id' | 'newPassword' | 'oldPassword'>>;
   updateTokenToNull?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationUpdateTokenToNullArgs, 'id'>>;
 }>;
 
 export type PostResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
-  authorId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  senderId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

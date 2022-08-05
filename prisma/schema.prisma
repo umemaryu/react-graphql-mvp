@@ -23,7 +23,7 @@ model User {
 
 model Post {
   id        Int    @id @default(autoincrement())
-  authorId  Int
+  senderId  Int
   body      String
   createdAt Int
   user      User   @relation(fields: [userId], references: [id])

@@ -25,7 +25,7 @@ export type Mutation = {
 
 
 export type MutationCreatePostArgs = {
-  authorId: Scalars['Int'];
+  senderId: Scalars['Int'];
 };
 
 
@@ -51,10 +51,10 @@ export type MutationUpdateTokenToNullArgs = {
 
 export type Post = {
   __typename?: 'Post';
-  authorId: Scalars['Int'];
   body: Scalars['String'];
   createdAt: Scalars['Int'];
   id: Scalars['ID'];
+  senderId: Scalars['Int'];
   user: User;
   userId: Scalars['Int'];
 };
@@ -83,7 +83,7 @@ export type User = {
 };
 
 export type CreatePostMutationVariables = Exact<{
-  authorId: Scalars['Int'];
+  senderId: Scalars['Int'];
 }>;
 
 
@@ -130,8 +130,8 @@ export type UpdateTokenToNullMutation = { __typename?: 'Mutation', updateTokenTo
 
 
 export const CreatePostDocument = gql`
-    mutation CreatePost($authorId: Int!) {
-  createPost(authorId: $authorId)
+    mutation CreatePost($senderId: Int!) {
+  createPost(senderId: $senderId)
 }
     `;
 export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
@@ -149,7 +149,7 @@ export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, C
  * @example
  * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
  *   variables: {
- *      authorId: // value for 'authorId'
+ *      senderId: // value for 'senderId'
  *   },
  * });
  */
