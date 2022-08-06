@@ -1,27 +1,40 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { WallLayout } from "components/Layout";
 import { useNavigate } from "react-router-dom";
+import { Form } from "components/Form";
 
 const useAccount = () => {
 	const list = [
 		{
+			id: "newPassword",
 			text: "New password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
 		},
 		{
+			id: "oldPassword",
 			text: "Old password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
 		},
 	];
+	const [state, setState] = useState({
+		newPassword: "",
+		oldPassword: "",
+	});
 	const navigate = useNavigate();
+	const onChangeFormInput = useCallback(
+		(value: string, id: string) => {
+			setState({ ...state, [id]: value });
+		},
+		[state]
+	);
 	const onClickSignOut = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
-	return { list, operations: { onClickSignOut } };
+	return { list, operations: { onChangeFormInput, onClickSignOut } };
 };
 
 export const AccountSection: React.FC = () => {
@@ -29,7 +42,7 @@ export const AccountSection: React.FC = () => {
 	return (
 		<WallLayout page="Account">
 			<Box w={theme.w.mobile}>
-				{/* <Form list={list} /> */}
+				<Form list={list} onChange={operations.onChangeFormInput} />
 				<Button
 					onClick={() => {
 						console.log("onClick");
