@@ -25,7 +25,7 @@ export const Account: React.FC = () => {
 					onClick={() => {
 						console.log("onClick");
 					}}
-					isFullWidth
+					w={"100%"}
 					mb={theme.m.md}
 				>
 					Update Password
