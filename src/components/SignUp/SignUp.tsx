@@ -13,7 +13,7 @@ import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
 
-export const SignUp: React.FC = () => {
+const useSignUp = () => {
 	const list: IFormList[] = [
 		{
 			id: "nickName",
@@ -64,13 +64,22 @@ export const SignUp: React.FC = () => {
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
+	return { list, operations: { onChange, onClickRegister, onClickLogin } };
+};
+
+export const SignUp: React.FC = () => {
+	const { list, operations } = useSignUp();
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>SignUp</Text>
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={onChange} />
-					<Button w={"100%"} mb={theme.m.sm} onClick={onClickRegister}>
+					<Form list={list} onChange={operations.onChange} />
+					<Button
+						w={"100%"}
+						mb={theme.m.sm}
+						onClick={operations.onClickRegister}
+					>
 						Resister
 					</Button>
 					<Divider mb={theme.m.sm} />
@@ -80,7 +89,7 @@ export const SignUp: React.FC = () => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={onClickLogin}
+							onClick={operations.onClickLogin}
 						>
 							Login
 						</Text>
