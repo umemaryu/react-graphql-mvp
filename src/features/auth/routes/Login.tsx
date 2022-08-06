@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Box } from "components/Box/Box";
 import { Button } from "components/Button/Button";
 import { Center } from "components/Center/Center";
@@ -15,12 +15,18 @@ export const Login: React.FC = () => {
 		email: "",
 		password: "",
 	});
-	const onChangeEmail = (value: string) => {
-		setState({ ...state, email: value });
-	};
-	const onChangePassword = (value: string) => {
-		setState({ ...state, password: value });
-	};
+	const onChangeEmail = useCallback(
+		(value: string) => {
+			setState({ ...state, email: value });
+		},
+		[state]
+	);
+	const onChangePassword = useCallback(
+		(value: string) => {
+			setState({ ...state, password: value });
+		},
+		[state]
+	);
 	const list: IFormList[] = [
 		{
 			text: "Email",
@@ -35,9 +41,9 @@ export const Login: React.FC = () => {
 			onChange: onChangePassword,
 		},
 	];
-	const onClickLogin = () => {
-		console.log(state);
-	};
+	const onClickLogin = useCallback(() => {
+		console.log(state, "API communication");
+	}, [state]);
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
