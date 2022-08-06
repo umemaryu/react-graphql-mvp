@@ -1,10 +1,7 @@
 import React from "react";
 import { lazyImport } from "utils/lazyImport";
 
-const { LoginSection } = lazyImport(
-	() => import("components/Sections"),
-	"LoginSection"
-);
+const { Login } = lazyImport(() => import("containers"), "Login");
 const { SignUpSection } = lazyImport(
 	() => import("components/Sections"),
 	"SignUpSection"
@@ -13,7 +10,7 @@ const { SignUpSection } = lazyImport(
 export const publicRoutes = [
 	{
 		path: "/login",
-		element: <LoginSection />,
+		element: <Login />,
 	},
 	{
 		path: "/sign-up",
