@@ -1,12 +1,3 @@
-import { Grid as ChakraGrid } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { Grid as ChakraGrid, GridProps } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-	templateColumns: string;
-	w: string;
-}
-
-export const Grid: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraGrid {...props}>{children}</ChakraGrid>
-);
+export const Grid = ({ ...props }: GridProps) => <ChakraGrid {...props} />;
