@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
 import { theme } from "utils/theme";
-import { Center } from "components/Center/Center";
-import { Container } from "components/Container/Container";
-import { Text } from "components/Text/Text";
-import { VStack } from "components/Stack/VStack";
-import { Grid } from "components/Grid/Grid";
+import { Center } from "components/Elements/Center/Center";
+import { Container } from "components/Elements/Container/Container";
+import { Text } from "components/Elements/Text/Text";
+import { VStack } from "components/Elements/Stack/VStack";
+import { Grid } from "components/Elements/Grid/Grid";
 
 interface Props {
 	children: ReactNode;

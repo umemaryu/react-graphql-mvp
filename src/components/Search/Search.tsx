@@ -1,8 +1,8 @@
 import React from "react";
-import { Input } from "components/Input/Input";
+import { Input } from "components/Elements/Input/Input";
 import { BiSearchAlt } from "react-icons/bi";
-import { Box } from "components/Box/Box";
-import { HStack } from "components/Stack/HStack";
+import { Box } from "components/Elements/Box/Box";
+import { HStack } from "components/Elements/Stack/HStack";
 
 export const Search: React.FC = () => {
 	return (

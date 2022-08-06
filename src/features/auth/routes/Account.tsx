@@ -1,9 +1,9 @@
-import React from "react";
-import { Box } from "components/Box/Box";
-import { Button } from "components/Button/Button";
-import { WallContainer } from "components/Container/WallContainer";
+import React, { useCallback } from "react";
+import { Box } from "components/Elements/Box/Box";
+import { Button } from "components/Elements/Button/Button";
+import { WallContainer } from "components/Elements/Container/WallContainer";
 import { Form } from "components/Form/Form";
-import { Text } from "components/Text/Text";
+import { Text } from "components/Elements/Text/Text";
 import { theme } from "utils/theme";
 
 export const Account: React.FC = () => {
@@ -19,10 +19,11 @@ export const Account: React.FC = () => {
 			placeholder: "abc123",
 		},
 	];
+
 	return (
 		<WallContainer page="Account">
 			<Box w={theme.w.mobile}>
-				<Form list={list} />
+				{/* <Form list={list} /> */}
 				<Button
 					onClick={() => {
 						console.log("onClick");

@@ -1,12 +1,12 @@
 import React from "react";
-import { WallContainer } from "components/Container/WallContainer";
-import { Box } from "components/Box/Box";
+import { WallContainer } from "components/Elements/Container/WallContainer";
+import { Box } from "components/Elements/Box/Box";
 import { UserInfo } from "components/List/UserInfo";
-import { Text } from "components/Text/Text";
+import { Text } from "components/Elements/Text/Text";
 import { theme } from "utils/theme";
 import { Post } from "components/Post/Post";
 import { Search } from "components/Search/Search";
-import { VStack } from "components/Stack/VStack";
+import { VStack } from "components/Elements/Stack/VStack";
 
 export const Browse: React.FC = () => {
 	return (
