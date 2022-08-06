@@ -12,8 +12,10 @@ export const WallLayout: React.FC<Props> = ({ children, page }) => {
 	return (
 		<Layout w={theme.w.wall} border={theme.border} h={"60vh"} mt={theme.m.lg}>
 			<Center>
-				<Header page={page} />
-				<VStack mb={100}>{children}</VStack>
+				<VStack mb={100}>
+					<Header page={page} />
+					{children}
+				</VStack>
 			</Center>
 		</Layout>
 	);
