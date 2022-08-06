@@ -9,6 +9,7 @@ import { VStack } from "components/Stack/VStack";
 import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp: React.FC = () => {
 	const list: IFormList[] = [
@@ -47,16 +48,19 @@ export const SignUp: React.FC = () => {
 		email: "",
 		password: "",
 	});
+	const navigate = useNavigate();
 	const onChange = useCallback(
 		(value: string, id: string) => {
 			setState({ ...state, [id]: value });
 		},
 		[state]
 	);
-
 	const onClickRegister = useCallback(() => {
 		console.log(state);
 	}, [state]);
+	const onClickLogin = useCallback(() => {
+		navigate("/login");
+	}, [navigate]);
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
@@ -73,9 +77,7 @@ export const SignUp: React.FC = () => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={() => {
-								console.log("onClick");
-							}}
+							onClick={onClickLogin}
 						>
 							Login
 						</Text>
