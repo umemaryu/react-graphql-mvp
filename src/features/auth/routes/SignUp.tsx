@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "components/Box/Box";
 import { Button } from "components/Button/Button";
 import { Center } from "components/Center/Center";
@@ -8,9 +8,17 @@ import { Form } from "components/Form/Form";
 import { VStack } from "components/Stack/VStack";
 import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
+import { IFormList } from "interface/IFormList";
 
 export const SignUp: React.FC = () => {
-	const list = [
+	const [state, setState] = useState({
+		nickName: "",
+		country: "",
+		city: "",
+		email: "",
+		password: "",
+	});
+	const list: IFormList[] = [
 		{
 			text: "Nick name",
 			placeholder: "Nick name",
