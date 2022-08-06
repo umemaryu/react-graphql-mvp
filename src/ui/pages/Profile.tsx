@@ -1,12 +1,8 @@
 import React from "react";
-import { Box } from "components/Box/Box";
-import { Button } from "components/Button/Button";
-import { Center } from "components/Center/Center";
-import { WallContainer } from "components/Container/WallContainer";
-import { UserInfo } from "components/List/UserInfo";
-import { Post } from "components/Post/Post";
-import { VStack } from "components/Stack/VStack";
-import { Text } from "components/Text/Text";
+import { Box, Button, Center, VStack, Text } from "components/Elements";
+import { WallContainer } from "components/Container";
+import { UserInfo } from "components/List";
+import { Post } from "components/Post";
 import { theme } from "utils/theme";
 
 const Profile: React.FC = () => {

@@ -1,10 +1,7 @@
 import React from "react";
-import { Box } from "components/Box/Box";
-import { Button } from "components/Button/Button";
-import { WallContainer } from "components/Container/WallContainer";
-import { Form } from "components/Form/Form";
-import { Text } from "components/Text/Text";
+import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
+import { WallContainer } from "components/Container";
 
 export const Account: React.FC = () => {
 	const list = [
@@ -19,10 +16,11 @@ export const Account: React.FC = () => {
 			placeholder: "abc123",
 		},
 	];
+
 	return (
 		<WallContainer page="Account">
 			<Box w={theme.w.mobile}>
-				<Form list={list} />
+				{/* <Form list={list} /> */}
 				<Button
 					onClick={() => {
 						console.log("onClick");

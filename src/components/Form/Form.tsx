@@ -1,17 +1,19 @@
+import {
+	Box,
+	FormControl,
+	FormHelperText,
+	FormInput,
+	FormLabel,
+} from "components/Elements";
 import { IFormList } from "interface/IFormList";
 import { theme } from "utils/theme";
-import { FormControl } from "components/Form/FormControl";
-import { FormHelperText } from "components/Form/FormHelperText";
-import { FormLabel } from "components/Form/FormLabel";
-import { Box } from "components/Box/Box";
-import { FormInput } from "components/Form/FormInput";
 
 interface Props {
 	list: IFormList[];
 	onChange: (value: string, id: string) => void;
 }
 
-export const Form: React.FC<Props> = ({ list,onChange }) => (
+export const Form: React.FC<Props> = ({ list, onChange }) => (
 	<FormControl>
 		{list.map((ele) => (
 			<Box mt={theme.m.sm} mb={theme.m.sm} key={ele.text}>
