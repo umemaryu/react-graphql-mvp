@@ -3,10 +3,10 @@ import React from "react";
 
 import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
-import { Home } from "ui/pages/Home";
+import { HomeSection } from "components/Sections";
 
 export const AppRoutes = () => {
-	const commonRoutes = [{ path: "/", element: <Home /> }];
+	const commonRoutes = [{ path: "/", element: <HomeSection /> }];
 
 	const element = useRoutes([
 		...publicRoutes,
