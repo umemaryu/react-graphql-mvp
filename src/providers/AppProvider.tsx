@@ -1,27 +1,66 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import * as React from "react";
+import { useMemo, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from "components/Elements";
 import { IconContext } from "react-icons";
 import { theme } from "utils/theme";
+import {
+	ApolloClient,
+	ApolloLink,
+	ApolloProvider,
+	createHttpLink,
+	InMemoryCache,
+} from "@apollo/client";
 
 type AppProviderProps = {
 	children: React.ReactNode;
 };
 
+type Props = {
+	children: React.ReactNode;
+};
+
+const CustomApolloProvider: React.FC<Props> = ({ children }) => {
+	const devURL = "http://localhost:4000/";
+	const httpLink = useMemo(() => {
+		return createHttpLink({
+			uri: devURL,
+			credentials: "same-origin",
+		});
+	}, []);
+
+	const client = useMemo(() => {
+		return new ApolloClient({
+			link: ApolloLink.from([httpLink]),
+			cache: new InMemoryCache(),
+			connectToDevTools: true,
+			defaultOptions: {
+				watchQuery: {
+					fetchPolicy: "cache-and-network",
+				},
+			},
+		});
+	}, [httpLink]);
+	return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
+
 export const AppProvider = ({ children }: AppProviderProps) => (
-	<React.Suspense fallback={<Spinner size="xl" />}>
+	<Suspense fallback={<Spinner size="xl" />}>
 		<ErrorBoundary
 			FallbackComponent={() => (
 				<h2>Something went wrong, please reload page</h2>
 			)}
 		>
 			<ChakraProvider>
-				<IconContext.Provider value={{ color: theme.color.blue, size: "32px" }}>
-					<Router>{children}</Router>
-				</IconContext.Provider>
+				<CustomApolloProvider>
+					<IconContext.Provider
+						value={{ color: theme.color.blue, size: "32px" }}
+					>
+						<Router>{children}</Router>
+					</IconContext.Provider>
+				</CustomApolloProvider>
 			</ChakraProvider>
 		</ErrorBoundary>
-	</React.Suspense>
+	</Suspense>
 );
