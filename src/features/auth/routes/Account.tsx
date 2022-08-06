@@ -1,8 +1,5 @@
-import React, { useCallback } from "react";
-import { Box } from "components/Elements/Box/Box";
-import { Button } from "components/Elements/Button/Button";
-import { Form } from "components/Form";
-import { Text } from "components/Elements/Text/Text";
+import React from "react";
+import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { WallContainer } from "components/Container";
 

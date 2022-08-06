@@ -1,8 +1,6 @@
 import React from "react";
-import { Input } from "components/Elements/Input/Input";
+import { Input, Box, HStack } from "components/Elements";
 import { BiSend } from "react-icons/bi";
-import { Box } from "components/Elements/Box/Box";
-import { HStack } from "components/Elements/Stack/HStack";
 
 export const Post: React.FC = () => {
 	return (

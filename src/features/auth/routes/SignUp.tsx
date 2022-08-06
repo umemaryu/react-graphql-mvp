@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from "react";
-import { Box } from "components/Elements/Box/Box";
-import { Button } from "components/Elements/Button/Button";
-import { Center } from "components/Elements/Center/Center";
-import { Container } from "components/Elements/Container/Container";
-import { Divider } from "components/Elements/Divider/Divider";
+import {
+	Box,
+	Button,
+	Center,
+	Container,
+	Divider,
+	VStack,
+	Text,
+} from "components/Elements";
 import { Form } from "components/Form";
-import { VStack } from "components/Elements/Stack/VStack";
-import { Text } from "components/Elements/Text/Text";
 import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
