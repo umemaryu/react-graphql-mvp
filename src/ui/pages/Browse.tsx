@@ -1,11 +1,11 @@
 import React from "react";
-import { WallContainer } from "components/Container/WallContainer";
+import { WallContainer } from "components/Container";
 import { Box } from "components/Elements/Box/Box";
-import { UserInfo } from "components/List/UserInfo";
+import { UserInfo } from "components/List";
 import { Text } from "components/Elements/Text/Text";
 import { theme } from "utils/theme";
-import { Post } from "components/Post/Post";
-import { Search } from "components/Search/Search";
+import { Post } from "components/Post";
+import { Search } from "components/Search";
 import { VStack } from "components/Elements/Stack/VStack";
 
 export const Browse: React.FC = () => {

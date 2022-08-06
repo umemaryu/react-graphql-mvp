@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { Box } from "components/Elements/Box/Box";
 import { Button } from "components/Elements/Button/Button";
-import { WallContainer } from "components/Container/WallContainer";
-import { Form } from "components/Form/Form";
+import { Form } from "components/Form";
 import { Text } from "components/Elements/Text/Text";
 import { theme } from "utils/theme";
+import { WallContainer } from "components/Container";
 
 export const Account: React.FC = () => {
 	const list = [
