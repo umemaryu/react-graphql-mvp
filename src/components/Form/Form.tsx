@@ -8,14 +8,15 @@ import { FormInput } from "components/Form/FormInput";
 
 interface Props {
 	list: IFormList[];
+	onChange: (value: string, id: string) => void;
 }
 
-export const Form: React.FC<Props> = ({ list }) => (
+export const Form: React.FC<Props> = ({ list,onChange }) => (
 	<FormControl>
 		{list.map((ele) => (
 			<Box mt={theme.m.sm} mb={theme.m.sm} key={ele.text}>
 				<FormLabel>{ele.text}</FormLabel>
-				<FormInput {...ele} />
+				<FormInput {...ele} onChange={onChange} />
 			</Box>
 		))}
 		<Box textAlign="center" mt={theme.m.sm} mb={theme.m.sm}>

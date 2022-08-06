@@ -12,6 +12,20 @@ import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
+	const list: IFormList[] = [
+		{
+			id: "email",
+			text: "Email",
+			type: "email",
+			placeholder: "mail@example.com",
+		},
+		{
+			id: "password",
+			text: "Password(min 6 characters)",
+			type: "password",
+			placeholder: "abc123",
+		},
+	];
 	const [state, setState] = useState({
 		email: "",
 		password: "",
@@ -23,22 +37,6 @@ export const Login: React.FC = () => {
 		},
 		[state]
 	);
-	const list: IFormList[] = [
-		{
-			id: "email",
-			text: "Email",
-			type: "email",
-			placeholder: "mail@example.com",
-			onChange: onChange,
-		},
-		{
-			id: "password",
-			text: "Password(min 6 characters)",
-			type: "password",
-			placeholder: "abc123",
-			onChange: onChange,
-		},
-	];
 	const onClickLogin = useCallback(() => {
 		console.log(state, "API communication");
 	}, [state]);
@@ -50,7 +48,7 @@ export const Login: React.FC = () => {
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} />
+					<Form list={list} onChange={onChange} />
 					<Button isFullWidth mb={theme.m.sm} onClick={onClickLogin}>
 						Login
 					</Button>
