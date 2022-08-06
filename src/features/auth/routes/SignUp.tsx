@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Box } from "components/Box/Box";
 import { Button } from "components/Button/Button";
 import { Center } from "components/Center/Center";
@@ -11,6 +11,35 @@ import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
 
 export const SignUp: React.FC = () => {
+	const list: IFormList[] = [
+		{
+			id: "nickName",
+			text: "Nick name",
+			placeholder: "Nick name",
+		},
+		{
+			id: "country",
+			text: "Country",
+			placeholder: "Country",
+		},
+		{
+			id: "city",
+			text: "City",
+			placeholder: "City",
+		},
+		{
+			id: "email",
+			text: "Email",
+			type: "email",
+			placeholder: "mail@example.com",
+		},
+		{
+			id: "password",
+			text: "Password(min 6 characters)",
+			type: "password",
+			placeholder: "abc123",
+		},
+	];
 	const [state, setState] = useState({
 		nickName: "",
 		country: "",
@@ -18,39 +47,23 @@ export const SignUp: React.FC = () => {
 		email: "",
 		password: "",
 	});
-	const list: IFormList[] = [
-		{
-			text: "Nick name",
-			placeholder: "Nick name",
+	const onChange = useCallback(
+		(value: string, id: string) => {
+			setState({ ...state, [id]: value });
 		},
-		{
-			text: "Country",
-			placeholder: "Country",
-		},
-		{
-			text: "City",
-			placeholder: "City",
-		},
-		{ text: "Email", type: "email", placeholder: "mail@example.com" },
-		{
-			text: "Password(min 6 characters)",
-			type: "password",
-			placeholder: "abc123",
-		},
-	];
+		[state]
+	);
+
+	const onClickRegister = useCallback(() => {
+		console.log(state);
+	}, [state]);
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>SignUp</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} />
-					<Button
-						isFullWidth
-						mb={theme.m.sm}
-						onClick={() => {
-							console.log("onClick");
-						}}
-					>
+					<Form list={list} onChange={onChange} />
+					<Button isFullWidth mb={theme.m.sm} onClick={onClickRegister}>
 						Resister
 					</Button>
 					<Divider mb={theme.m.sm} />
