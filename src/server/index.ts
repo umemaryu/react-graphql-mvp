@@ -7,6 +7,7 @@ import {
 	QueryFetchUserByEmailArgs,
 } from "gql/codegen";
 import {
+	MutationCreatePostArgs,
 	MutationCreateUserArgs,
 	MutationUpdateTokenToNullArgs,
 	Resolvers,
@@ -72,6 +73,7 @@ const resolvers: Resolvers = {
 				data: {
 					token: token,
 					...args,
+					posts: {},
 				},
 			});
 			return res;
@@ -105,6 +107,21 @@ const resolvers: Resolvers = {
 					token: null,
 				},
 			});
+			return true;
+		},
+		createPost: async (_parent: unknown, args: MutationCreatePostArgs) => {
+			try {
+				await prisma.post.create({
+					data: {
+						createdAt: Math.floor(Date.now() / 1000),
+						userId: args.receiverId,
+						body: args.body,
+						senderId: args.senderId,
+					},
+				});
+			} catch (e) {
+				console.log(e);
+			}
 			return true;
 		},
 	},
