@@ -7,10 +7,7 @@ const { BrowseSection } = lazyImport(
 	() => import("components/Sections"),
 	"BrowseSection"
 );
-const { AccountSection } = lazyImport(
-	() => import("components/Sections"),
-	"AccountSection"
-);
+const { Account } = lazyImport(() => import("containers"), "Account");
 
 export const protectedRoutes = [
 	{
@@ -23,6 +20,6 @@ export const protectedRoutes = [
 	},
 	{
 		path: "/account",
-		element: <AccountSection />,
+		element: <Account />,
 	},
 ];
