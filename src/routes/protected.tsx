@@ -2,11 +2,7 @@ import React from "react";
 import { lazyImport } from "utils/lazyImport";
 
 const { Profile } = lazyImport(() => import("containers"), "Profile");
-
-const { BrowseSection } = lazyImport(
-	() => import("components/Sections"),
-	"BrowseSection"
-);
+const { Browse } = lazyImport(() => import("containers"), "Browse");
 const { Account } = lazyImport(() => import("containers"), "Account");
 
 export const protectedRoutes = [
@@ -16,7 +12,7 @@ export const protectedRoutes = [
 	},
 	{
 		path: "/browse",
-		element: <BrowseSection />,
+		element: <Browse />,
 	},
 	{
 		path: "/account",
