@@ -1,5 +1,5 @@
 import React from "react";
-import { WallContainer } from "components/Elements/Container/WallContainer";
+import { WallContainer } from "components/Container/WallContainer";
 import { Box } from "components/Elements/Box/Box";
 import { UserInfo } from "components/List/UserInfo";
 import { Text } from "components/Elements/Text/Text";

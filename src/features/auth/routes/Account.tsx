@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Box } from "components/Elements/Box/Box";
 import { Button } from "components/Elements/Button/Button";
-import { WallContainer } from "components/Elements/Container/WallContainer";
+import { WallContainer } from "components/Container/WallContainer";
 import { Form } from "components/Form/Form";
 import { Text } from "components/Elements/Text/Text";
 import { theme } from "utils/theme";

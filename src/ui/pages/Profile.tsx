@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "components/Elements/Box/Box";
 import { Button } from "components/Elements/Button/Button";
 import { Center } from "components/Elements/Center/Center";
-import { WallContainer } from "components/Elements/Container/WallContainer";
+import { WallContainer } from "components/Container/WallContainer";
 import { UserInfo } from "components/List/UserInfo";
 import { Post } from "components/Post/Post";
 import { VStack } from "components/Elements/Stack/VStack";
