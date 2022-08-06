@@ -51,12 +51,11 @@ const useSignUp = () => {
 		password: "",
 	});
 	const navigate = useNavigate();
-	const onChange = useCallback(
-		(value: string, id: string) => {
-			setState({ ...state, [id]: value });
-		},
-		[state]
-	);
+	const onChangeFormInput = useCallback((value: string, id: string) => {
+		setState((prevState) => {
+			return { ...prevState, [id]: value };
+		});
+	}, []);
 	const onClickRegister = useCallback(() => {
 		console.log(state);
 		navigate("/profile");
@@ -64,7 +63,10 @@ const useSignUp = () => {
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
-	return { list, operations: { onChange, onClickRegister, onClickLogin } };
+	return {
+		list,
+		operations: { onChangeFormInput, onClickRegister, onClickLogin },
+	};
 };
 
 export const SignUpSection: React.FC = () => {
@@ -74,7 +76,7 @@ export const SignUpSection: React.FC = () => {
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>SignUp</Text>
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={operations.onChange} />
+					<Form list={list} onChange={operations.onChangeFormInput} />
 					<Button
 						w={"100%"}
 						mb={theme.m.sm}
