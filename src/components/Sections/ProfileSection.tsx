@@ -5,7 +5,7 @@ import { UserInfo } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
 
-const Profile: React.FC = () => {
+export const ProfileSection: React.FC = () => {
 	return (
 		<WallLayout page="Profile">
 			<Box pt={theme.m.md}>
@@ -27,5 +27,3 @@ const Profile: React.FC = () => {
 		</WallLayout>
 	);
 };
-
-export default Profile;
