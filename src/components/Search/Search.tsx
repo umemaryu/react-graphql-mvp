@@ -1,6 +1,5 @@
 import React from "react";
-import { Input, Box, HStack } from "components/Elements";
-import { BiSearchAlt } from "react-icons/bi";
+import { Input, Box, HStack, SearchIcon } from "components/Elements";
 
 export const Search: React.FC = () => {
 	return (
@@ -11,7 +10,7 @@ export const Search: React.FC = () => {
 					console.log("onClick");
 				}}
 			>
-				<BiSearchAlt cursor={"pointer"} />
+				<SearchIcon />
 			</Box>
 		</HStack>
 	);
