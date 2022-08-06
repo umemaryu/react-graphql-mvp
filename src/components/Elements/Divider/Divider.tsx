@@ -1,10 +1,5 @@
-import { Divider as ChakraDivider } from "@chakra-ui/react";
-import React from "react";
+import { Divider as ChakraDivider, DividerProps } from "@chakra-ui/react";
 
-interface Props {
-	mb: number;
-}
-
-export const Divider: React.FC<Props> = ({ ...props }) => (
+export const Divider = ({ ...props }: DividerProps) => (
 	<ChakraDivider {...props} />
 );

@@ -1,11 +1,5 @@
-import { Center as ChakraCenter } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { AbsoluteCenterProps, Center as ChakraCenter } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-	h?: string;
-}
-
-export const Center: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraCenter {...props}>{children}</ChakraCenter>
+export const Center = ({ ...props }: AbsoluteCenterProps) => (
+	<ChakraCenter {...props} />
 );
