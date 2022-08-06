@@ -1,4 +1,4 @@
-export * from "./routes/Login";
+export * from "../../components/Login/Login";
 export * from "./routes/SignUp";
 export * from "./routes/Account";
 
