@@ -1,7 +1,7 @@
 // This is to fix codegen error
 export type UserModel = {
 	id: number;
-	token: string;
+	token: string | null;
 	email: string;
 	password: string;
 	country: string;
@@ -12,11 +12,11 @@ export type UserModel = {
 
 export type UserPost = {
 	id: number;
-	authorId: number;
+	senderId: number;
 	body: string;
 	createdAt: number;
 };
 
 export type Context = {
-	token: string;
+	token: string | null;
 };

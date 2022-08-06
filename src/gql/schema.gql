@@ -1,6 +1,6 @@
 type User {
 	id: ID!
-	token: String!
+	token: String
 	email: String!
 	password: String!
 	country: String!
@@ -11,7 +11,7 @@ type User {
 
 type Post {
 	id: ID!
-	authorId: Int!
+	senderId: Int!
 	body: String!
 	createdAt: Int!
 	user: User!
@@ -19,7 +19,7 @@ type Post {
 }
 
 type Query {
-	fetchUserById(id: Int!): User!
+	fetchUserByToken: User!
 	fetchUserByEmail(email: String!): User!
 }
 
@@ -31,7 +31,7 @@ type Mutation {
 		city: String!
 		nickName: String!
 	): User!
-	updatePassword(oldPassword: String!, newPassword: String!): Boolean!
+	updatePassword(oldPassword: String!, newPassword: String!, id: Int!): Boolean!
 	updateTokenToNull(id: Int!): Boolean!
-	createPost(authorId: Int!): Boolean!
+	createPost(senderId: Int!, body: String!, receiverId: Int!): Boolean!
 }

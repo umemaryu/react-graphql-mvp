@@ -1,3 +1,3 @@
-mutation CreatePost($authorId: Int!) {
-	createPost(authorId: $authorId)
+mutation CreatePost($senderId: Int!, $body: String!, $receiverId: Int!) {
+	createPost(senderId: $senderId, body: $body, receiverId: $receiverId)
 }

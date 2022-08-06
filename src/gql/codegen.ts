@@ -25,7 +25,9 @@ export type Mutation = {
 
 
 export type MutationCreatePostArgs = {
-  authorId: Scalars['Int'];
+  body: Scalars['String'];
+  receiverId: Scalars['Int'];
+  senderId: Scalars['Int'];
 };
 
 
@@ -39,6 +41,7 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdatePasswordArgs = {
+  id: Scalars['Int'];
   newPassword: Scalars['String'];
   oldPassword: Scalars['String'];
 };
@@ -50,10 +53,10 @@ export type MutationUpdateTokenToNullArgs = {
 
 export type Post = {
   __typename?: 'Post';
-  authorId: Scalars['Int'];
   body: Scalars['String'];
   createdAt: Scalars['Int'];
   id: Scalars['ID'];
+  senderId: Scalars['Int'];
   user: User;
   userId: Scalars['Int'];
 };
@@ -61,17 +64,12 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   fetchUserByEmail: User;
-  fetchUserById: User;
+  fetchUserByToken: User;
 };
 
 
 export type QueryFetchUserByEmailArgs = {
   email: Scalars['String'];
-};
-
-
-export type QueryFetchUserByIdArgs = {
-  id: Scalars['Int'];
 };
 
 export type User = {
@@ -83,22 +81,22 @@ export type User = {
   nickName: Scalars['String'];
   password: Scalars['String'];
   posts?: Maybe<Array<Post>>;
-  token: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
 };
 
 export type CreatePostMutationVariables = Exact<{
-  authorId: Scalars['Int'];
+  senderId: Scalars['Int'];
+  body: Scalars['String'];
+  receiverId: Scalars['Int'];
 }>;
 
 
 export type CreatePostMutation = { __typename?: 'Mutation', createPost: boolean };
 
-export type FetchUserByIdQueryVariables = Exact<{
-  id: Scalars['Int'];
-}>;
+export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUserByIdQuery = { __typename?: 'Query', fetchUserById: { __typename?: 'User', email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
 
 export type FetchUserByEmailQueryVariables = Exact<{
   email: Scalars['String'];
@@ -116,11 +114,12 @@ export type CreateUserMutationVariables = Exact<{
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', token: string } };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', token?: string | null } };
 
 export type UpdatePasswordMutationVariables = Exact<{
   oldPassword: Scalars['String'];
   newPassword: Scalars['String'];
+  id: Scalars['Int'];
 }>;
 
 
@@ -135,8 +134,8 @@ export type UpdateTokenToNullMutation = { __typename?: 'Mutation', updateTokenTo
 
 
 export const CreatePostDocument = gql`
-    mutation CreatePost($authorId: Int!) {
-  createPost(authorId: $authorId)
+    mutation CreatePost($senderId: Int!, $body: String!, $receiverId: Int!) {
+  createPost(senderId: $senderId, body: $body, receiverId: $receiverId)
 }
     `;
 export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;
@@ -154,7 +153,9 @@ export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, C
  * @example
  * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
  *   variables: {
- *      authorId: // value for 'authorId'
+ *      senderId: // value for 'senderId'
+ *      body: // value for 'body'
+ *      receiverId: // value for 'receiverId'
  *   },
  * });
  */
@@ -165,9 +166,9 @@ export function useCreatePostMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreatePostMutationHookResult = ReturnType<typeof useCreatePostMutation>;
 export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>;
 export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMutation, CreatePostMutationVariables>;
-export const FetchUserByIdDocument = gql`
-    query FetchUserById($id: Int!) {
-  fetchUserById(id: $id) {
+export const FetchUserByTokenDocument = gql`
+    query FetchUserByToken {
+  fetchUserByToken {
     email
     country
     city
@@ -185,32 +186,31 @@ export const FetchUserByIdDocument = gql`
     `;
 
 /**
- * __useFetchUserByIdQuery__
+ * __useFetchUserByTokenQuery__
  *
- * To run a query within a React component, call `useFetchUserByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useFetchUserByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFetchUserByTokenQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchUserByTokenQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFetchUserByIdQuery({
+ * const { data, loading, error } = useFetchUserByTokenQuery({
  *   variables: {
- *      id: // value for 'id'
  *   },
  * });
  */
-export function useFetchUserByIdQuery(baseOptions: Apollo.QueryHookOptions<FetchUserByIdQuery, FetchUserByIdQueryVariables>) {
+export function useFetchUserByTokenQuery(baseOptions?: Apollo.QueryHookOptions<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FetchUserByIdQuery, FetchUserByIdQueryVariables>(FetchUserByIdDocument, options);
+        return Apollo.useQuery<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>(FetchUserByTokenDocument, options);
       }
-export function useFetchUserByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchUserByIdQuery, FetchUserByIdQueryVariables>) {
+export function useFetchUserByTokenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FetchUserByIdQuery, FetchUserByIdQueryVariables>(FetchUserByIdDocument, options);
+          return Apollo.useLazyQuery<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>(FetchUserByTokenDocument, options);
         }
-export type FetchUserByIdQueryHookResult = ReturnType<typeof useFetchUserByIdQuery>;
-export type FetchUserByIdLazyQueryHookResult = ReturnType<typeof useFetchUserByIdLazyQuery>;
-export type FetchUserByIdQueryResult = Apollo.QueryResult<FetchUserByIdQuery, FetchUserByIdQueryVariables>;
+export type FetchUserByTokenQueryHookResult = ReturnType<typeof useFetchUserByTokenQuery>;
+export type FetchUserByTokenLazyQueryHookResult = ReturnType<typeof useFetchUserByTokenLazyQuery>;
+export type FetchUserByTokenQueryResult = Apollo.QueryResult<FetchUserByTokenQuery, FetchUserByTokenQueryVariables>;
 export const FetchUserByEmailDocument = gql`
     query FetchUserByEmail($email: String!) {
   fetchUserByEmail(email: $email) {
@@ -301,8 +301,8 @@ export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutati
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const UpdatePasswordDocument = gql`
-    mutation UpdatePassword($oldPassword: String!, $newPassword: String!) {
-  updatePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+    mutation UpdatePassword($oldPassword: String!, $newPassword: String!, $id: Int!) {
+  updatePassword(oldPassword: $oldPassword, newPassword: $newPassword, id: $id)
 }
     `;
 export type UpdatePasswordMutationFn = Apollo.MutationFunction<UpdatePasswordMutation, UpdatePasswordMutationVariables>;
@@ -322,6 +322,7 @@ export type UpdatePasswordMutationFn = Apollo.MutationFunction<UpdatePasswordMut
  *   variables: {
  *      oldPassword: // value for 'oldPassword'
  *      newPassword: // value for 'newPassword'
+ *      id: // value for 'id'
  *   },
  * });
  */
