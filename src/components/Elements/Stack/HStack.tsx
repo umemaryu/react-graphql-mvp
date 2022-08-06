@@ -1,13 +1,3 @@
-import { HStack as ChakraHStack } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { HStack as ChakraHStack, StackProps } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-	mb?: number;
-	spacing?: number;
-	w?: string;
-}
-
-export const HStack: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraHStack {...props}>{children}</ChakraHStack>
-);
+export const HStack = ({ ...props }: StackProps) => <ChakraHStack {...props} />;

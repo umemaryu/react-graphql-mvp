@@ -1,10 +1,5 @@
-import { Spinner as ChakraSpinner } from "@chakra-ui/react";
-import React from "react";
+import { Spinner as ChakraSpinner, SpinnerProps } from "@chakra-ui/react";
 
-interface Props {
-	size: string;
-}
-
-export const Spinner: React.FC<Props> = ({ ...props }) => (
+export const Spinner = ({ ...props }: SpinnerProps) => (
 	<ChakraSpinner {...props} />
 );
