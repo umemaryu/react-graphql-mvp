@@ -1,6 +1,5 @@
 import React from "react";
-import { Input, Box, HStack } from "components/Elements";
-import { BiSend } from "react-icons/bi";
+import { Input, Box, HStack, PostIcon } from "components/Elements";
 
 export const Post: React.FC = () => {
 	return (
@@ -11,7 +10,7 @@ export const Post: React.FC = () => {
 					console.log("onClick");
 				}}
 			>
-				<BiSend cursor={"pointer"} />
+				<PostIcon />
 			</Box>
 		</HStack>
 	);

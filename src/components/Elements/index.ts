@@ -6,6 +6,7 @@ export * from "./Divider";
 export * from "./Flex";
 export * from "./Form";
 export * from "./Grid";
+export * from "./Icon";
 export * from "./Input";
 export * from "./Spinner";
 export * from "./Stack";
