@@ -12,6 +12,7 @@ import {
 	createHttpLink,
 	InMemoryCache,
 } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 type AppProviderProps = {
 	children: React.ReactNode;
@@ -29,10 +30,21 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 			credentials: "same-origin",
 		});
 	}, []);
+	const authLink = useMemo(() => {
+		return setContext((_, { headers }) => {
+			const token = localStorage.getItem("token");
+			return {
+				headers: {
+					...headers,
+					authorization: "Bearer 1bS5XsbnppFJ3jK9VFmzsHkD5XNwnFYw",
+				},
+			};
+		});
+	}, []);
 
 	const client = useMemo(() => {
 		return new ApolloClient({
-			link: ApolloLink.from([httpLink]),
+			link: ApolloLink.from([authLink, httpLink]),
 			cache: new InMemoryCache(),
 			connectToDevTools: true,
 			defaultOptions: {
@@ -41,7 +53,7 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 				},
 			},
 		});
-	}, [httpLink]);
+	}, [httpLink, authLink]);
 	return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
