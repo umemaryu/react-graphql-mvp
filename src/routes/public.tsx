@@ -2,10 +2,7 @@ import React from "react";
 import { lazyImport } from "utils/lazyImport";
 
 const { Login } = lazyImport(() => import("containers"), "Login");
-const { SignUpSection } = lazyImport(
-	() => import("components/Sections"),
-	"SignUpSection"
-);
+const { SignUp } = lazyImport(() => import("containers"), "SignUp");
 
 export const publicRoutes = [
 	{
@@ -14,6 +11,6 @@ export const publicRoutes = [
 	},
 	{
 		path: "/sign-up",
-		element: <SignUpSection />,
+		element: <SignUp />,
 	},
 ];
