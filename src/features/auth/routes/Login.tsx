@@ -3,7 +3,7 @@ import {
 	Box,
 	Button,
 	Center,
-	Container,
+	Layout,
 	Divider,
 	VStack,
 	Text,
@@ -50,7 +50,7 @@ export const Login: React.FC = () => {
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>Login</Text>
-				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
+				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form list={list} onChange={onChange} />
 					<Button w={"100%"} mb={theme.m.sm} onClick={onClickLogin}>
 						Login
@@ -67,7 +67,7 @@ export const Login: React.FC = () => {
 							Sign up
 						</Text>
 					</Box>
-				</Container>
+				</Layout>
 			</VStack>
 		</Center>
 	);
