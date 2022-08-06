@@ -8,7 +8,7 @@ interface Props {
 	page: "Profile" | "Browse" | "Account";
 }
 
-export const WallContainer: React.FC<Props> = ({ children, page }) => {
+export const WallLayout: React.FC<Props> = ({ children, page }) => {
 	const list = [
 		{ text: "Profile", path: "profile" },
 		{ text: "Browse", path: "browse" },

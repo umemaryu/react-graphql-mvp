@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
-import { WallContainer } from "components/Container";
+import { WallLayout } from "components/Layout";
 import { useNavigate } from "react-router-dom";
 
 export const Account: React.FC = () => {
@@ -23,7 +23,7 @@ export const Account: React.FC = () => {
 	}, [navigate]);
 
 	return (
-		<WallContainer page="Account">
+		<WallLayout page="Account">
 			<Box w={theme.w.mobile}>
 				{/* <Form list={list} /> */}
 				<Button
@@ -39,6 +39,6 @@ export const Account: React.FC = () => {
 					Sign Out
 				</Text>
 			</Box>
-		</WallContainer>
+		</WallLayout>
 	);
 };

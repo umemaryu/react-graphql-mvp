@@ -1,5 +1,5 @@
 import React from "react";
-import { WallContainer } from "components/Container";
+import { WallLayout } from "components/Layout";
 import { Box, Text, VStack } from "components/Elements";
 import { UserInfo } from "components/List";
 import { theme } from "utils/theme";
@@ -8,7 +8,7 @@ import { Search } from "components/Search";
 
 export const Browse: React.FC = () => {
 	return (
-		<WallContainer page="Browse">
+		<WallLayout page="Browse">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
 					<UserInfo />
@@ -17,7 +17,7 @@ export const Browse: React.FC = () => {
 					<Post />
 				</VStack>
 			</Box>
-		</WallContainer>
+		</WallLayout>
 	);
 };
 

@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Button, Center, VStack, Text } from "components/Elements";
-import { WallContainer } from "components/Container";
+import { WallLayout } from "components/Layout";
 import { UserInfo } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
 
 const Profile: React.FC = () => {
 	return (
-		<WallContainer page="Profile">
+		<WallLayout page="Profile">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
 					<UserInfo />
@@ -24,7 +24,7 @@ const Profile: React.FC = () => {
 					</Center>
 				</VStack>
 			</Box>
-		</WallContainer>
+		</WallLayout>
 	);
 };
 
