@@ -17,30 +17,26 @@ export const Login: React.FC = () => {
 		password: "",
 	});
 	const navigate = useNavigate();
-	const onChangeEmail = useCallback(
-		(value: string) => {
-			setState({ ...state, email: value });
-		},
-		[state]
-	);
-	const onChangePassword = useCallback(
-		(value: string) => {
-			setState({ ...state, password: value });
+	const onChange = useCallback(
+		(value: string, id: string) => {
+			setState({ ...state, [id]: value });
 		},
 		[state]
 	);
 	const list: IFormList[] = [
 		{
+			id: "email",
 			text: "Email",
 			type: "email",
 			placeholder: "mail@example.com",
-			onChange: onChangeEmail,
+			onChange: onChange,
 		},
 		{
+			id: "password",
 			text: "Password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
-			onChange: onChangePassword,
+			onChange: onChange,
 		},
 	];
 	const onClickLogin = useCallback(() => {
