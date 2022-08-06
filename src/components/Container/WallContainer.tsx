@@ -1,6 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useCallback } from "react";
 import { theme } from "utils/theme";
 import { Center, Container, Text, VStack, Grid } from "components/Elements";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
 	children: ReactNode;
@@ -8,7 +9,18 @@ interface Props {
 }
 
 export const WallContainer: React.FC<Props> = ({ children, page }) => {
-	const list = ["Profile", "Browse", "Account"];
+	const list = [
+		{ text: "Profile", path: "profile" },
+		{ text: "Browse", path: "browse" },
+		{ text: "Account", path: "account" },
+	];
+	const navigate = useNavigate();
+	const onClickText = useCallback(
+		(path: string) => {
+			navigate(`/${path}`);
+		},
+		[navigate]
+	);
 	const textH = "40px";
 	return (
 		<Container
@@ -22,17 +34,18 @@ export const WallContainer: React.FC<Props> = ({ children, page }) => {
 					<Grid templateColumns="repeat(3, 1fr)" w={theme.w.wall}>
 						{list.map((ele, index) => (
 							<Text
-								key={ele}
+								key={ele.text}
 								cursor="pointer"
-								bg={ele === page ? "blue.100" : "initial"}
+								bg={ele.text === page ? "blue.100" : "initial"}
 								h={textH}
 								lineHeight={textH}
 								borderLeft={theme.border}
 								borderRight={index === list.length - 1 ? theme.border : ""}
 								borderBottom={theme.border}
 								textAlign={"center"}
+								onClick={() => onClickText(ele.path)}
 							>
-								{ele}
+								{ele.text}
 							</Text>
 						))}
 					</Grid>

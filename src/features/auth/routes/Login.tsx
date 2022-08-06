@@ -41,7 +41,8 @@ export const Login: React.FC = () => {
 	);
 	const onClickLogin = useCallback(() => {
 		console.log(state, "API communication");
-	}, [state]);
+		navigate("/profile");
+	}, [state, navigate]);
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);

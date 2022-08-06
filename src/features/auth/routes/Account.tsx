@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { WallContainer } from "components/Container";
+import { useNavigate } from "react-router-dom";
 
 export const Account: React.FC = () => {
 	const list = [
@@ -16,6 +17,10 @@ export const Account: React.FC = () => {
 			placeholder: "abc123",
 		},
 	];
+	const navigate = useNavigate();
+	const onClickSignOut = useCallback(() => {
+		navigate("/login");
+	}, [navigate]);
 
 	return (
 		<WallContainer page="Account">
@@ -30,7 +35,7 @@ export const Account: React.FC = () => {
 				>
 					Update Password
 				</Button>
-				<Text cursor="pointer" textAlign="center">
+				<Text cursor="pointer" textAlign="center" onClick={onClickSignOut}>
 					Sign Out
 				</Text>
 			</Box>
