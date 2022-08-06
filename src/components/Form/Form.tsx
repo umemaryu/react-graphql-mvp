@@ -18,7 +18,12 @@ export const Form: React.FC<Props> = ({ list, onChange }) => (
 		{list.map((ele) => (
 			<Box mt={theme.m.sm} mb={theme.m.sm} key={ele.text}>
 				<FormLabel>{ele.text}</FormLabel>
-				<FormInput {...ele} onChange={onChange} />
+				<FormInput
+					type={ele.type}
+					placeholder={ele.placeholder}
+					id={ele.id}
+					onChange={onChange}
+				/>
 			</Box>
 		))}
 		<Box textAlign="center" mt={theme.m.sm} mb={theme.m.sm}>

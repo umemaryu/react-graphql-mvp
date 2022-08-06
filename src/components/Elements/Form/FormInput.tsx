@@ -1,14 +1,12 @@
-import { Input as ChakraInput } from "@chakra-ui/react";
+import { Input as ChakraInput, InputProps } from "@chakra-ui/react";
 import React from "react";
 
-interface Props {
-	type?: React.HTMLInputTypeAttribute;
-	placeholder: string;
+type Props = Omit<InputProps, "onChange"> & {
 	id: string;
-	onChange: (value: string, kind: string) => void;
-}
+	onChange: (value: string, id: string) => void;
+};
 
-export const FormInput: React.FC<Props> = ({ id, onChange, ...props }) => (
+export const FormInput = ({ id, onChange, ...props }: Props) => (
 	<ChakraInput
 		{...props}
 		size="lg"
