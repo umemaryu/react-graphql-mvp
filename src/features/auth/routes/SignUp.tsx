@@ -59,7 +59,8 @@ export const SignUp: React.FC = () => {
 	);
 	const onClickRegister = useCallback(() => {
 		console.log(state);
-	}, [state]);
+		navigate("/profile");
+	}, [state, navigate]);
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
