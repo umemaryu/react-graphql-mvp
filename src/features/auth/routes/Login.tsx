@@ -9,12 +9,14 @@ import { VStack } from "components/Stack/VStack";
 import { Text } from "components/Text/Text";
 import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
+import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
 	const [state, setState] = useState({
 		email: "",
 		password: "",
 	});
+	const navigate = useNavigate();
 	const onChangeEmail = useCallback(
 		(value: string) => {
 			setState({ ...state, email: value });
@@ -44,6 +46,9 @@ export const Login: React.FC = () => {
 	const onClickLogin = useCallback(() => {
 		console.log(state, "API communication");
 	}, [state]);
+	const onClickSignUp = useCallback(() => {
+		navigate("/sign-up");
+	}, [navigate]);
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
@@ -60,9 +65,7 @@ export const Login: React.FC = () => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={() => {
-								console.log("onClick");
-							}}
+							onClick={onClickSignUp}
 						>
 							Sign up
 						</Text>
