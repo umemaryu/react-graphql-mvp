@@ -6,7 +6,7 @@ import { theme } from "utils/theme";
 import { Post } from "components/Post";
 import { Search } from "components/Search";
 
-export const Browse: React.FC = () => {
+export const BrowseSection: React.FC = () => {
 	return (
 		<WallLayout page="Browse">
 			<Box pt={theme.m.md}>
@@ -20,5 +20,3 @@ export const Browse: React.FC = () => {
 		</WallLayout>
 	);
 };
-
-export default Browse;

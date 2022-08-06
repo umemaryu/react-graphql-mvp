@@ -6,7 +6,10 @@ const { ProfileSection } = lazyImport(
 	"ProfileSection"
 );
 
-const Browse = React.lazy(() => import("ui/pages/Browse"));
+const { BrowseSection } = lazyImport(
+	() => import("components/Sections"),
+	"BrowseSection"
+);
 const { AccountSection } = lazyImport(
 	() => import("components/Sections"),
 	"AccountSection"
@@ -19,7 +22,7 @@ export const protectedRoutes = [
 	},
 	{
 		path: "/browse",
-		element: <Browse />,
+		element: <BrowseSection />,
 	},
 	{
 		path: "/account",
