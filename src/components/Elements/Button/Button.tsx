@@ -1,23 +1,5 @@
-import { Button as ChakraButton } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { Button as ChakraButton, ButtonProps } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-	mb?: number;
-	isFullWidth?: boolean;
-	onClick: () => void;
-}
-
-export const Button: React.FC<Props> = ({
-	children,
-	isFullWidth,
-	...props
-}) => (
-	<ChakraButton
-		w={isFullWidth ? "100%" : "initial"}
-		colorScheme={"blue"}
-		{...props}
-	>
-		{children}
-	</ChakraButton>
+export const Button = ({ ...props }: ButtonProps) => (
+	<ChakraButton colorScheme={"blue"} {...props} />
 );

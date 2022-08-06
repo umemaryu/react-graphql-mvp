@@ -69,7 +69,7 @@ export const SignUp: React.FC = () => {
 				<Text fontSize={theme.fs.h3}>SignUp</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form list={list} onChange={onChange} />
-					<Button isFullWidth mb={theme.m.sm} onClick={onClickRegister}>
+					<Button w={"100%"} mb={theme.m.sm} onClick={onClickRegister}>
 						Resister
 					</Button>
 					<Divider mb={theme.m.sm} />

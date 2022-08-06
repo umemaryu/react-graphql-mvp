@@ -1,17 +1,3 @@
-import { Box as ChakraBox } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { Box as ChakraBox, BoxProps } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-	textAlign?: "center";
-	w?: string;
-	pt?: number;
-	mt?: number;
-	mb?: number;
-	border?: string;
-	onClick?: () => void;
-}
-
-export const Box: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraBox {...props}>{children}</ChakraBox>
-);
+export const Box = ({ ...props }: BoxProps) => <ChakraBox {...props} />;

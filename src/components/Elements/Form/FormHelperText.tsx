@@ -1,10 +1,8 @@
-import { FormHelperText as ChakraFormHelperText } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import {
+	FormHelperText as ChakraFormHelperText,
+	HelpTextProps,
+} from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-}
-
-export const FormHelperText: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraFormHelperText {...props}>{children}</ChakraFormHelperText>
+export const FormHelperText = ({ ...props }: HelpTextProps) => (
+	<ChakraFormHelperText {...props} />
 );

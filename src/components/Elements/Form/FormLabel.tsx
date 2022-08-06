@@ -1,10 +1,5 @@
-import { FormLabel as ChakraFormLabel } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { FormLabel as ChakraFormLabel, FormLabelProps } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-}
-
-export const FormLabel: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraFormLabel {...props}>{children}</ChakraFormLabel>
+export const FormLabel = ({ ...props }: FormLabelProps) => (
+	<ChakraFormLabel {...props} />
 );

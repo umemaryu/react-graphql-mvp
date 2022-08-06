@@ -1,11 +1,5 @@
-import { Flex as ChakraFlex } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { Flex as ChakraFlex, FlexProps } from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-	w: string;
-}
-
-export const Flex: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraFlex {...props}>{children}</ChakraFlex>
+export const Flex = ({ ...props }: FlexProps) => (
+	<ChakraFlex {...props}></ChakraFlex>
 );

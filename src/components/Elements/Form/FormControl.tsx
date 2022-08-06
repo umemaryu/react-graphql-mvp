@@ -1,10 +1,8 @@
-import { FormControl as ChakraFormControl } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import {
+	FormControl as ChakraFormControl,
+	FormControlProps,
+} from "@chakra-ui/react";
 
-interface Props {
-	children: ReactNode;
-}
-
-export const FormControl: React.FC<Props> = ({ children, ...props }) => (
-	<ChakraFormControl {...props}>{children}</ChakraFormControl>
+export const FormControl = ({ ...props }: FormControlProps) => (
+	<ChakraFormControl {...props} />
 );

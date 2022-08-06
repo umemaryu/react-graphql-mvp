@@ -51,7 +51,7 @@ export const Login: React.FC = () => {
 				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form list={list} onChange={onChange} />
-					<Button isFullWidth mb={theme.m.sm} onClick={onClickLogin}>
+					<Button w={"100%"} mb={theme.m.sm} onClick={onClickLogin}>
 						Login
 					</Button>
 					<Divider mb={theme.m.sm} />
