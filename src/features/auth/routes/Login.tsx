@@ -13,7 +13,7 @@ import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
 
-export const Login: React.FC = () => {
+const useLogin = () => {
 	const list: IFormList[] = [
 		{
 			id: "email",
@@ -33,7 +33,7 @@ export const Login: React.FC = () => {
 		password: "",
 	});
 	const navigate = useNavigate();
-	const onChange = useCallback(
+	const onChangeFormInput = useCallback(
 		(value: string, id: string) => {
 			setState({ ...state, [id]: value });
 		},
@@ -46,13 +46,21 @@ export const Login: React.FC = () => {
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
+	return {
+		list,
+		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
+	};
+};
+
+export const Login: React.FC = () => {
+	const { list, operations } = useLogin();
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={onChange} />
-					<Button w={"100%"} mb={theme.m.sm} onClick={onClickLogin}>
+					<Form list={list} onChange={operations.onChangeFormInput} />
+					<Button w={"100%"} mb={theme.m.sm} onClick={operations.onClickLogin}>
 						Login
 					</Button>
 					<Divider mb={theme.m.sm} />
@@ -62,7 +70,7 @@ export const Login: React.FC = () => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={onClickSignUp}
+							onClick={operations.onClickSignUp}
 						>
 							Sign up
 						</Text>
