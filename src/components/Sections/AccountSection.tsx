@@ -30,10 +30,16 @@ const useAccount = () => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
+	const onClickUpdatePassword = useCallback(() => {
+		console.log(state);
+	}, [state]);
 	const onClickSignOut = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
-	return { list, operations: { onChangeFormInput, onClickSignOut } };
+	return {
+		list,
+		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },
+	};
 };
 
 export const AccountSection: React.FC = () => {
@@ -43,9 +49,7 @@ export const AccountSection: React.FC = () => {
 			<Box w={theme.w.mobile}>
 				<Form list={list} onChange={operations.onChangeFormInput} />
 				<Button
-					onClick={() => {
-						console.log("onClick");
-					}}
+					onClick={operations.onClickUpdatePassword}
 					w={"100%"}
 					mb={theme.m.md}
 				>
