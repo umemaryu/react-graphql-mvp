@@ -3,7 +3,7 @@ import { lazyImport } from "utils/lazyImport";
 
 const Profile = React.lazy(() => import("ui/pages/Profile"));
 const Browse = React.lazy(() => import("ui/pages/Browse"));
-const { Account } = lazyImport(() => import("features/auth"), "Account");
+const { Account } = lazyImport(() => import("components/Account"), "Account");
 
 export const protectedRoutes = [
 	{
