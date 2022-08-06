@@ -10,11 +10,10 @@ import {
 } from "components/Elements";
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
-import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
-	const list: IFormList[] = [
+	const list = [
 		{
 			id: "email",
 			text: "Email",

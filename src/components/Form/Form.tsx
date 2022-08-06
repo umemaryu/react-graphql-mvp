@@ -5,13 +5,19 @@ import {
 	FormInput,
 	FormLabel,
 } from "components/Elements";
-import { IFormList } from "interface/IFormList";
 import { theme } from "utils/theme";
 
-interface Props {
-	list: IFormList[];
+type FormList = {
+	id: string;
+	text: string;
+	type?: React.HTMLInputTypeAttribute;
+	placeholder: string;
+};
+
+type Props = {
+	list: FormList[];
 	onChange: (value: string, id: string) => void;
-}
+};
 
 export const Form: React.FC<Props> = ({ list, onChange }) => (
 	<FormControl>

@@ -3,10 +3,10 @@ import { theme } from "utils/theme";
 import { Center, Layout, Text, VStack, Grid } from "components/Elements";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
+type Props = {
 	children: ReactNode;
 	page: "Profile" | "Browse" | "Account";
-}
+};
 
 export const WallLayout: React.FC<Props> = ({ children, page }) => {
 	const list = [
