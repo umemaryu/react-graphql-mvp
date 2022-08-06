@@ -24,7 +24,7 @@ const useAccount = () => {
 	return { list, operations: { onClickSignOut } };
 };
 
-export const Account: React.FC = () => {
+export const AccountSection: React.FC = () => {
 	const { list, operations } = useAccount();
 	return (
 		<WallLayout page="Account">

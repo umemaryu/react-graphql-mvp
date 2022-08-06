@@ -1,16 +1,22 @@
 import React from "react";
 import { lazyImport } from "utils/lazyImport";
 
-const { Login } = lazyImport(() => import("components/Login"), "Login");
-const { SignUp } = lazyImport(() => import("components/SignUp"), "SignUp");
+const { LoginSection } = lazyImport(
+	() => import("components/Sections"),
+	"LoginSection"
+);
+const { SignUpSection } = lazyImport(
+	() => import("components/Sections"),
+	"SignUpSection"
+);
 
 export const publicRoutes = [
 	{
 		path: "/login",
-		element: <Login />,
+		element: <LoginSection />,
 	},
 	{
 		path: "/sign-up",
-		element: <SignUp />,
+		element: <SignUpSection />,
 	},
 ];

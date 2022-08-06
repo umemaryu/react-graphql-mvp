@@ -67,7 +67,7 @@ const useSignUp = () => {
 	return { list, operations: { onChange, onClickRegister, onClickLogin } };
 };
 
-export const SignUp: React.FC = () => {
+export const SignUpSection: React.FC = () => {
 	const { list, operations } = useSignUp();
 	return (
 		<Center h={theme.h.full}>

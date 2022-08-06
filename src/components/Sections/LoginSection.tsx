@@ -52,7 +52,7 @@ const useLogin = () => {
 	};
 };
 
-export const Login: React.FC = () => {
+export const LoginSection: React.FC = () => {
 	const { list, operations } = useLogin();
 	return (
 		<Center h={theme.h.full}>
