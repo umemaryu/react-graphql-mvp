@@ -14,10 +14,10 @@ type FormList = {
 	placeholder: string;
 };
 
-interface Props {
+type Props = {
 	list: FormList[];
 	onChange: (value: string, id: string) => void;
-}
+};
 
 export const Form: React.FC<Props> = ({ list, onChange }) => (
 	<FormControl>
