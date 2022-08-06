@@ -33,12 +33,11 @@ const useLogin = () => {
 		password: "",
 	});
 	const navigate = useNavigate();
-	const onChangeFormInput = useCallback(
-		(value: string, id: string) => {
-			setState({ ...state, [id]: value });
-		},
-		[state]
-	);
+	const onChangeFormInput = useCallback((value: string, id: string) => {
+		setState((prevState) => {
+			return { ...prevState, [id]: value };
+		});
+	}, []);
 	const onClickLogin = useCallback(() => {
 		console.log(state, "API communication");
 		navigate("/profile");

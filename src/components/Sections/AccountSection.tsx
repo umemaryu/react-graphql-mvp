@@ -25,12 +25,11 @@ const useAccount = () => {
 		oldPassword: "",
 	});
 	const navigate = useNavigate();
-	const onChangeFormInput = useCallback(
-		(value: string, id: string) => {
-			setState({ ...state, [id]: value });
-		},
-		[state]
-	);
+	const onChangeFormInput = useCallback((value: string, id: string) => {
+		setState((prevState) => {
+			return { ...prevState, [id]: value };
+		});
+	}, []);
 	const onClickSignOut = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
