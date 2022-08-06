@@ -1,6 +1,6 @@
 import React, { ReactNode, useCallback } from "react";
 import { theme } from "utils/theme";
-import { Center, Container, Text, VStack, Grid } from "components/Elements";
+import { Center, Layout, Text, VStack, Grid } from "components/Elements";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 	page: "Profile" | "Browse" | "Account";
 }
 
-export const WallContainer: React.FC<Props> = ({ children, page }) => {
+export const WallLayout: React.FC<Props> = ({ children, page }) => {
 	const list = [
 		{ text: "Profile", path: "profile" },
 		{ text: "Browse", path: "browse" },
@@ -23,12 +23,7 @@ export const WallContainer: React.FC<Props> = ({ children, page }) => {
 	);
 	const textH = "40px";
 	return (
-		<Container
-			w={theme.w.wall}
-			border={theme.border}
-			h={"60vh"}
-			mt={theme.m.lg}
-		>
+		<Layout w={theme.w.wall} border={theme.border} h={"60vh"} mt={theme.m.lg}>
 			<Center>
 				<VStack mb={100}>
 					<Grid templateColumns="repeat(3, 1fr)" w={theme.w.wall}>
@@ -52,6 +47,6 @@ export const WallContainer: React.FC<Props> = ({ children, page }) => {
 					{children}
 				</VStack>
 			</Center>
-		</Container>
+		</Layout>
 	);
 };

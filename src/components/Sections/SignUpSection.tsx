@@ -3,7 +3,7 @@ import {
 	Box,
 	Button,
 	Center,
-	Container,
+	Layout,
 	Divider,
 	VStack,
 	Text,
@@ -13,8 +13,23 @@ import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
 
-export const Login: React.FC = () => {
+const useSignUp = () => {
 	const list: IFormList[] = [
+		{
+			id: "nickName",
+			text: "Nick name",
+			placeholder: "Nick name",
+		},
+		{
+			id: "country",
+			text: "Country",
+			placeholder: "Country",
+		},
+		{
+			id: "city",
+			text: "City",
+			placeholder: "City",
+		},
 		{
 			id: "email",
 			text: "Email",
@@ -29,6 +44,9 @@ export const Login: React.FC = () => {
 		},
 	];
 	const [state, setState] = useState({
+		nickName: "",
+		country: "",
+		city: "",
 		email: "",
 		password: "",
 	});
@@ -39,21 +57,30 @@ export const Login: React.FC = () => {
 		},
 		[state]
 	);
-	const onClickLogin = useCallback(() => {
-		console.log(state, "API communication");
+	const onClickRegister = useCallback(() => {
+		console.log(state);
 		navigate("/profile");
 	}, [state, navigate]);
-	const onClickSignUp = useCallback(() => {
-		navigate("/sign-up");
+	const onClickLogin = useCallback(() => {
+		navigate("/login");
 	}, [navigate]);
+	return { list, operations: { onChange, onClickRegister, onClickLogin } };
+};
+
+export const SignUpSection: React.FC = () => {
+	const { list, operations } = useSignUp();
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
-				<Text fontSize={theme.fs.h3}>Login</Text>
-				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={onChange} />
-					<Button w={"100%"} mb={theme.m.sm} onClick={onClickLogin}>
-						Login
+				<Text fontSize={theme.fs.h3}>SignUp</Text>
+				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
+					<Form list={list} onChange={operations.onChange} />
+					<Button
+						w={"100%"}
+						mb={theme.m.sm}
+						onClick={operations.onClickRegister}
+					>
+						Resister
 					</Button>
 					<Divider mb={theme.m.sm} />
 					<Box textAlign="center">
@@ -62,12 +89,12 @@ export const Login: React.FC = () => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={onClickSignUp}
+							onClick={operations.onClickLogin}
 						>
-							Sign up
+							Login
 						</Text>
 					</Box>
-				</Container>
+				</Layout>
 			</VStack>
 		</Center>
 	);

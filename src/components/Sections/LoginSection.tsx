@@ -3,7 +3,7 @@ import {
 	Box,
 	Button,
 	Center,
-	Container,
+	Layout,
 	Divider,
 	VStack,
 	Text,
@@ -13,23 +13,8 @@ import { theme } from "utils/theme";
 import { IFormList } from "interface/IFormList";
 import { useNavigate } from "react-router-dom";
 
-export const SignUp: React.FC = () => {
+const useLogin = () => {
 	const list: IFormList[] = [
-		{
-			id: "nickName",
-			text: "Nick name",
-			placeholder: "Nick name",
-		},
-		{
-			id: "country",
-			text: "Country",
-			placeholder: "Country",
-		},
-		{
-			id: "city",
-			text: "City",
-			placeholder: "City",
-		},
 		{
 			id: "email",
 			text: "Email",
@@ -44,34 +29,39 @@ export const SignUp: React.FC = () => {
 		},
 	];
 	const [state, setState] = useState({
-		nickName: "",
-		country: "",
-		city: "",
 		email: "",
 		password: "",
 	});
 	const navigate = useNavigate();
-	const onChange = useCallback(
+	const onChangeFormInput = useCallback(
 		(value: string, id: string) => {
 			setState({ ...state, [id]: value });
 		},
 		[state]
 	);
-	const onClickRegister = useCallback(() => {
-		console.log(state);
+	const onClickLogin = useCallback(() => {
+		console.log(state, "API communication");
 		navigate("/profile");
 	}, [state, navigate]);
-	const onClickLogin = useCallback(() => {
-		navigate("/login");
+	const onClickSignUp = useCallback(() => {
+		navigate("/sign-up");
 	}, [navigate]);
+	return {
+		list,
+		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
+	};
+};
+
+export const LoginSection: React.FC = () => {
+	const { list, operations } = useLogin();
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
-				<Text fontSize={theme.fs.h3}>SignUp</Text>
-				<Container borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={onChange} />
-					<Button w={"100%"} mb={theme.m.sm} onClick={onClickRegister}>
-						Resister
+				<Text fontSize={theme.fs.h3}>Login</Text>
+				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
+					<Form list={list} onChange={operations.onChangeFormInput} />
+					<Button w={"100%"} mb={theme.m.sm} onClick={operations.onClickLogin}>
+						Login
 					</Button>
 					<Divider mb={theme.m.sm} />
 					<Box textAlign="center">
@@ -80,12 +70,12 @@ export const SignUp: React.FC = () => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={onClickLogin}
+							onClick={operations.onClickSignUp}
 						>
-							Login
+							Sign up
 						</Text>
 					</Box>
-				</Container>
+				</Layout>
 			</VStack>
 		</Center>
 	);

@@ -1,10 +1,10 @@
 import React, { useCallback } from "react";
 import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
-import { WallContainer } from "components/Container";
+import { WallLayout } from "components/Layout";
 import { useNavigate } from "react-router-dom";
 
-export const Account: React.FC = () => {
+const useAccount = () => {
 	const list = [
 		{
 			text: "New password(min 6 characters)",
@@ -21,9 +21,13 @@ export const Account: React.FC = () => {
 	const onClickSignOut = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
+	return { list, operations: { onClickSignOut } };
+};
 
+export const AccountSection: React.FC = () => {
+	const { list, operations } = useAccount();
 	return (
-		<WallContainer page="Account">
+		<WallLayout page="Account">
 			<Box w={theme.w.mobile}>
 				{/* <Form list={list} /> */}
 				<Button
@@ -35,10 +39,14 @@ export const Account: React.FC = () => {
 				>
 					Update Password
 				</Button>
-				<Text cursor="pointer" textAlign="center" onClick={onClickSignOut}>
+				<Text
+					cursor="pointer"
+					textAlign="center"
+					onClick={operations.onClickSignOut}
+				>
 					Sign Out
 				</Text>
 			</Box>
-		</WallContainer>
+		</WallLayout>
 	);
 };

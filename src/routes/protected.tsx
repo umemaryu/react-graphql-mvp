@@ -1,21 +1,31 @@
 import React from "react";
 import { lazyImport } from "utils/lazyImport";
 
-const Profile = React.lazy(() => import("ui/pages/Profile"));
-const Browse = React.lazy(() => import("ui/pages/Browse"));
-const { Account } = lazyImport(() => import("features/auth"), "Account");
+const { ProfileSection } = lazyImport(
+	() => import("components/Sections"),
+	"ProfileSection"
+);
+
+const { BrowseSection } = lazyImport(
+	() => import("components/Sections"),
+	"BrowseSection"
+);
+const { AccountSection } = lazyImport(
+	() => import("components/Sections"),
+	"AccountSection"
+);
 
 export const protectedRoutes = [
 	{
 		path: "/profile",
-		element: <Profile />,
+		element: <ProfileSection />,
 	},
 	{
 		path: "/browse",
-		element: <Browse />,
+		element: <BrowseSection />,
 	},
 	{
 		path: "/account",
-		element: <Account />,
+		element: <AccountSection />,
 	},
 ];
