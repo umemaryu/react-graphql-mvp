@@ -1,12 +1,5 @@
 import React from "react";
-import {
-	Box,
-	Button,
-	Center,
-	VStack,
-	Text,
-	Divider,
-} from "components/Elements";
+import { Box, VStack, Text, Divider } from "components/Elements";
 import { ThreadLayout } from "components/Layout";
 import { UserInfoList } from "components/List";
 import { Post } from "components/Post";
@@ -28,15 +21,6 @@ export const ProfileSection: React.FC<Props> = ({ user }) => {
 					<Text textAlign="center">Write a post to your thread</Text>
 					<Posts user={user} />
 					<Post />
-					<Center>
-						<Button
-							onClick={() => {
-								console.log("onClick");
-							}}
-						>
-							reload
-						</Button>
-					</Center>
 				</VStack>
 			</Box>
 		</ThreadLayout>
