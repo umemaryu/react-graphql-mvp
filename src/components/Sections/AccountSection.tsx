@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
-import { WallLayout } from "components/Layout";
+import { ThreadLayout } from "components/Layout";
 import { useNavigate } from "react-router-dom";
 import { Form } from "components/Form";
 
@@ -45,7 +45,7 @@ const useAccount = () => {
 export const AccountSection: React.FC = () => {
 	const { list, operations } = useAccount();
 	return (
-		<WallLayout page="Account">
+		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>
 				<Form list={list} onChange={operations.onChangeFormInput} />
 				<Button
@@ -63,6 +63,6 @@ export const AccountSection: React.FC = () => {
 					Sign Out
 				</Text>
 			</Box>
-		</WallLayout>
+		</ThreadLayout>
 	);
 };

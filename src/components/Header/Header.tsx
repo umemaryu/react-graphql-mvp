@@ -26,7 +26,7 @@ export const Header: React.FC<Props> = ({ page }) => {
 	];
 	const { operations } = useHeader();
 	return (
-		<Grid templateColumns="repeat(3, 1fr)" w={theme.w.wall}>
+		<Grid templateColumns="repeat(3, 1fr)" w={theme.w.thread}>
 			{list.map((ele, index) => (
 				<Text
 					key={ele.text}
