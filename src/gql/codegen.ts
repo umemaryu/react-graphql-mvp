@@ -334,7 +334,7 @@ export type UpdatePasswordMutationHookResult = ReturnType<typeof useUpdatePasswo
 export type UpdatePasswordMutationResult = Apollo.MutationResult<UpdatePasswordMutation>;
 export type UpdatePasswordMutationOptions = Apollo.BaseMutationOptions<UpdatePasswordMutation, UpdatePasswordMutationVariables>;
 export const UpdateTokenToNullDocument = gql`
-    mutation updateTokenToNull($id: Int!) {
+    mutation UpdateTokenToNull($id: Int!) {
   updateTokenToNull(id: $id)
 }
     `;

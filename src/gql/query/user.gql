@@ -57,6 +57,6 @@ mutation UpdatePassword(
 ) {
 	updatePassword(oldPassword: $oldPassword, newPassword: $newPassword, id: $id)
 }
-mutation updateTokenToNull($id: Int!) {
+mutation UpdateTokenToNull($id: Int!) {
 	updateTokenToNull(id: $id)
 }
