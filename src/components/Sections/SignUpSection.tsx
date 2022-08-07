@@ -12,6 +12,7 @@ import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { ICreateUser } from "types";
+import { emailValidation } from "utils/emailValidation";
 
 type Props = {
 	actions: {
@@ -56,6 +57,8 @@ const useSignUp = ({ actions }: Props) => {
 		email: "",
 		password: "",
 	});
+	const [error, setError] = useState<string>("");
+
 	const navigate = useNavigate();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
@@ -63,6 +66,13 @@ const useSignUp = ({ actions }: Props) => {
 		});
 	}, []);
 	const onClickRegister = useCallback(async () => {
+		for (let key in state) {
+			if (state[key as keyof typeof state] === "") {
+				setError(`${[key as keyof typeof state]} should be filled`);
+			}
+		}
+		const { emailError } = emailValidation(state.email);
+		if (emailError) setError(emailError);
 		const res = await actions.createUser({ ...state });
 		if (res?.createUser.token) {
 			navigate("/profile");
@@ -73,18 +83,23 @@ const useSignUp = ({ actions }: Props) => {
 	}, [navigate]);
 	return {
 		list,
+		models: { error },
 		operations: { onChangeFormInput, onClickRegister, onClickLogin },
 	};
 };
 
 export const SignUpSection: React.FC<Props> = ({ actions }) => {
-	const { list, operations } = useSignUp({ actions });
+	const { list, models, operations } = useSignUp({ actions });
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>SignUp</Text>
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={operations.onChangeFormInput} />
+					<Form
+						list={list}
+						onChange={operations.onChangeFormInput}
+						error={models.error}
+					/>
 					<Button
 						w={"100%"}
 						mb={theme.m.sm}
