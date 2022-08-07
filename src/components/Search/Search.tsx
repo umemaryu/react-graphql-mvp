@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Box, HStack, SearchIcon } from "components/Elements";
 import {
 	CreatePostMutation,
@@ -18,15 +18,25 @@ type Props = {
 	};
 };
 
+const useSearch = () => {
+	const [value, setValue] = useState<string>("");
+	const onChange = (value: string) => {
+		setValue(value);
+	};
+	const onClick = () => {};
+	return { models: { value }, operations: { onChange, onClick } };
+};
+
 export const Search: React.FC<Props> = ({ actions }) => {
+	const { models, operations } = useSearch();
 	return (
 		<HStack>
-			<Input placeholder="mail@example.com" />
-			<Box
-				onClick={() => {
-					console.log("onClick");
-				}}
-			>
+			<Input
+				placeholder="mail@example.com"
+				onChange={(e) => operations.onChange(e.target.value)}
+				value={models.value}
+			/>
+			<Box onClick={() => operations.onClick()}>
 				<SearchIcon />
 			</Box>
 		</HStack>
