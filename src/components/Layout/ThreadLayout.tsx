@@ -10,7 +10,12 @@ type Props = {
 
 export const ThreadLayout: React.FC<Props> = ({ children, page }) => {
 	return (
-		<Layout w={theme.w.thread} border={theme.border} h={"60vh"} mt={theme.m.lg}>
+		<Layout
+			w={theme.w.thread}
+			border={theme.border}
+			minH={"60vh"}
+			mt={theme.m.lg}
+		>
 			<Center>
 				<VStack mb={100}>
 					<Header page={page} />
