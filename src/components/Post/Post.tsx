@@ -3,30 +3,25 @@ import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
 import { ProfileActions } from "containers";
-import { FetchUserByTokenQuery } from "gql/codegen";
 
 type Props =
 	| ({
-			user?: FetchUserByTokenQuery;
+			receiverId?: string;
+			senderId?: string;
 	  } & ProfileActions)
 	| any;
 
-const usePost = ({
-	actions,
-	user,
-}: {
-	user?: FetchUserByTokenQuery;
-} & ProfileActions) => {
+const usePost = ({ actions, senderId, receiverId }: Props) => {
 	const [value, setValue] = useState<string>("");
 	const onChange = (value: string) => {
 		setValue(value);
 	};
 	const onClick = () => {
-		if (user) {
+		if (senderId && receiverId) {
 			actions.createPost({
 				body: value,
-				senderId: parseInt(user.fetchUserByToken.id),
-				receiverId: parseInt(user.fetchUserByToken.id),
+				senderId: parseInt(senderId),
+				receiverId: parseInt(receiverId),
 			});
 			setValue("");
 		}
@@ -34,8 +29,8 @@ const usePost = ({
 	return { models: { value }, operations: { onClick, onChange } };
 };
 
-export const Post: React.FC<Props> = ({ actions, user }) => {
-	const { models, operations } = usePost({ actions, user });
+export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
+	const { models, operations } = usePost({ actions, senderId, receiverId });
 	return (
 		<HStack
 			border="1px"
