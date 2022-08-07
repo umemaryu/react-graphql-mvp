@@ -4,8 +4,13 @@ import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { useNavigate } from "react-router-dom";
 import { Form } from "components/Form";
+import { IUpdateTokenToNull } from "types";
 
-const useAccount = () => {
+type Input = {
+	actions: { updateTokenToNull: IUpdateTokenToNull };
+};
+
+const useAccount = ({ actions }: Input) => {
 	const list = [
 		{
 			id: "newPassword",
@@ -42,8 +47,12 @@ const useAccount = () => {
 	};
 };
 
-export const AccountSection: React.FC = () => {
-	const { list, operations } = useAccount();
+type Props = {
+	actions: { updateTokenToNull: IUpdateTokenToNull };
+};
+
+export const AccountSection: React.FC<Props> = ({ actions }) => {
+	const { list, operations } = useAccount({ actions });
 	return (
 		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>
@@ -60,7 +69,7 @@ export const AccountSection: React.FC = () => {
 					textAlign="center"
 					onClick={operations.onClickSignOut}
 				>
-					Sign Out
+					Sign out
 				</Text>
 			</Box>
 		</ThreadLayout>
