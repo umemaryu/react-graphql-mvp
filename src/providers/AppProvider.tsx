@@ -13,6 +13,7 @@ import {
 	InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import storage from "utils/storage";
 
 type AppProviderProps = {
 	children: React.ReactNode;
@@ -32,10 +33,11 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 	}, []);
 	const authLink = useMemo(() => {
 		return setContext((_, { headers }) => {
+			const token = storage.getToken();
 			return {
 				headers: {
 					...headers,
-					authorization: "Bearer Y4kXhhv2H0Ug4yzgepPDj3WGYndX2n2R",
+					authorization: token ? `Bearer ${token}` : "",
 				},
 			};
 		});
