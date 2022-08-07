@@ -5,10 +5,10 @@ import {
 } from "gql/codegen";
 
 type Input = {
-	models?: FetchUserByTokenQuery;
+	data?: FetchUserByTokenQuery;
 };
 
-export const usePost = ({ models }: Input) => {
+export const usePost = ({ data }: Input) => {
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
 	const createPost = async (args: MutationCreatePostArgs) => {
 		try {

@@ -1,10 +1,10 @@
-import { usePost } from "application";
+import { useAuth, usePost } from "application";
 import { ProfileSection } from "components/Sections";
-import { useFetchUserByTokenQuery } from "gql/codegen";
 
 export const Profile = () => {
-	const { data: models } = useFetchUserByTokenQuery();
-	const { operations } = usePost({ models });
+	const { models } = useAuth();
+	const data = models.data;
+	const { operations } = usePost({ data });
 	const { createPost } = operations;
-	return <ProfileSection user={models} actions={{ createPost }} />;
+	return <ProfileSection user={models.data} actions={{ createPost }} />;
 };

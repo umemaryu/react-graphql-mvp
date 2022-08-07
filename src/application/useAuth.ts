@@ -2,11 +2,22 @@ import {
 	MutationCreateUserArgs,
 	MutationUpdateTokenToNullArgs,
 	useCreateUserMutation,
+	useFetchUserByTokenLazyQuery,
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
+import { useCallback, useEffect } from "react";
+import { authStore } from "stores/authStore";
 import storage from "utils/storage";
 
 export const useAuth = () => {
+	const [FETCH_USER_BY_TOKEN, { data }] = useFetchUserByTokenLazyQuery();
+	const fetchUserByToken = useCallback(async () => {
+		return await FETCH_USER_BY_TOKEN().then((res) => {
+			if (res.data) authStore(res.data.fetchUserByToken.id);
+			return res.data;
+		});
+	}, [FETCH_USER_BY_TOKEN]);
+
 	const [CREATE_USER] = useCreateUserMutation();
 	const createUser = async (args: MutationCreateUserArgs) => {
 		return await CREATE_USER({
@@ -29,5 +40,9 @@ export const useAuth = () => {
 		});
 	};
 
-	return { operations: { createUser, updateTokenToNull } };
+	useEffect(() => {
+		fetchUserByToken();
+	}, [fetchUserByToken]);
+
+	return { models: { data }, operations: { createUser, updateTokenToNull } };
 };
