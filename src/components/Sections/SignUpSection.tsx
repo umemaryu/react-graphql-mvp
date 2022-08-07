@@ -11,8 +11,15 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
+import { ICreateUser } from "types";
 
-const useSignUp = () => {
+type Props = {
+	actions: {
+		createUser: ICreateUser;
+	};
+};
+
+const useSignUp = ({ actions }: Props) => {
 	const list = [
 		{
 			id: "nickName",
@@ -55,10 +62,12 @@ const useSignUp = () => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
-	const onClickRegister = useCallback(() => {
-		console.log(state);
-		navigate("/profile");
-	}, [state, navigate]);
+	const onClickRegister = useCallback(async () => {
+		const res = await actions.createUser({ ...state });
+		if (res?.createUser.token) {
+			navigate("/profile");
+		}
+	}, [state, navigate, actions]);
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
@@ -68,8 +77,8 @@ const useSignUp = () => {
 	};
 };
 
-export const SignUpSection: React.FC = () => {
-	const { list, operations } = useSignUp();
+export const SignUpSection: React.FC<Props> = ({ actions }) => {
+	const { list, operations } = useSignUp({ actions });
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
