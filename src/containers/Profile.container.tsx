@@ -1,4 +1,4 @@
-import usePost from "application/usePost";
+import { usePost } from "application";
 import { ProfileSection } from "components/Sections";
 import {
 	CreatePostMutation,
