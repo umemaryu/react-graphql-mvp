@@ -1,5 +1,6 @@
 query FetchUserByToken {
 	fetchUserByToken {
+		id
 		email
 		country
 		city
