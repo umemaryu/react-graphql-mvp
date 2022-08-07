@@ -10,11 +10,11 @@ import {
 	ApolloLink,
 	ApolloProvider,
 	createHttpLink,
-	InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import storage from "utils/storage";
 import { onError } from "@apollo/client/link/error";
+import { cache } from "stores";
 
 type AppProviderProps = {
 	children: React.ReactNode;
@@ -93,7 +93,7 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 	const client = useMemo(() => {
 		return new ApolloClient({
 			link: ApolloLink.from([errorLink, authLink, httpLink]),
-			cache: new InMemoryCache(),
+			cache: cache,
 			connectToDevTools: true,
 			defaultOptions: {
 				watchQuery: {

@@ -6,7 +6,7 @@ import {
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
 import { useCallback, useEffect } from "react";
-import { authStore } from "stores/authStore";
+import { authStore } from "stores";
 import storage from "utils/storage";
 
 export const useAuth = () => {
