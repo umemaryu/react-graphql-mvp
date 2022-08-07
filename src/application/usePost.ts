@@ -4,9 +4,11 @@ import {
 	useCreatePostMutation,
 } from "gql/codegen";
 
-type Input = { models: FetchUserByTokenQuery | undefined };
+type Input = {
+	models?: FetchUserByTokenQuery;
+};
 
-const usePost = ({ models }: Input) => {
+export const usePost = ({ models }: Input) => {
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
 	const createPost = async (args: MutationCreatePostArgs) => {
 		try {
@@ -19,5 +21,3 @@ const usePost = ({ models }: Input) => {
 	};
 	return { operations: { createPost } };
 };
-
-export default usePost;
