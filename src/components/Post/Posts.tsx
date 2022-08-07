@@ -10,10 +10,12 @@ type Props = {
 
 export const Posts: React.FC<Props> = ({ user }) => {
 	const posts = user?.fetchUserByToken.posts;
-	console.log(posts);
+	if (!posts) return null;
+	const postsForSort = [...posts];
+	postsForSort.sort((a, b) => b.createdAt - a.createdAt);
 	return (
 		<Box>
-			{posts?.map((post, index) => {
+			{postsForSort.map((post, index) => {
 				const timestamp = post.createdAt * 1000;
 				const date = timestampToDate(timestamp);
 				return (
@@ -23,7 +25,7 @@ export const Posts: React.FC<Props> = ({ user }) => {
 						borderTop="1px"
 						borderRight="1px"
 						borderLeft="1px"
-						borderBottom={index === posts.length - 1 ? "1px" : "initial"}
+						borderBottom={index === postsForSort.length - 1 ? "1px" : "initial"}
 						borderColor={theme.color.gray}
 					>
 						<Flex w={theme.w.mobile}>
