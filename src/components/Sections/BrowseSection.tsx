@@ -5,23 +5,16 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post } from "components/Post";
 import { Search } from "components/Search";
-import {
-	CreatePostMutation,
-	FetchUserByEmailQuery,
-	MutationCreatePostArgs,
-	QueryFetchUserByEmailArgs,
-} from "gql/codegen";
+import { FetchUserByEmailQuery } from "gql/codegen";
+import { IFetchUserByEmail } from "types";
+import { ICreatePost } from "types/ICreatePost";
 
 type Props = {
 	user?: FetchUserByEmailQuery | undefined;
 } & {
 	actions: {
-		fetchUserByEmail: (
-			args: QueryFetchUserByEmailArgs
-		) => Promise<FetchUserByEmailQuery | undefined>;
-		createPost: (
-			args: MutationCreatePostArgs
-		) => Promise<CreatePostMutation | null | undefined>;
+		fetchUserByEmail: IFetchUserByEmail;
+		createPost: ICreatePost;
 	};
 };
 

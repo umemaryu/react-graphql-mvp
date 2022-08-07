@@ -1,16 +1,11 @@
 import { usePost } from "application";
 import { ProfileSection } from "components/Sections";
-import {
-	CreatePostMutation,
-	MutationCreatePostArgs,
-	useFetchUserByTokenQuery,
-} from "gql/codegen";
+import { useFetchUserByTokenQuery } from "gql/codegen";
+import { ICreatePost } from "types";
 
 export type ProfileActions = {
 	actions: {
-		createPost: (
-			args: MutationCreatePostArgs
-		) => Promise<CreatePostMutation | null | undefined>;
+		createPost: ICreatePost;
 	};
 };
 
