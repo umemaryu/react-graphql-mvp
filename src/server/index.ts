@@ -41,6 +41,7 @@ const resolvers: Resolvers = {
 		) => {
 			const user = await prisma.user.findFirst({
 				where: { token: context.token },
+				include: { posts: { include: { user: true } } },
 			});
 			if (!user || !context.token) throw new ValidationError("Invalid token");
 			return user;
