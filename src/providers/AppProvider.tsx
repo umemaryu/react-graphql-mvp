@@ -32,11 +32,10 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 	}, []);
 	const authLink = useMemo(() => {
 		return setContext((_, { headers }) => {
-			const token = localStorage.getItem("token");
 			return {
 				headers: {
 					...headers,
-					authorization: "Bearer 1bS5XsbnppFJ3jK9VFmzsHkD5XNwnFYw",
+					authorization: "Bearer Y4kXhhv2H0Ug4yzgepPDj3WGYndX2n2R",
 				},
 			};
 		});
