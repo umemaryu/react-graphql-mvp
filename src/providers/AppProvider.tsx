@@ -1,5 +1,5 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { useMemo, Suspense } from "react";
+import { ChakraProvider, useToast } from "@chakra-ui/react";
+import { useMemo, Suspense, useState, useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from "components/Elements";
@@ -14,6 +14,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import storage from "utils/storage";
+import { onError } from "@apollo/client/link/error";
 
 type AppProviderProps = {
 	children: React.ReactNode;
@@ -21,6 +22,12 @@ type AppProviderProps = {
 
 type Props = {
 	children: React.ReactNode;
+};
+
+type Toast = {
+	title: string;
+	description: string;
+	status: "success" | "error" | "warning" | "info";
 };
 
 const CustomApolloProvider: React.FC<Props> = ({ children }) => {
@@ -31,6 +38,12 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 			credentials: "same-origin",
 		});
 	}, []);
+	const [state, setState] = useState<Toast>({
+		title: "",
+		description: "",
+		status: "error",
+	});
+	const toast = useToast();
 	const authLink = useMemo(() => {
 		return setContext((_, { headers }) => {
 			const token = storage.getToken();
@@ -42,10 +55,44 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 			};
 		});
 	}, []);
+	const errorLink = useMemo(() => {
+		return onError(({ graphQLErrors, networkError }) => {
+			if (graphQLErrors) {
+				graphQLErrors.map(({ message, locations, path }) => {
+					setState({
+						title: `${message}`,
+						description: "Will you please try one more time?",
+						status: "error",
+					});
+					return console.log(
+						`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+					);
+				});
+			}
+			if (networkError) {
+				setState({
+					title: `${networkError.message}`,
+					description: "Will you please try one more time?",
+					status: "error",
+				});
+				console.log(`[Network error]: ${networkError}`);
+			}
+		});
+	}, []);
+	useEffect(() => {
+		if (state.description || state.title)
+			toast({
+				title: state.title,
+				description: state.description,
+				status: state.status,
+				duration: 6000,
+				isClosable: true,
+			});
+	}, [toast, state]);
 
 	const client = useMemo(() => {
 		return new ApolloClient({
-			link: ApolloLink.from([authLink, httpLink]),
+			link: ApolloLink.from([errorLink, authLink, httpLink]),
 			cache: new InMemoryCache(),
 			connectToDevTools: true,
 			defaultOptions: {
@@ -54,7 +101,7 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 				},
 			},
 		});
-	}, [httpLink, authLink]);
+	}, [httpLink, authLink, errorLink]);
 	return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
