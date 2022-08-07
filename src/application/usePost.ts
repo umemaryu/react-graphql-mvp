@@ -17,7 +17,7 @@ const usePost = ({ models }: Input) => {
 			console.log(e);
 		}
 	};
-	return { createPost };
+	return { operations: { createPost } };
 };
 
 export default usePost;

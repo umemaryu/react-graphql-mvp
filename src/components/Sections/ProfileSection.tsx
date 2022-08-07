@@ -6,12 +6,13 @@ import { Post } from "components/Post";
 import { theme } from "utils/theme";
 import { FetchUserByTokenQuery } from "gql/codegen";
 import { Posts } from "components/Post";
+import { ProfileActions } from "containers";
 
 type Props = {
 	user?: FetchUserByTokenQuery;
-};
+} & ProfileActions;
 
-export const ProfileSection: React.FC<Props> = ({ user }) => {
+export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 	return (
 		<ThreadLayout page="Profile">
 			<Box pt={theme.m.md}>
@@ -20,7 +21,7 @@ export const ProfileSection: React.FC<Props> = ({ user }) => {
 					<Divider />
 					<Text textAlign="center">Write a post to your thread</Text>
 					<Posts user={user} />
-					<Post />
+					<Post actions={actions} />
 				</VStack>
 			</Box>
 		</ThreadLayout>
