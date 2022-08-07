@@ -18,17 +18,19 @@ type Props = {
 	};
 };
 
-const useSearch = () => {
+const useSearch = ({ actions }: Props) => {
 	const [value, setValue] = useState<string>("");
 	const onChange = (value: string) => {
 		setValue(value);
 	};
-	const onClick = () => {};
+	const onClick = () => {
+		actions.fetchUserByEmail({ email: value });
+	};
 	return { models: { value }, operations: { onChange, onClick } };
 };
 
 export const Search: React.FC<Props> = ({ actions }) => {
-	const { models, operations } = useSearch();
+	const { models, operations } = useSearch({ actions });
 	return (
 		<HStack>
 			<Input
