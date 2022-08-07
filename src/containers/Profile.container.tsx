@@ -1,18 +1,6 @@
-import usePost from "application/usePost";
+import { usePost } from "application";
 import { ProfileSection } from "components/Sections";
-import {
-	CreatePostMutation,
-	MutationCreatePostArgs,
-	useFetchUserByTokenQuery,
-} from "gql/codegen";
-
-export type ProfileActions = {
-	actions: {
-		createPost: (
-			args: MutationCreatePostArgs
-		) => Promise<CreatePostMutation | null | undefined>;
-	};
-};
+import { useFetchUserByTokenQuery } from "gql/codegen";
 
 export const Profile = () => {
 	const { data: models } = useFetchUserByTokenQuery();

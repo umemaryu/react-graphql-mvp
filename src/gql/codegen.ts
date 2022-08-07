@@ -103,7 +103,7 @@ export type FetchUserByEmailQueryVariables = Exact<{
 }>;
 
 
-export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
 
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -215,6 +215,7 @@ export type FetchUserByTokenQueryResult = Apollo.QueryResult<FetchUserByTokenQue
 export const FetchUserByEmailDocument = gql`
     query FetchUserByEmail($email: String!) {
   fetchUserByEmail(email: $email) {
+    id
     email
     country
     city

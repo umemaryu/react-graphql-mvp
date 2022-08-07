@@ -18,6 +18,7 @@ query FetchUserByToken {
 
 query FetchUserByEmail($email: String!) {
 	fetchUserByEmail(email: $email) {
+		id
 		email
 		country
 		city

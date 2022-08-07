@@ -1,14 +1,19 @@
 import React, { Fragment } from "react";
 import { Flex, Spacer, Text, Box } from "components/Elements";
 import { theme } from "utils/theme";
-import { FetchUserByTokenQuery } from "gql/codegen";
 
 type Props = {
-	user?: FetchUserByTokenQuery;
+	user:
+		| {
+				email: string;
+				country: string;
+				city: string;
+				nickName: string;
+		  }
+		| undefined;
 };
 
 export const UserInfoList: React.FC<Props> = ({ user }) => {
-	const userInfo = user?.fetchUserByToken;
 	const list = [
 		{
 			id: "nickName",
@@ -32,12 +37,12 @@ export const UserInfoList: React.FC<Props> = ({ user }) => {
 		<Box>
 			{list.map((ele) => (
 				<Fragment key={ele.id}>
-					{userInfo && (
+					{user && (
 						<Flex w={theme.w.mobile}>
 							<Text fontSize={theme.fs.normal}>{ele.text}</Text>
 							<Spacer />
 							<Text>
-								{userInfo[ele.id as "nickName" | "country" | "city" | "email"]}
+								{user[ele.id as "nickName" | "country" | "city" | "email"]}
 							</Text>
 						</Flex>
 					)}

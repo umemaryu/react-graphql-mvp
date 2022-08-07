@@ -5,16 +5,28 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post } from "components/Post";
 import { Search } from "components/Search";
+import { FetchUserByEmailQuery } from "gql/codegen";
+import { IFetchUserByEmail } from "types";
+import { ICreatePost } from "types/ICreatePost";
 
-export const BrowseSection: React.FC = () => {
+type Props = {
+	user?: FetchUserByEmailQuery | undefined;
+} & {
+	actions: {
+		fetchUserByEmail: IFetchUserByEmail;
+		createPost: ICreatePost;
+	};
+};
+
+export const BrowseSection: React.FC<Props> = ({ user, actions }) => {
 	return (
 		<ThreadLayout page="Browse">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					<UserInfoList />
+					<UserInfoList user={user?.fetchUserByEmail} />
 					<Text textAlign="center">Search the other user by email</Text>
-					<Search />
-					<Post />
+					<Search actions={actions} />
+					<Post actions={actions} />
 				</VStack>
 			</Box>
 		</ThreadLayout>
