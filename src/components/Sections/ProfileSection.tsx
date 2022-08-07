@@ -12,6 +12,7 @@ import { UserInfoList } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
 import { FetchUserByTokenQuery } from "gql/codegen";
+import { Posts } from "components/Post";
 
 type Props = {
 	user?: FetchUserByTokenQuery;
@@ -25,6 +26,7 @@ export const ProfileSection: React.FC<Props> = ({ user }) => {
 					<UserInfoList user={user} />
 					<Divider />
 					<Text textAlign="center">Write a post to your thread</Text>
+					<Posts user={user} />
 					<Post />
 					<Center>
 						<Button
