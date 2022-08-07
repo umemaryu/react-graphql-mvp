@@ -96,7 +96,7 @@ export type CreatePostMutation = { __typename?: 'Mutation', createPost: boolean 
 export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
 
 export type FetchUserByEmailQueryVariables = Exact<{
   email: Scalars['String'];
@@ -169,6 +169,7 @@ export type CreatePostMutationOptions = Apollo.BaseMutationOptions<CreatePostMut
 export const FetchUserByTokenDocument = gql`
     query FetchUserByToken {
   fetchUserByToken {
+    id
     email
     country
     city
@@ -334,7 +335,7 @@ export type UpdatePasswordMutationHookResult = ReturnType<typeof useUpdatePasswo
 export type UpdatePasswordMutationResult = Apollo.MutationResult<UpdatePasswordMutation>;
 export type UpdatePasswordMutationOptions = Apollo.BaseMutationOptions<UpdatePasswordMutation, UpdatePasswordMutationVariables>;
 export const UpdateTokenToNullDocument = gql`
-    mutation updateTokenToNull($id: Int!) {
+    mutation UpdateTokenToNull($id: Int!) {
   updateTokenToNull(id: $id)
 }
     `;
