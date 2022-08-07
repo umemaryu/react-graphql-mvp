@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
-import { ProfileActions } from "containers";
+import { ICreatePost } from "types";
 
 type Props =
-	| ({
+	| {
 			receiverId?: string;
 			senderId?: string;
-	  } & ProfileActions)
-	| any;
+	  } & {
+			actions: {
+				createPost: ICreatePost;
+			};
+	  };
 
 const usePost = ({ actions, senderId, receiverId }: Props) => {
 	const [value, setValue] = useState<string>("");
