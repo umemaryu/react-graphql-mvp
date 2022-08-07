@@ -21,7 +21,7 @@ export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 					<Divider />
 					<Text textAlign="center">Write a post to your thread</Text>
 					<Posts user={user} />
-					<Post actions={actions} />
+					<Post actions={actions} user={user} />
 				</VStack>
 			</Box>
 		</ThreadLayout>
