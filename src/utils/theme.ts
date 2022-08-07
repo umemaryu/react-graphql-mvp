@@ -1,5 +1,5 @@
 export const theme = {
-	w: { mobile: "376px", wall: "560px" },
+	w: { mobile: "376px", thread: "560px" },
 	h: { full: "100vh" },
 	m: { sm: 4, md: 8, lg: 12 },
 	border: "1px solid black",

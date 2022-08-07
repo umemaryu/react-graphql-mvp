@@ -7,7 +7,7 @@ import {
 	Text,
 	Divider,
 } from "components/Elements";
-import { WallLayout } from "components/Layout";
+import { ThreadLayout } from "components/Layout";
 import { UserInfoList } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
@@ -19,12 +19,12 @@ type Props = {
 
 export const ProfileSection: React.FC<Props> = ({ user }) => {
 	return (
-		<WallLayout page="Profile">
+		<ThreadLayout page="Profile">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
 					<UserInfoList user={user} />
 					<Divider />
-					<Text textAlign="center">Write a post to your wall</Text>
+					<Text textAlign="center">Write a post to your thread</Text>
 					<Post />
 					<Center>
 						<Button
@@ -37,6 +37,6 @@ export const ProfileSection: React.FC<Props> = ({ user }) => {
 					</Center>
 				</VStack>
 			</Box>
-		</WallLayout>
+		</ThreadLayout>
 	);
 };

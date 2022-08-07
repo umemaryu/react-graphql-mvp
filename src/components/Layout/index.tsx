@@ -1,1 +1,1 @@
-export * from "./WallLayout";
+export * from "./ThreadLayout";
