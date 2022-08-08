@@ -31,15 +31,13 @@ const usePost = ({ actions, senderId, receiverId }: Input) => {
 	return { models: { value }, operations: { onClick, onChange } };
 };
 
-type Props =
-	| {
-			receiverId: string | undefined;
-			senderId: string | undefined;
-	  } & {
-			actions: {
-				createPost: ICreatePost;
-			};
-	  };
+type Props = {
+	receiverId: string | undefined;
+	senderId: string | undefined;
+	actions: {
+		createPost: ICreatePost;
+	};
+};
 
 export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
 	const { models, operations } = usePost({ actions, senderId, receiverId });

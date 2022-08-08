@@ -12,7 +12,6 @@ import { authStore } from "stores";
 
 type Props = {
 	user?: FetchUserByEmailQuery | undefined;
-} & {
 	actions: {
 		fetchUserByEmail: IFetchUserByEmail;
 		createPost: ICreatePost;

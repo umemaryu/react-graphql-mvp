@@ -10,7 +10,6 @@ import { ICreatePost } from "types";
 
 type Props = {
 	user?: FetchUserByTokenQuery;
-} & {
 	actions: {
 		createPost: ICreatePost;
 	};
