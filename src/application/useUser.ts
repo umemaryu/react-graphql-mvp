@@ -1,6 +1,8 @@
 import {
+	MutationUpdatePasswordArgs,
 	QueryFetchUserByEmailArgs,
 	useFetchUserByEmailLazyQuery,
+	useUpdatePasswordMutation,
 } from "gql/codegen";
 
 export const useUser = () => {
@@ -10,5 +12,13 @@ export const useUser = () => {
 			variables: args,
 		}).then((res) => res.data);
 	};
-	return { models: { data }, operations: { fetchUserByEmail } };
+	const [UPDATE_PASSWORD] = useUpdatePasswordMutation();
+	const updatePassword = async (args: MutationUpdatePasswordArgs) => {
+		return await UPDATE_PASSWORD({
+			variables: args,
+		}).then((res) => {
+			return res.data;
+		});
+	};
+	return { models: { data }, operations: { fetchUserByEmail, updatePassword } };
 };
