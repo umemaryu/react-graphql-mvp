@@ -1,15 +1,20 @@
 import React from "react";
 import { Box, Flex, Spacer, Text, VStack } from "components/Elements";
-import { FetchUserByTokenQuery } from "gql/codegen";
 import { theme } from "utils/theme";
 import { timestampToDate } from "utils/timestampToDate";
 
-type Props = {
-	user?: FetchUserByTokenQuery;
+type Post = {
+	id: string;
+	body: string;
+	createdAt: number;
+	user: { email: string };
 };
 
-export const Posts: React.FC<Props> = ({ user }) => {
-	const posts = user?.fetchUserByToken.posts;
+type Props = {
+	posts: Post[] | undefined | null;
+};
+
+export const Posts: React.FC<Props> = ({ posts }) => {
 	if (!posts) return null;
 	const postsForSort = [...posts];
 	postsForSort.sort((a, b) => b.createdAt - a.createdAt);

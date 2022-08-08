@@ -3,7 +3,7 @@ import { ThreadLayout } from "components/Layout";
 import { Box, Text, VStack } from "components/Elements";
 import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
-import { Post } from "components/Post";
+import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
 import { FetchUserByEmailQuery } from "gql/codegen";
 import { IFetchUserByEmail } from "types";
@@ -29,6 +29,7 @@ export const BrowseSection: React.FC<Props> = ({ user, actions }) => {
 						<Text textAlign="center">Search the other user by email</Text>
 					)}
 					<Search actions={actions} />
+					<Posts posts={user?.fetchUserByEmail.posts} />
 					{user && (
 						<Post
 							actions={actions}
