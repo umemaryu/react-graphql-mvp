@@ -69,14 +69,14 @@ const resolvers: Resolvers = {
 				throw new UserInputError("The password must be over 6 characters");
 			emailValidation(args.email);
 			const token = createToken();
-			const res = await prisma.user.create({
+			await prisma.user.create({
 				data: {
 					token: token,
 					...args,
 					posts: {},
 				},
 			});
-			return res;
+			return token;
 		},
 		updateTokenByLogin: async (
 			_parent: unknown,

@@ -34,8 +34,8 @@ export const useAuth = () => {
 		return await CREATE_USER({
 			variables: args,
 		}).then((res) => {
-			if (res.data && res.data.createUser.token)
-				storage.setToken(res.data.createUser.token);
+			if (res.data && res.data.createUser)
+				storage.setToken(res.data.createUser);
 			return res.data;
 		});
 	};

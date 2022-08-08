@@ -18,7 +18,7 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   createPost: Scalars['Boolean'];
-  createUser: User;
+  createUser: Scalars['String'];
   updatePassword: Scalars['Boolean'];
   updateTokenByLogin: User;
   updateTokenToNull: Scalars['Boolean'];
@@ -129,7 +129,7 @@ export type CreateUserMutationVariables = Exact<{
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'User', token?: string | null } };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: string };
 
 export type UpdatePasswordMutationVariables = Exact<{
   oldPassword: Scalars['String'];
@@ -317,9 +317,7 @@ export const CreateUserDocument = gql`
     country: $country
     city: $city
     nickName: $nickName
-  ) {
-    token
-  }
+  )
 }
     `;
 export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;

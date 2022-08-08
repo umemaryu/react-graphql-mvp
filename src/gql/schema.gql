@@ -30,7 +30,7 @@ type Mutation {
 		country: String!
 		city: String!
 		nickName: String!
-	): User!
+	): String!
 	updateTokenByLogin(email: String!, password: String!): User!
 	updatePassword(oldPassword: String!, newPassword: String!, id: Int!): Boolean!
 	updateTokenToNull(id: Int!): Boolean!
