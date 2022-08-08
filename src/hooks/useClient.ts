@@ -30,10 +30,12 @@ const useClient = () => {
 		return onError(({ graphQLErrors, networkError }) => {
 			if (graphQLErrors) {
 				graphQLErrors.map(({ message, locations, path }) => {
-					setError({
-						title: `${message}`,
-						description: "Will you please try one more time?",
-					});
+					if (path && path[0] !== "fetchUserByToken") {
+						setError({
+							title: `${message}`,
+							description: "Will you please try one more time?",
+						});
+					}
 					return console.log(
 						`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
 					);
