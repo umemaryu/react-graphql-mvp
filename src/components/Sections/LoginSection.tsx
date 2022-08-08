@@ -13,6 +13,8 @@ import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { IUpdateTokenByLogin } from "types";
 import { emailValidation } from "utils/emailValidation";
+import { inputValidation } from "utils/inputValidation";
+import { passwordValidation } from "utils/passwordValidation";
 
 type Input = Props;
 
@@ -45,15 +47,15 @@ const useLogin = ({ actions }: Input) => {
 	}, []);
 
 	const onClickLogin = useCallback(async () => {
-		for (let key in state) {
-			if (state[key as keyof typeof state] === "") {
-				return setError(`${[key as keyof typeof state]} should be filled`);
-			}
-		}
+		const { inputError } = inputValidation(state);
 		const { emailError } = emailValidation(state.email);
-		if (emailError) return setError(emailError);
-		else if (state.password.length < 6) {
-			return setError(`Password must be over 6 letters`);
+		const { passwordError } = passwordValidation(state.password);
+		if (emailError) {
+			setError(emailError);
+		} else if (inputError) {
+			setError(inputError);
+		} else if (passwordError) {
+			setError(passwordError);
 		} else {
 			const res = await actions.updateTokenByLogin({
 				...state,
