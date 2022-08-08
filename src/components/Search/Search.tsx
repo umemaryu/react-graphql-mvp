@@ -15,6 +15,7 @@ const useSearch = ({ actions }: Props) => {
 		setValue(value);
 	};
 	const onClick = () => {
+		if (!value) return;
 		actions.fetchUserByEmail({ email: value });
 	};
 	return { models: { value }, operations: { onChange, onClick } };
@@ -30,7 +31,7 @@ export const Search: React.FC<Props> = ({ actions }) => {
 				value={models.value}
 			/>
 			<Box onClick={() => operations.onClick()}>
-				<SearchIcon />
+				<SearchIcon value={models.value} />
 			</Box>
 		</HStack>
 	);

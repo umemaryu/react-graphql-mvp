@@ -8,6 +8,7 @@ import { Search } from "components/Search";
 import { FetchUserByEmailQuery } from "gql/codegen";
 import { IFetchUserByEmail } from "types";
 import { ICreatePost } from "types/ICreatePost";
+import { authStore } from "stores";
 
 type Props = {
 	user?: FetchUserByEmailQuery | undefined;
@@ -24,9 +25,17 @@ export const BrowseSection: React.FC<Props> = ({ user, actions }) => {
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
 					<UserInfoList user={user?.fetchUserByEmail} />
-					<Text textAlign="center">Search the other user by email</Text>
+					{!user && (
+						<Text textAlign="center">Search the other user by email</Text>
+					)}
 					<Search actions={actions} />
-					<Post actions={actions} />
+					{user && (
+						<Post
+							actions={actions}
+							receiverId={user.fetchUserByEmail.id}
+							senderId={authStore()?.toString()}
+						/>
+					)}
 				</VStack>
 			</Box>
 		</ThreadLayout>

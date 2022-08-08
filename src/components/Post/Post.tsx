@@ -6,8 +6,8 @@ import { ICreatePost } from "types";
 
 type Props =
 	| {
-			receiverId?: string;
-			senderId?: string;
+			receiverId: string | undefined;
+			senderId: string | undefined;
 	  } & {
 			actions: {
 				createPost: ICreatePost;
@@ -20,6 +20,7 @@ const usePost = ({ actions, senderId, receiverId }: Props) => {
 		setValue(value);
 	};
 	const onClick = () => {
+		if (!value) return;
 		if (senderId && receiverId) {
 			actions.createPost({
 				body: value,
@@ -51,7 +52,7 @@ export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
 				value={models.value}
 			/>
 			<Box onClick={() => operations.onClick()}>
-				<PostIcon />
+				<PostIcon value={models.value} />
 			</Box>
 		</HStack>
 	);
