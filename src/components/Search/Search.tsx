@@ -9,9 +9,10 @@ const useSearch = ({ actions }: SearchInput) => {
 	const onChange = (value: string) => {
 		setValue(value);
 	};
-	const onClick = () => {
+	const onClick = async () => {
 		if (!value) return;
-		actions.fetchUserByEmail({ email: value });
+		const res = await actions.fetchUserByEmail({ email: value });
+		if (res?.fetchUserByEmail) setValue("");
 	};
 	return { models: { value }, operations: { onChange, onClick } };
 };
