@@ -16,10 +16,11 @@ type FormList = {
 
 type Props = {
 	list: FormList[];
+	error?: string;
 	onChange: (value: string, id: string) => void;
 };
 
-export const Form: React.FC<Props> = ({ list, onChange }) => (
+export const Form: React.FC<Props> = ({ list, error, onChange }) => (
 	<FormControl>
 		{list.map((ele) => (
 			<Box mt={theme.m.sm} mb={theme.m.sm} key={ele.text}>
@@ -33,7 +34,7 @@ export const Form: React.FC<Props> = ({ list, onChange }) => (
 			</Box>
 		))}
 		<Box textAlign="center" mt={theme.m.sm} mb={theme.m.sm}>
-			<FormHelperText>Wrong something.</FormHelperText>
+			<FormHelperText color={theme.color.red}> {error}</FormHelperText>
 		</Box>
 	</FormControl>
 );

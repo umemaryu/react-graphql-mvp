@@ -3,13 +3,12 @@ import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
 import { Context } from "gql/models";
 import {
-	MutationUpdatePasswordArgs,
-	QueryFetchUserByEmailArgs,
-} from "gql/codegen";
-import {
 	MutationCreatePostArgs,
 	MutationCreateUserArgs,
+	MutationUpdatePasswordArgs,
+	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
+	QueryFetchUserByEmailArgs,
 	Resolvers,
 } from "server/codegen";
 
@@ -78,6 +77,22 @@ const resolvers: Resolvers = {
 				},
 			});
 			return res;
+		},
+		updateTokenByLogin: async (
+			_parent: unknown,
+			args: MutationUpdateTokenByLoginArgs
+		) => {
+			emailValidation(args.email);
+			const user = await prisma.user.findFirst({
+				where: { email: args.email, password: args.password },
+			});
+			if (!user) throw new Error("Email or password is wrong");
+			const token = createToken();
+			const updatedUser = await prisma.user.update({
+				where: { email: args.email },
+				data: { token },
+			});
+			return updatedUser;
 		},
 		updatePassword: async (
 			_parent: unknown,

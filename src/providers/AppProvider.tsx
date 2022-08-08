@@ -1,77 +1,36 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { useMemo, Suspense } from "react";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from "components/Elements";
 import { IconContext } from "react-icons";
 import { theme } from "utils/theme";
-import {
-	ApolloClient,
-	ApolloLink,
-	ApolloProvider,
-	createHttpLink,
-	InMemoryCache,
-} from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
-
-type AppProviderProps = {
-	children: React.ReactNode;
-};
+import { ApolloProvider } from "@apollo/client";
+import useClient from "hooks/useClient";
 
 type Props = {
 	children: React.ReactNode;
 };
 
-const CustomApolloProvider: React.FC<Props> = ({ children }) => {
-	const devURL = "http://localhost:4000/";
-	const httpLink = useMemo(() => {
-		return createHttpLink({
-			uri: devURL,
-			credentials: "same-origin",
-		});
-	}, []);
-	const authLink = useMemo(() => {
-		return setContext((_, { headers }) => {
-			return {
-				headers: {
-					...headers,
-					authorization: "Bearer Y4kXhhv2H0Ug4yzgepPDj3WGYndX2n2R",
-				},
-			};
-		});
-	}, []);
-
-	const client = useMemo(() => {
-		return new ApolloClient({
-			link: ApolloLink.from([authLink, httpLink]),
-			cache: new InMemoryCache(),
-			connectToDevTools: true,
-			defaultOptions: {
-				watchQuery: {
-					fetchPolicy: "cache-and-network",
-				},
-			},
-		});
-	}, [httpLink, authLink]);
-	return <ApolloProvider client={client}>{children}</ApolloProvider>;
+export const AppProvider = ({ children }: Props) => {
+	const { client } = useClient();
+	return (
+		<Suspense fallback={<Spinner size="xl" />}>
+			<ErrorBoundary
+				FallbackComponent={() => (
+					<h2>Something went wrong, please reload page</h2>
+				)}
+			>
+				<ChakraProvider>
+					<ApolloProvider client={client}>
+						<IconContext.Provider
+							value={{ color: theme.color.blue, size: "32px" }}
+						>
+							<Router>{children}</Router>
+						</IconContext.Provider>
+					</ApolloProvider>
+				</ChakraProvider>
+			</ErrorBoundary>
+		</Suspense>
+	);
 };
-
-export const AppProvider = ({ children }: AppProviderProps) => (
-	<Suspense fallback={<Spinner size="xl" />}>
-		<ErrorBoundary
-			FallbackComponent={() => (
-				<h2>Something went wrong, please reload page</h2>
-			)}
-		>
-			<ChakraProvider>
-				<CustomApolloProvider>
-					<IconContext.Provider
-						value={{ color: theme.color.blue, size: "32px" }}
-					>
-						<Router>{children}</Router>
-					</IconContext.Provider>
-				</CustomApolloProvider>
-			</ChakraProvider>
-		</ErrorBoundary>
-	</Suspense>
-);

@@ -11,8 +11,15 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
+import { IUpdateTokenByLogin } from "types";
 
-const useLogin = () => {
+type Input = {
+	actions: {
+		updateTokenByLogin: IUpdateTokenByLogin;
+	};
+};
+
+const useLogin = ({ actions }: Input) => {
 	const list = [
 		{
 			id: "email",
@@ -37,10 +44,13 @@ const useLogin = () => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
-	const onClickLogin = useCallback(() => {
-		console.log(state, "API communication");
-		navigate("/profile");
-	}, [state, navigate]);
+	const onClickLogin = useCallback(async () => {
+		const res = await actions.updateTokenByLogin({
+			password: state.password,
+			email: state.email,
+		});
+		if (res && res.updateTokenByLogin.token) navigate("/profile");
+	}, [state, actions, navigate]);
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
@@ -50,8 +60,14 @@ const useLogin = () => {
 	};
 };
 
-export const LoginSection: React.FC = () => {
-	const { list, operations } = useLogin();
+type Props = {
+	actions: {
+		updateTokenByLogin: IUpdateTokenByLogin;
+	};
+};
+
+export const LoginSection: React.FC<Props> = ({ actions }) => {
+	const { list, operations } = useLogin({ actions });
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>

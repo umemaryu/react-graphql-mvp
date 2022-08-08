@@ -1,5 +1,8 @@
+import { useAuth } from "application";
 import { LoginSection } from "components/Sections";
 
 export const Login = () => {
-	return <LoginSection />;
+	const { operations } = useAuth();
+	const { updateTokenByLogin } = operations;
+	return <LoginSection actions={{ updateTokenByLogin }} />;
 };

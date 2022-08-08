@@ -20,6 +20,7 @@ export type Mutation = {
   createPost: Scalars['Boolean'];
   createUser: User;
   updatePassword: Scalars['Boolean'];
+  updateTokenByLogin: User;
   updateTokenToNull: Scalars['Boolean'];
 };
 
@@ -44,6 +45,12 @@ export type MutationUpdatePasswordArgs = {
   id: Scalars['Int'];
   newPassword: Scalars['String'];
   oldPassword: Scalars['String'];
+};
+
+
+export type MutationUpdateTokenByLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -104,6 +111,14 @@ export type FetchUserByEmailQueryVariables = Exact<{
 
 
 export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+
+export type UpdateTokenByLoginMutationVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type UpdateTokenByLoginMutation = { __typename?: 'Mutation', updateTokenByLogin: { __typename?: 'User', token?: string | null } };
 
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -259,6 +274,40 @@ export function useFetchUserByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type FetchUserByEmailQueryHookResult = ReturnType<typeof useFetchUserByEmailQuery>;
 export type FetchUserByEmailLazyQueryHookResult = ReturnType<typeof useFetchUserByEmailLazyQuery>;
 export type FetchUserByEmailQueryResult = Apollo.QueryResult<FetchUserByEmailQuery, FetchUserByEmailQueryVariables>;
+export const UpdateTokenByLoginDocument = gql`
+    mutation UpdateTokenByLogin($email: String!, $password: String!) {
+  updateTokenByLogin(email: $email, password: $password) {
+    token
+  }
+}
+    `;
+export type UpdateTokenByLoginMutationFn = Apollo.MutationFunction<UpdateTokenByLoginMutation, UpdateTokenByLoginMutationVariables>;
+
+/**
+ * __useUpdateTokenByLoginMutation__
+ *
+ * To run a mutation, you first call `useUpdateTokenByLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTokenByLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTokenByLoginMutation, { data, loading, error }] = useUpdateTokenByLoginMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useUpdateTokenByLoginMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTokenByLoginMutation, UpdateTokenByLoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTokenByLoginMutation, UpdateTokenByLoginMutationVariables>(UpdateTokenByLoginDocument, options);
+      }
+export type UpdateTokenByLoginMutationHookResult = ReturnType<typeof useUpdateTokenByLoginMutation>;
+export type UpdateTokenByLoginMutationResult = Apollo.MutationResult<UpdateTokenByLoginMutation>;
+export type UpdateTokenByLoginMutationOptions = Apollo.BaseMutationOptions<UpdateTokenByLoginMutation, UpdateTokenByLoginMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser($email: String!, $password: String!, $country: String!, $city: String!, $nickName: String!) {
   createUser(
