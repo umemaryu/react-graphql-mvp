@@ -1,8 +1,10 @@
-import { useAuth } from "application";
+import { useAuth, useUser } from "application";
 import { AccountSection } from "components/Sections";
 
 export const Account = () => {
-	const { operations } = useAuth();
-	const { updateTokenToNull } = operations;
-	return <AccountSection actions={{ updateTokenToNull }} />;
+	const { operations: authOperations } = useAuth();
+	const { operations: userOperations } = useUser();
+	const { updateTokenToNull } = authOperations;
+	const { updatePassword } = userOperations;
+	return <AccountSection actions={{ updateTokenToNull, updatePassword }} />;
 };
