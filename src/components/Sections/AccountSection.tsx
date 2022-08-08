@@ -10,26 +10,24 @@ import useCustomToast from "hooks/useCustomToast";
 type Input = Props;
 
 const useAccount = ({ actions }: Input) => {
-	const [state, setState] = useState({
-		newPassword: "",
-		oldPassword: "",
-	});
 	const list = [
 		{
 			id: "oldPassword",
 			text: "Old password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
-			value: state.oldPassword,
 		},
 		{
 			id: "newPassword",
 			text: "New password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
-			value: state.newPassword,
 		},
 	];
+	const [state, setState] = useState({
+		newPassword: "",
+		oldPassword: "",
+	});
 	const { setError, setSuccess } = useCustomToast();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
@@ -75,11 +73,15 @@ type Props = {
 };
 
 export const AccountSection: React.FC<Props> = ({ actions }) => {
-	const { list, operations } = useAccount({ actions });
+	const { list, models, operations } = useAccount({ actions });
 	return (
 		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>
-				<Form list={list} onChange={operations.onChangeFormInput} />
+				<Form
+					list={list}
+					onChange={operations.onChangeFormInput}
+					values={models.state}
+				/>
 				<Button
 					onClick={operations.onClickUpdatePassword}
 					w={"100%"}

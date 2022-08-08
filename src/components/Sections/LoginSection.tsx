@@ -16,26 +16,25 @@ import { IUpdateTokenByLogin } from "types";
 type Input = Props;
 
 const useLogin = ({ actions }: Input) => {
-	const [state, setState] = useState({
-		email: "",
-		password: "",
-	});
 	const list = [
 		{
 			id: "email",
 			text: "Email",
 			type: "email",
 			placeholder: "mail@example.com",
-			value: state.email,
 		},
 		{
 			id: "password",
 			text: "Password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
-			value: state.password,
 		},
 	];
+
+	const [state, setState] = useState({
+		email: "",
+		password: "",
+	});
 
 	const navigate = useNavigate();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
@@ -54,6 +53,7 @@ const useLogin = ({ actions }: Input) => {
 	}, [navigate]);
 	return {
 		list,
+		models: { state },
 		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
 	};
 };
@@ -65,13 +65,17 @@ type Props = {
 };
 
 export const LoginSection: React.FC<Props> = ({ actions }) => {
-	const { list, operations } = useLogin({ actions });
+	const { list, models, operations } = useLogin({ actions });
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
-					<Form list={list} onChange={operations.onChangeFormInput} />
+					<Form
+						list={list}
+						onChange={operations.onChangeFormInput}
+						values={models.state}
+					/>
 					<Button w={"100%"} mb={theme.m.sm} onClick={operations.onClickLogin}>
 						Login
 					</Button>
