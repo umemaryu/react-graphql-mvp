@@ -1,29 +1,21 @@
 import { useToast } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Toast } from "types";
 
-const useCustomToast = (state: Toast) => {
-	const error = useToast();
-	const success = useToast();
+const useCustomToast = () => {
+	const [error, setError] = useState<Toast>({ title: "", description: "" });
+	const toast = useToast();
 	useEffect(() => {
-		error({
-			title: state.title,
-			description: state.description,
-			status: "success",
-			duration: 3000,
-			isClosable: true,
-		});
-	}, [state, error]);
-	useEffect(() => {
-		error({
-			title: state.title,
-			description: state.description,
-			status: "error",
-			duration: 3000,
-			isClosable: true,
-		});
-	}, [state, error]);
-	return { error, success };
-};
+		if (error.description || error.title)
+			toast({
+				title: error.title,
+				description: error.description,
+				status: "error",
+				duration: 3000,
+				isClosable: true,
+			});
+	}, [error, toast]);
 
+	return { setError };
+};
 export default useCustomToast;
