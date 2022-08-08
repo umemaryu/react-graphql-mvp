@@ -85,7 +85,7 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 				title: state.title,
 				description: state.description,
 				status: state.status,
-				duration: 6000,
+				duration: 3000,
 				isClosable: true,
 			});
 	}, [toast, state]);
@@ -95,11 +95,6 @@ const CustomApolloProvider: React.FC<Props> = ({ children }) => {
 			link: ApolloLink.from([errorLink, authLink, httpLink]),
 			cache: cache,
 			connectToDevTools: true,
-			defaultOptions: {
-				watchQuery: {
-					fetchPolicy: "cache-and-network",
-				},
-			},
 		});
 	}, [httpLink, authLink, errorLink]);
 	return <ApolloProvider client={client}>{children}</ApolloProvider>;
