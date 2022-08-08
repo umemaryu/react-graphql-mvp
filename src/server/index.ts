@@ -52,6 +52,7 @@ const resolvers: Resolvers = {
 			emailValidation(args.email);
 			const user = await prisma.user.findFirst({
 				where: { email: args.email },
+				include: { posts: { include: { user: true } } },
 			});
 			if (!user)
 				throw new ValidationError("There is no corresponding e-mail address");

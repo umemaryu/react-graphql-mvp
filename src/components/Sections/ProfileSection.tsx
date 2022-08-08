@@ -24,7 +24,7 @@ export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 					<UserInfoList user={user?.fetchUserByToken} />
 					<Divider />
 					<Text textAlign="center">Write a post to your thread</Text>
-					<Posts user={user} />
+					<Posts posts={user?.fetchUserByToken.posts} />
 					<Post
 						actions={actions}
 						receiverId={user?.fetchUserByToken.id}
