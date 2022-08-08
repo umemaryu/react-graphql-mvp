@@ -16,7 +16,7 @@ type FormList = {
 type Props = {
 	list: FormList[];
 	values: Record<string, string>;
-	error?: string;
+	error: string;
 	onChange: (value: string, id: string) => void;
 };
 

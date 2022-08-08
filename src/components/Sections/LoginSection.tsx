@@ -12,6 +12,7 @@ import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { IUpdateTokenByLogin } from "types";
+import { emailValidation } from "utils/emailValidation";
 
 type Input = Props;
 
@@ -24,7 +25,7 @@ const useLogin = ({ actions }: Input) => {
 		},
 		{
 			id: "password",
-			text: "Password(min 6 characters)",
+			text: "Password(min 6 letters)",
 			placeholder: "abc123",
 		},
 	];
@@ -33,25 +34,40 @@ const useLogin = ({ actions }: Input) => {
 		email: "",
 		password: "",
 	});
+	const [error, setError] = useState<string>("");
 
 	const navigate = useNavigate();
+
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
+
 	const onClickLogin = useCallback(async () => {
-		const res = await actions.updateTokenByLogin({
-			...state,
-		});
-		if (res?.updateTokenByLogin) window.location.reload();
+		for (let key in state) {
+			if (state[key as keyof typeof state] === "") {
+				return setError(`${[key as keyof typeof state]} should be filled`);
+			}
+		}
+		const { emailError } = emailValidation(state.email);
+		if (emailError) return setError(emailError);
+		else if (state.password.length < 6) {
+			return setError(`Password must be over 6 letters`);
+		} else {
+			const res = await actions.updateTokenByLogin({
+				...state,
+			});
+			if (res?.updateTokenByLogin) window.location.reload();
+		}
 	}, [state, actions]);
+
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
 	return {
 		list,
-		models: { state },
+		models: { state, error },
 		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
 	};
 };
@@ -73,6 +89,7 @@ export const LoginSection: React.FC<Props> = ({ actions }) => {
 						list={list}
 						onChange={operations.onChangeFormInput}
 						values={models.state}
+						error={models.error}
 					/>
 					<Button w={"100%"} mb={theme.m.sm} onClick={operations.onClickLogin}>
 						Login

@@ -66,7 +66,7 @@ const resolvers: Resolvers = {
 						`${args[key as keyof typeof args]} should be filled`
 					);
 			if (args.password.length < 6)
-				throw new UserInputError("The password must be over 6 characters");
+				throw new UserInputError("The password must be over 6 letters");
 			emailValidation(args.email);
 			const token = createToken();
 			await prisma.user.create({
@@ -99,7 +99,7 @@ const resolvers: Resolvers = {
 			args: MutationUpdatePasswordArgs
 		) => {
 			if (args.oldPassword.length < 6 || args.newPassword.length < 6)
-				throw new UserInputError("The password must be over 6 characters");
+				throw new UserInputError("The password must be over 6 letters");
 			const user = await prisma.user.findUniqueOrThrow({
 				where: { id: args.id },
 			});

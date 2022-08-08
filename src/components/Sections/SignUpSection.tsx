@@ -40,7 +40,7 @@ const useSignUp = ({ actions }: Input) => {
 		},
 		{
 			id: "password",
-			text: "Password(min 6 characters)",
+			text: "Password(min 6 letters)",
 			placeholder: "abc123",
 		},
 	];
