@@ -8,7 +8,6 @@ import {
 } from "gql/codegen";
 import useClient from "hooks/useClient";
 import { useCallback } from "react";
-import { authStore } from "stores";
 import storage from "utils/storage";
 
 export const useAuth = () => {
@@ -46,7 +45,6 @@ export const useAuth = () => {
 			if (res.data && res.data.updateTokenToNull) {
 				storage.clearToken();
 				client.clearStore();
-				authStore(undefined);
 			}
 			return res.data;
 		});
