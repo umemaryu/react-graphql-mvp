@@ -21,7 +21,7 @@ export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 		<ThreadLayout page="Profile">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					<UserInfoList user={user?.fetchUserByToken} />
+					{user && <UserInfoList user={user.fetchUserByToken} />}
 					<Divider />
 					<Text textAlign="center">Write a post to your thread</Text>
 					<Posts posts={user?.fetchUserByToken.posts} />

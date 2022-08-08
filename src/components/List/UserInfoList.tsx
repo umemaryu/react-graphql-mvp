@@ -3,14 +3,12 @@ import { Flex, Spacer, Text, Box } from "components/Elements";
 import { theme } from "utils/theme";
 
 type Props = {
-	user:
-		| {
-				email: string;
-				country: string;
-				city: string;
-				nickName: string;
-		  }
-		| undefined;
+	user: {
+		email: string;
+		country: string;
+		city: string;
+		nickName: string;
+	};
 };
 
 export const UserInfoList: React.FC<Props> = ({ user }) => {
@@ -41,9 +39,7 @@ export const UserInfoList: React.FC<Props> = ({ user }) => {
 						<Flex w={theme.w.mobile}>
 							<Text fontSize={theme.fs.normal}>{ele.text}</Text>
 							<Spacer />
-							<Text>
-								{user[ele.id as "nickName" | "country" | "city" | "email"]}
-							</Text>
+							<Text>{user[ele.id as keyof typeof user]}</Text>
 						</Flex>
 					)}
 				</Fragment>
