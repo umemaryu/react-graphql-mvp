@@ -12,6 +12,7 @@ type FormList = {
 	text: string;
 	type?: React.HTMLInputTypeAttribute;
 	placeholder: string;
+	value: string;
 };
 
 type Props = {
@@ -26,6 +27,7 @@ export const Form: React.FC<Props> = ({ list, error, onChange }) => (
 			<Box mt={theme.m.sm} mb={theme.m.sm} key={ele.text}>
 				<FormLabel>{ele.text}</FormLabel>
 				<FormInput
+					value={ele.value}
 					type={ele.type}
 					placeholder={ele.placeholder}
 					id={ele.id}

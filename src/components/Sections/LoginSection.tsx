@@ -16,24 +16,27 @@ import { IUpdateTokenByLogin } from "types";
 type Input = Props;
 
 const useLogin = ({ actions }: Input) => {
+	const [state, setState] = useState({
+		email: "",
+		password: "",
+	});
 	const list = [
 		{
 			id: "email",
 			text: "Email",
 			type: "email",
 			placeholder: "mail@example.com",
+			value: state.email,
 		},
 		{
 			id: "password",
 			text: "Password(min 6 characters)",
 			type: "password",
 			placeholder: "abc123",
+			value: state.password,
 		},
 	];
-	const [state, setState] = useState({
-		email: "",
-		password: "",
-	});
+
 	const navigate = useNavigate();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
