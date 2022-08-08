@@ -49,7 +49,7 @@ const useLogin = ({ actions }: Input) => {
 			password: state.password,
 			email: state.email,
 		});
-		if (res?.updateTokenByLogin.token) window.location.reload();
+		if (res?.updateTokenByLogin) window.location.reload();
 	}, [state, actions]);
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");

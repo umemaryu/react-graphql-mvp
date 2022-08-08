@@ -88,11 +88,11 @@ const resolvers: Resolvers = {
 			});
 			if (!user) throw new Error("Email or password is wrong");
 			const token = createToken();
-			const updatedUser = await prisma.user.update({
+			await prisma.user.update({
 				where: { email: args.email },
 				data: { token },
 			});
-			return updatedUser;
+			return token;
 		},
 		updatePassword: async (
 			_parent: unknown,

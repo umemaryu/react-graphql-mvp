@@ -18,10 +18,8 @@ export const useAuth = () => {
 	const updateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
 			return await UPDATE_TOKEN_BY_LOGIN({ variables: args }).then((res) => {
-				if (res.data && res.data.updateTokenByLogin.token) {
-					storage.setToken(res.data.updateTokenByLogin.token);
-					const id = parseInt(res.data.updateTokenByLogin.id);
-					authStore(id);
+				if (res.data && res.data.updateTokenByLogin) {
+					storage.setToken(res.data.updateTokenByLogin);
 				}
 				return res.data;
 			});

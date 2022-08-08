@@ -20,7 +20,7 @@ export type Mutation = {
   createPost: Scalars['Boolean'];
   createUser: Scalars['String'];
   updatePassword: Scalars['Boolean'];
-  updateTokenByLogin: User;
+  updateTokenByLogin: Scalars['String'];
   updateTokenToNull: Scalars['Boolean'];
 };
 
@@ -118,7 +118,7 @@ export type UpdateTokenByLoginMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTokenByLoginMutation = { __typename?: 'Mutation', updateTokenByLogin: { __typename?: 'User', id: string, token?: string | null } };
+export type UpdateTokenByLoginMutation = { __typename?: 'Mutation', updateTokenByLogin: string };
 
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -276,10 +276,7 @@ export type FetchUserByEmailLazyQueryHookResult = ReturnType<typeof useFetchUser
 export type FetchUserByEmailQueryResult = Apollo.QueryResult<FetchUserByEmailQuery, FetchUserByEmailQueryVariables>;
 export const UpdateTokenByLoginDocument = gql`
     mutation UpdateTokenByLogin($email: String!, $password: String!) {
-  updateTokenByLogin(email: $email, password: $password) {
-    id
-    token
-  }
+  updateTokenByLogin(email: $email, password: $password)
 }
     `;
 export type UpdateTokenByLoginMutationFn = Apollo.MutationFunction<UpdateTokenByLoginMutation, UpdateTokenByLoginMutationVariables>;
