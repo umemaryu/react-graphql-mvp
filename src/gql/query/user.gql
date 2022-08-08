@@ -36,6 +36,7 @@ query FetchUserByEmail($email: String!) {
 
 mutation UpdateTokenByLogin($email: String!, $password: String!) {
 	updateTokenByLogin(email: $email, password: $password) {
+		id
 		token
 	}
 }

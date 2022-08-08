@@ -118,7 +118,7 @@ export type UpdateTokenByLoginMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTokenByLoginMutation = { __typename?: 'Mutation', updateTokenByLogin: { __typename?: 'User', token?: string | null } };
+export type UpdateTokenByLoginMutation = { __typename?: 'Mutation', updateTokenByLogin: { __typename?: 'User', id: string, token?: string | null } };
 
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
@@ -277,6 +277,7 @@ export type FetchUserByEmailQueryResult = Apollo.QueryResult<FetchUserByEmailQue
 export const UpdateTokenByLoginDocument = gql`
     mutation UpdateTokenByLogin($email: String!, $password: String!) {
   updateTokenByLogin(email: $email, password: $password) {
+    id
     token
   }
 }
