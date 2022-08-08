@@ -8,6 +8,7 @@ import {
 } from "gql/codegen";
 import useClient from "hooks/useClient";
 import { useCallback } from "react";
+import { authStore } from "stores";
 import storage from "utils/storage";
 
 export const useAuth = () => {
@@ -17,8 +18,11 @@ export const useAuth = () => {
 	const updateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
 			return await UPDATE_TOKEN_BY_LOGIN({ variables: args }).then((res) => {
-				if (res.data && res.data.updateTokenByLogin.token)
+				if (res.data && res.data.updateTokenByLogin.token) {
 					storage.setToken(res.data.updateTokenByLogin.token);
+					const id = parseInt(res.data.updateTokenByLogin.id);
+					authStore(id);
+				}
 				return res.data;
 			});
 		},
@@ -43,7 +47,8 @@ export const useAuth = () => {
 		}).then((res) => {
 			if (res.data && res.data.updateTokenToNull) {
 				storage.clearToken();
-				client.resetStore();
+				client.clearStore();
+				authStore(undefined);
 			}
 			return res.data;
 		});

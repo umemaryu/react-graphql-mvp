@@ -74,10 +74,8 @@ const useSignUp = ({ actions }: Props) => {
 		const { emailError } = emailValidation(state.email);
 		if (emailError) setError(emailError);
 		const res = await actions.createUser({ ...state });
-		if (res?.createUser.token) {
-			navigate("/profile");
-		}
-	}, [state, navigate, actions]);
+		if (res?.createUser.token) window.location.reload();
+	}, [state, actions]);
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);

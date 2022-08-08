@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
-import { useNavigate } from "react-router-dom";
 import { Form } from "components/Form";
 import { IUpdateTokenToNull } from "types";
 import { authStore } from "stores";
@@ -30,7 +29,6 @@ const useAccount = ({ actions }: Input) => {
 		newPassword: "",
 		oldPassword: "",
 	});
-	const navigate = useNavigate();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
 			return { ...prevState, [id]: value };
@@ -39,10 +37,10 @@ const useAccount = ({ actions }: Input) => {
 	const onClickUpdatePassword = useCallback(() => {
 		console.log(state);
 	}, [state]);
-	const onClickSignOut = useCallback(() => {
-		actions.updateTokenToNull({ id: authStore() as number });
-		navigate("/login");
-	}, [navigate, actions]);
+	const onClickSignOut = useCallback(async () => {
+		const res = await actions.updateTokenToNull({ id: authStore() as number });
+		if (res?.updateTokenToNull) window.location.reload();
+	}, [actions]);
 	return {
 		list,
 		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },
