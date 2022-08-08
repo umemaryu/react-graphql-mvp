@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import {
-	Box,
 	Button,
 	Center,
 	Layout,
@@ -114,9 +113,8 @@ export const SignUpSection: React.FC<Props> = ({ actions }) => {
 						Resister
 					</Button>
 					<Divider mb={theme.m.sm} />
-					<Box textAlign="center">
+					<Center>
 						<Text
-							display="inline-block"
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
@@ -124,7 +122,7 @@ export const SignUpSection: React.FC<Props> = ({ actions }) => {
 						>
 							Login
 						</Text>
-					</Box>
+					</Center>
 				</Layout>
 			</VStack>
 		</Center>

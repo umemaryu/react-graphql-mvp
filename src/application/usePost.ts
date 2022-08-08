@@ -1,14 +1,6 @@
-import {
-	FetchUserByTokenQuery,
-	MutationCreatePostArgs,
-	useCreatePostMutation,
-} from "gql/codegen";
+import { MutationCreatePostArgs, useCreatePostMutation } from "gql/codegen";
 
-type Input = {
-	data?: FetchUserByTokenQuery;
-};
-
-export const usePost = ({ data }: Input) => {
+export const usePost = () => {
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
 	const createPost = async (args: MutationCreatePostArgs) => {
 		return await CREATE_POST_MUTATION({

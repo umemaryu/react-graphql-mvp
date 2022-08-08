@@ -31,15 +31,13 @@ const usePost = ({ actions, senderId, receiverId }: Input) => {
 	return { models: { value }, operations: { onClick, onChange } };
 };
 
-type Props =
-	| {
-			receiverId: string | undefined;
-			senderId: string | undefined;
-	  } & {
-			actions: {
-				createPost: ICreatePost;
-			};
-	  };
+type Props = {
+	receiverId: string | undefined;
+	senderId: string | undefined;
+	actions: {
+		createPost: ICreatePost;
+	};
+};
 
 export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
 	const { models, operations } = usePost({ actions, senderId, receiverId });
@@ -56,8 +54,8 @@ export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
 				placeholder="Hi!"
 				my={2}
 				ml={2}
-				onChange={(e) => operations.onChange(e.target.value)}
 				value={models.value}
+				onChange={(e) => operations.onChange(e.target.value)}
 			/>
 			<Box onClick={() => operations.onClick()}>
 				<PostIcon value={models.value} />

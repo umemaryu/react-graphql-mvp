@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Box, Button, Text } from "components/Elements";
+import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
@@ -102,13 +102,15 @@ export const AccountSection: React.FC<Props> = ({ actions }) => {
 				>
 					Update Password
 				</Button>
-				<Text
-					cursor="pointer"
-					textAlign="center"
-					onClick={operations.onClickSignOut}
-				>
-					Sign out
-				</Text>
+				<Center>
+					<Text
+						display={"inline-block"}
+						cursor="pointer"
+						onClick={operations.onClickSignOut}
+					>
+						Sign out
+					</Text>
+				</Center>
 			</Box>
 		</ThreadLayout>
 	);
