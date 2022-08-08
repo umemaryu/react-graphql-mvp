@@ -54,8 +54,8 @@ export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
 				placeholder="Hi!"
 				my={2}
 				ml={2}
-				onChange={(e) => operations.onChange(e.target.value)}
 				value={models.value}
+				onChange={(e) => operations.onChange(e.target.value)}
 			/>
 			<Box onClick={() => operations.onClick()}>
 				<PostIcon value={models.value} />

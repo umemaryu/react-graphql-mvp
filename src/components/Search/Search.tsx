@@ -30,8 +30,8 @@ export const Search: React.FC<Props> = ({ actions }) => {
 		<HStack>
 			<Input
 				placeholder="mail@example.com"
-				onChange={(e) => operations.onChange(e.target.value)}
 				value={models.value}
+				onChange={(e) => operations.onChange(e.target.value)}
 			/>
 			<Box onClick={() => operations.onClick()}>
 				<SearchIcon value={models.value} />
