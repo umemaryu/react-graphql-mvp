@@ -6,8 +6,8 @@ import { ICreatePost } from "types";
 
 type Props =
 	| {
-			receiverId?: string;
-			senderId?: string;
+			receiverId: string | undefined;
+			senderId: string | undefined;
 	  } & {
 			actions: {
 				createPost: ICreatePost;
