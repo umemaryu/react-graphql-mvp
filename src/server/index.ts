@@ -6,8 +6,8 @@ import {
 	MutationCreatePostArgs,
 	MutationCreateUserArgs,
 	MutationUpdatePasswordArgs,
+	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
-	QueryFetchUserByEmailAndPasswordArgs,
 	QueryFetchUserByEmailArgs,
 	Resolvers,
 } from "server/codegen";
@@ -57,17 +57,6 @@ const resolvers: Resolvers = {
 				throw new ValidationError("There is no corresponding e-mail address");
 			return user;
 		},
-		fetchUserByEmailAndPassword: async (
-			_parent: unknown,
-			args: QueryFetchUserByEmailAndPasswordArgs
-		) => {
-			emailValidation(args.email);
-			const user = await prisma.user.findFirst({
-				where: { email: args.email, password: args.password },
-			});
-			if (!user) throw new ValidationError("Email or password is wrong");
-			return user;
-		},
 	},
 	Mutation: {
 		createUser: async (_parent: unknown, args: MutationCreateUserArgs) => {
@@ -88,6 +77,22 @@ const resolvers: Resolvers = {
 				},
 			});
 			return res;
+		},
+		updateTokenByLogin: async (
+			_parent: unknown,
+			args: MutationUpdateTokenByLoginArgs
+		) => {
+			emailValidation(args.email);
+			const user = await prisma.user.findFirst({
+				where: { email: args.email, password: args.password },
+			});
+			if (!user) throw new Error("Email or password is wrong");
+			const token = createToken();
+			const updatedUser = await prisma.user.update({
+				where: { email: args.email },
+				data: { token },
+			});
+			return updatedUser;
 		},
 		updatePassword: async (
 			_parent: unknown,

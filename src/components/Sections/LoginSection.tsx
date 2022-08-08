@@ -11,11 +11,11 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { IFetchUserByEmailAndPassword } from "types";
+import { IUpdateTokenByLogin } from "types";
 
 type Input = {
 	actions: {
-		fetchUserByEmailAndPassword: IFetchUserByEmailAndPassword;
+		updateTokenByLogin: IUpdateTokenByLogin;
 	};
 };
 
@@ -44,10 +44,13 @@ const useLogin = ({ actions }: Input) => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
-	const onClickLogin = useCallback(() => {
-		actions.fetchUserByEmailAndPassword({ ...state });
-		navigate("/profile");
-	}, [state, navigate, actions]);
+	const onClickLogin = useCallback(async () => {
+		const res = await actions.updateTokenByLogin({
+			password: state.password,
+			email: state.email,
+		});
+		if (res && res.updateTokenByLogin.token) navigate("/profile");
+	}, [state, actions, navigate]);
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
@@ -59,7 +62,7 @@ const useLogin = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		fetchUserByEmailAndPassword: IFetchUserByEmailAndPassword;
+		updateTokenByLogin: IUpdateTokenByLogin;
 	};
 };
 

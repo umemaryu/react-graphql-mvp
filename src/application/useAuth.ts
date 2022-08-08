@@ -1,11 +1,10 @@
 import {
-	FetchUserByEmailAndPasswordQuery,
 	MutationCreateUserArgs,
+	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
-	QueryFetchUserByEmailAndPasswordArgs,
 	useCreateUserMutation,
-	useFetchUserByEmailAndPasswordLazyQuery,
 	useFetchUserByTokenLazyQuery,
+	useUpdateTokenByLoginMutation,
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
 import useClient from "hooks/useClient";
@@ -23,17 +22,16 @@ export const useAuth = () => {
 		});
 	}, [FETCH_USER_BY_TOKEN]);
 
-	const [FETCH_USER_BY_EMAIL_AND_PASSWORD, { data: userByEmail }] =
-		useFetchUserByEmailAndPasswordLazyQuery();
-	const fetchUserByEmailAndPassword = useCallback(
-		async (args: QueryFetchUserByEmailAndPasswordArgs) => {
-			return await FETCH_USER_BY_EMAIL_AND_PASSWORD().then((res) => {
-				if (res.data)
-					authStore(parseInt(res.data.fetchUserByEmailAndPassword.id));
+	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
+	const updateTokenByLogin = useCallback(
+		async (args: MutationUpdateTokenByLoginArgs) => {
+			return await UPDATE_TOKEN_BY_LOGIN({ variables: args }).then((res) => {
+				if (res.data && res.data.updateTokenByLogin.token)
+					storage.setToken(res.data.updateTokenByLogin.token);
 				return res.data;
 			});
 		},
-		[FETCH_USER_BY_EMAIL_AND_PASSWORD]
+		[UPDATE_TOKEN_BY_LOGIN]
 	);
 
 	const [CREATE_USER] = useCreateUserMutation();
@@ -65,7 +63,7 @@ export const useAuth = () => {
 	}, [fetchUserByToken]);
 
 	return {
-		models: { data, userByEmail },
-		operations: { createUser, updateTokenToNull, fetchUserByEmailAndPassword },
+		models: { data },
+		operations: { createUser, updateTokenToNull, updateTokenByLogin },
 	};
 };
