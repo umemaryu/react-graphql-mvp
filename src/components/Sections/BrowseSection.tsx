@@ -24,9 +24,11 @@ export const BrowseSection: React.FC<Props> = ({ user, actions }) => {
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
 					<UserInfoList user={user?.fetchUserByEmail} />
-					<Text textAlign="center">Search the other user by email</Text>
+					{!user && (
+						<Text textAlign="center">Search the other user by email</Text>
+					)}
 					<Search actions={actions} />
-					<Post actions={actions} />
+					{user && <Post actions={actions} />}
 				</VStack>
 			</Box>
 		</ThreadLayout>
