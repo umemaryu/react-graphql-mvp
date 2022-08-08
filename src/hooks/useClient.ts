@@ -5,12 +5,7 @@ import { setContext } from "@apollo/client/link/context";
 import storage from "utils/storage";
 import { onError } from "@apollo/client/link/error";
 import { cache } from "stores";
-
-type Toast = {
-	title: string;
-	description: string;
-	status: "success" | "error" | "warning" | "info";
-};
+import { Toast } from "types";
 
 const useClient = () => {
 	const devURL = "http://localhost:4000/";
