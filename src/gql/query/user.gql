@@ -34,6 +34,24 @@ query FetchUserByEmail($email: String!) {
 	}
 }
 
+query FetchUserByEmailAndPassword($email: String!, $password: String!) {
+	fetchUserByEmailAndPassword(email: $email, password: $password) {
+		id
+		email
+		country
+		city
+		nickName
+		posts {
+			id
+			body
+			createdAt
+			user {
+				email
+			}
+		}
+	}
+}
+
 mutation CreateUser(
 	$email: String!
 	$password: String!

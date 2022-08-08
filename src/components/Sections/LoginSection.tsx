@@ -11,8 +11,15 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
+import { IFetchUserByEmailAndPassword } from "types";
 
-const useLogin = () => {
+type Input = {
+	actions: {
+		fetchUserByEmailAndPassword: IFetchUserByEmailAndPassword;
+	};
+};
+
+const useLogin = ({ actions }: Input) => {
 	const list = [
 		{
 			id: "email",
@@ -38,9 +45,9 @@ const useLogin = () => {
 		});
 	}, []);
 	const onClickLogin = useCallback(() => {
-		console.log(state, "API communication");
+		actions.fetchUserByEmailAndPassword({ ...state });
 		navigate("/profile");
-	}, [state, navigate]);
+	}, [state, navigate, actions]);
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
@@ -50,8 +57,14 @@ const useLogin = () => {
 	};
 };
 
-export const LoginSection: React.FC = () => {
-	const { list, operations } = useLogin();
+type Props = {
+	actions: {
+		fetchUserByEmailAndPassword: IFetchUserByEmailAndPassword;
+	};
+};
+
+export const LoginSection: React.FC<Props> = ({ actions }) => {
+	const { list, operations } = useLogin({ actions });
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>

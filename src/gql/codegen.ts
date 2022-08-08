@@ -112,6 +112,14 @@ export type FetchUserByEmailQueryVariables = Exact<{
 
 export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
 
+export type FetchUserByEmailAndPasswordQueryVariables = Exact<{
+  email: Scalars['String'];
+  password: Scalars['String'];
+}>;
+
+
+export type FetchUserByEmailAndPasswordQuery = { __typename?: 'Query', fetchUserByEmailAndPassword: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+
 export type CreateUserMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
@@ -266,6 +274,54 @@ export function useFetchUserByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type FetchUserByEmailQueryHookResult = ReturnType<typeof useFetchUserByEmailQuery>;
 export type FetchUserByEmailLazyQueryHookResult = ReturnType<typeof useFetchUserByEmailLazyQuery>;
 export type FetchUserByEmailQueryResult = Apollo.QueryResult<FetchUserByEmailQuery, FetchUserByEmailQueryVariables>;
+export const FetchUserByEmailAndPasswordDocument = gql`
+    query FetchUserByEmailAndPassword($email: String!, $password: String!) {
+  fetchUserByEmailAndPassword(email: $email, password: $password) {
+    id
+    email
+    country
+    city
+    nickName
+    posts {
+      id
+      body
+      createdAt
+      user {
+        email
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useFetchUserByEmailAndPasswordQuery__
+ *
+ * To run a query within a React component, call `useFetchUserByEmailAndPasswordQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFetchUserByEmailAndPasswordQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFetchUserByEmailAndPasswordQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useFetchUserByEmailAndPasswordQuery(baseOptions: Apollo.QueryHookOptions<FetchUserByEmailAndPasswordQuery, FetchUserByEmailAndPasswordQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FetchUserByEmailAndPasswordQuery, FetchUserByEmailAndPasswordQueryVariables>(FetchUserByEmailAndPasswordDocument, options);
+      }
+export function useFetchUserByEmailAndPasswordLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FetchUserByEmailAndPasswordQuery, FetchUserByEmailAndPasswordQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FetchUserByEmailAndPasswordQuery, FetchUserByEmailAndPasswordQueryVariables>(FetchUserByEmailAndPasswordDocument, options);
+        }
+export type FetchUserByEmailAndPasswordQueryHookResult = ReturnType<typeof useFetchUserByEmailAndPasswordQuery>;
+export type FetchUserByEmailAndPasswordLazyQueryHookResult = ReturnType<typeof useFetchUserByEmailAndPasswordLazyQuery>;
+export type FetchUserByEmailAndPasswordQueryResult = Apollo.QueryResult<FetchUserByEmailAndPasswordQuery, FetchUserByEmailAndPasswordQueryVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser($email: String!, $password: String!, $country: String!, $city: String!, $nickName: String!) {
   createUser(

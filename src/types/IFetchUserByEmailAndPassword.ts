@@ -1,5 +1,8 @@
-import { FetchUserByEmailAndPasswordQuery } from "gql/codegen";
+import {
+	FetchUserByEmailAndPasswordQuery,
+	QueryFetchUserByEmailAndPasswordArgs,
+} from "gql/codegen";
 
-export type IFetchUserByEmailAndPassword = () => Promise<
-	FetchUserByEmailAndPasswordQuery | undefined
->;
+export type IFetchUserByEmailAndPassword = (
+	args: QueryFetchUserByEmailAndPasswordArgs
+) => Promise<FetchUserByEmailAndPasswordQuery | undefined>;

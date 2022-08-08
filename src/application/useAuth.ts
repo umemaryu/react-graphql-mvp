@@ -1,7 +1,10 @@
 import {
+	FetchUserByEmailAndPasswordQuery,
 	MutationCreateUserArgs,
 	MutationUpdateTokenToNullArgs,
+	QueryFetchUserByEmailAndPasswordArgs,
 	useCreateUserMutation,
+	useFetchUserByEmailAndPasswordLazyQuery,
 	useFetchUserByTokenLazyQuery,
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
@@ -20,6 +23,19 @@ export const useAuth = () => {
 		});
 	}, [FETCH_USER_BY_TOKEN]);
 
+	const [FETCH_USER_BY_EMAIL_AND_PASSWORD, { data: userByEmail }] =
+		useFetchUserByEmailAndPasswordLazyQuery();
+	const fetchUserByEmailAndPassword = useCallback(
+		async (args: QueryFetchUserByEmailAndPasswordArgs) => {
+			return await FETCH_USER_BY_EMAIL_AND_PASSWORD().then((res) => {
+				if (res.data)
+					authStore(parseInt(res.data.fetchUserByEmailAndPassword.id));
+				return res.data;
+			});
+		},
+		[FETCH_USER_BY_EMAIL_AND_PASSWORD]
+	);
+
 	const [CREATE_USER] = useCreateUserMutation();
 	const createUser = async (args: MutationCreateUserArgs) => {
 		return await CREATE_USER({
@@ -30,6 +46,7 @@ export const useAuth = () => {
 			return res.data;
 		});
 	};
+
 	const [UPDATE_TOKEN_TO_NULL] = useUpdateTokenToNullMutation();
 	const updateTokenToNull = async (args: MutationUpdateTokenToNullArgs) => {
 		return await UPDATE_TOKEN_TO_NULL({
@@ -47,5 +64,8 @@ export const useAuth = () => {
 		fetchUserByToken();
 	}, [fetchUserByToken]);
 
-	return { models: { data }, operations: { createUser, updateTokenToNull } };
+	return {
+		models: { data, userByEmail },
+		operations: { createUser, updateTokenToNull, fetchUserByEmailAndPassword },
+	};
 };
