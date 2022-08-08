@@ -64,12 +64,19 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   fetchUserByEmail: User;
+  fetchUserByEmailAndPassword: User;
   fetchUserByToken: User;
 };
 
 
 export type QueryFetchUserByEmailArgs = {
   email: Scalars['String'];
+};
+
+
+export type QueryFetchUserByEmailAndPasswordArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type User = {
@@ -195,6 +202,7 @@ export type PostResolvers<ContextType = Context, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   fetchUserByEmail?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryFetchUserByEmailArgs, 'email'>>;
+  fetchUserByEmailAndPassword?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryFetchUserByEmailAndPasswordArgs, 'email' | 'password'>>;
   fetchUserByToken?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 }>;
 

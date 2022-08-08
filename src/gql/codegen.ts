@@ -64,12 +64,19 @@ export type Post = {
 export type Query = {
   __typename?: 'Query';
   fetchUserByEmail: User;
+  fetchUserByEmailAndPassword: User;
   fetchUserByToken: User;
 };
 
 
 export type QueryFetchUserByEmailArgs = {
   email: Scalars['String'];
+};
+
+
+export type QueryFetchUserByEmailAndPasswordArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type User = {

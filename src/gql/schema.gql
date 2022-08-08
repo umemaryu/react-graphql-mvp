@@ -21,6 +21,7 @@ type Post {
 type Query {
 	fetchUserByToken: User!
 	fetchUserByEmail(email: String!): User!
+	fetchUserByEmailAndPassword(email: String!, password: String!): User!
 }
 
 type Mutation {

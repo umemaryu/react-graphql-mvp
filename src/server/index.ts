@@ -3,13 +3,12 @@ import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
 import { Context } from "gql/models";
 import {
-	MutationUpdatePasswordArgs,
-	QueryFetchUserByEmailArgs,
-} from "gql/codegen";
-import {
 	MutationCreatePostArgs,
 	MutationCreateUserArgs,
+	MutationUpdatePasswordArgs,
 	MutationUpdateTokenToNullArgs,
+	QueryFetchUserByEmailAndPasswordArgs,
+	QueryFetchUserByEmailArgs,
 	Resolvers,
 } from "server/codegen";
 
@@ -56,6 +55,17 @@ const resolvers: Resolvers = {
 			});
 			if (!user)
 				throw new ValidationError("There is no corresponding e-mail address");
+			return user;
+		},
+		fetchUserByEmailAndPassword: async (
+			_parent: unknown,
+			args: QueryFetchUserByEmailAndPasswordArgs
+		) => {
+			emailValidation(args.email);
+			const user = await prisma.user.findFirst({
+				where: { email: args.email, password: args.password },
+			});
+			if (!user) throw new ValidationError("Email or password is wrong");
 			return user;
 		},
 	},
