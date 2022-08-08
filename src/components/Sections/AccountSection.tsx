@@ -31,7 +31,6 @@ const useAccount = ({ actions }: Input) => {
 		},
 	];
 	const { setError, setSuccess } = useCustomToast();
-	console.log(state);
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
 			return { ...prevState, [id]: value };
@@ -47,8 +46,7 @@ const useAccount = ({ actions }: Input) => {
 		}
 		const res = await actions.updatePassword({
 			id: id,
-			oldPassword: state.oldPassword,
-			newPassword: state.newPassword,
+			...state,
 		});
 		if (res?.updatePassword) {
 			setSuccess({ title: "Password is changed ", description: "" });

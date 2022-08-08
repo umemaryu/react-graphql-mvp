@@ -45,8 +45,7 @@ const useLogin = ({ actions }: Input) => {
 	}, []);
 	const onClickLogin = useCallback(async () => {
 		const res = await actions.updateTokenByLogin({
-			password: state.password,
-			email: state.email,
+			...state,
 		});
 		if (res?.updateTokenByLogin) window.location.reload();
 	}, [state, actions]);
