@@ -6,65 +6,73 @@ import { Form } from "components/Form";
 import { authStore } from "stores";
 import { IUpdatePassword, IUpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
+import { passwordValidation } from "utils/passwordValidation";
 
 type Input = Props;
 
 const useAccount = ({ actions }: Input) => {
-	const [state, setState] = useState({
-		newPassword: "",
-		oldPassword: "",
-	});
 	const list = [
 		{
 			id: "oldPassword",
-			text: "Old password(min 6 characters)",
-			type: "password",
+			text: "Old password(min 6 letters)",
 			placeholder: "abc123",
-			value: state.oldPassword,
 		},
 		{
 			id: "newPassword",
-			text: "New password(min 6 characters)",
-			type: "password",
+			text: "New password(min 6 letters)",
 			placeholder: "abc123",
-			value: state.newPassword,
 		},
 	];
-	const { setError, setSuccess } = useCustomToast();
-	console.log(state);
+
+	const [state, setState] = useState({
+		oldPassword: "",
+		newPassword: "",
+	});
+
+	const [error, setError] = useState<string>("");
+	const { setError: setToastError, setSuccess } = useCustomToast();
+
 	const onChangeFormInput = useCallback((value: string, id: string) => {
-		setState((prevState) => {
-			return { ...prevState, [id]: value };
-		});
+		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
 	const onClickUpdatePassword = useCallback(async () => {
 		const id = authStore();
-		if (!id) {
-			return setError({
+		const { passwordError: oldPasswordError } = passwordValidation(
+			state.oldPassword
+		);
+		const { passwordError: newPasswordError } = passwordValidation(
+			state.newPassword
+		);
+		if (oldPasswordError) {
+			setError(oldPasswordError);
+		} else if (newPasswordError) {
+			setError(newPasswordError);
+		} else if (!id) {
+			setToastError({
 				title: "Authorization Error",
 				description: "Please reload and try again",
 			});
-		}
-		const res = await actions.updatePassword({
-			id: id,
-			oldPassword: state.oldPassword,
-			newPassword: state.newPassword,
-		});
-		if (res?.updatePassword) {
-			setSuccess({ title: "Password is changed ", description: "" });
-			setState({
-				newPassword: "",
-				oldPassword: "",
+		} else {
+			const res = await actions.updatePassword({
+				id: id,
+				...state,
 			});
+			if (res?.updatePassword) {
+				setSuccess({ title: "Password is changed ", description: "" });
+				setState({
+					newPassword: "",
+					oldPassword: "",
+				});
+			}
 		}
-	}, [state, actions, setError, setSuccess]);
+	}, [state, actions, setError, setSuccess, setToastError]);
 	const onClickSignOut = useCallback(async () => {
 		const res = await actions.updateTokenToNull({ id: authStore() as number });
 		if (res?.updateTokenToNull) window.location.reload();
 	}, [actions]);
 	return {
 		list,
-		models: { state },
+		models: { state, error },
 		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },
 	};
 };
@@ -77,11 +85,16 @@ type Props = {
 };
 
 export const AccountSection: React.FC<Props> = ({ actions }) => {
-	const { list, operations } = useAccount({ actions });
+	const { list, models, operations } = useAccount({ actions });
 	return (
 		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>
-				<Form list={list} onChange={operations.onChangeFormInput} />
+				<Form
+					error={models.error}
+					list={list}
+					onChange={operations.onChangeFormInput}
+					values={models.state}
+				/>
 				<Button
 					onClick={operations.onClickUpdatePassword}
 					w={"100%"}

@@ -13,10 +13,40 @@ import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { emailValidation } from "utils/emailValidation";
 import { ICreateUser } from "types";
+import { inputValidation } from "utils/inputValidation";
+import { passwordValidation } from "utils/passwordValidation";
 
 type Input = Props;
 
 const useSignUp = ({ actions }: Input) => {
+	const list = [
+		{
+			id: "nickName",
+			text: "Nick name",
+			placeholder: "Nick name",
+		},
+		{
+			id: "country",
+			text: "Country",
+			placeholder: "Country",
+		},
+		{
+			id: "city",
+			text: "City",
+			placeholder: "City",
+		},
+		{
+			id: "email",
+			text: "Email",
+			placeholder: "mail@example.com",
+		},
+		{
+			id: "password",
+			text: "Password(min 6 letters)",
+			placeholder: "abc123",
+		},
+	];
+
 	const [state, setState] = useState({
 		nickName: "",
 		country: "",
@@ -24,41 +54,6 @@ const useSignUp = ({ actions }: Input) => {
 		email: "",
 		password: "",
 	});
-	const list = [
-		{
-			id: "nickName",
-			text: "Nick name",
-			placeholder: "Nick name",
-			value: state.nickName,
-		},
-		{
-			id: "country",
-			text: "Country",
-			placeholder: "Country",
-			value: state.country,
-		},
-		{
-			id: "city",
-			text: "City",
-			placeholder: "City",
-			value: state.city,
-		},
-		{
-			id: "email",
-			text: "Email",
-			type: "email",
-			placeholder: "mail@example.com",
-			value: state.email,
-		},
-		{
-			id: "password",
-			text: "Password(min 6 characters)",
-			type: "password",
-			placeholder: "abc123",
-			value: state.password,
-		},
-	];
-
 	const [error, setError] = useState<string>("");
 
 	const navigate = useNavigate();
@@ -68,22 +63,26 @@ const useSignUp = ({ actions }: Input) => {
 		});
 	}, []);
 	const onClickRegister = useCallback(async () => {
-		for (let key in state) {
-			if (state[key as keyof typeof state] === "") {
-				setError(`${[key as keyof typeof state]} should be filled`);
-			}
-		}
+		const { inputError } = inputValidation(state);
 		const { emailError } = emailValidation(state.email);
-		if (emailError) setError(emailError);
-		const res = await actions.createUser({ ...state });
-		if (res?.createUser) window.location.reload();
+		const { passwordError } = passwordValidation(state.password);
+		if (inputError) {
+			setError(inputError);
+		} else if (emailError) {
+			setError(emailError);
+		} else if (passwordError) {
+			setError(passwordError);
+		} else {
+			const res = await actions.createUser({ ...state });
+			if (res?.createUser) window.location.reload();
+		}
 	}, [state, actions]);
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
 	return {
 		list,
-		models: { error },
+		models: { error, state },
 		operations: { onChangeFormInput, onClickRegister, onClickLogin },
 	};
 };
@@ -103,6 +102,7 @@ export const SignUpSection: React.FC<Props> = ({ actions }) => {
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form
 						list={list}
+						values={models.state}
 						onChange={operations.onChangeFormInput}
 						error={models.error}
 					/>
