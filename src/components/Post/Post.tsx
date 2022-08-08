@@ -3,24 +3,30 @@ import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
 import { ICreatePost } from "types";
+import useCustomToast from "hooks/useCustomToast";
 
 type Input = Props;
 
 const usePost = ({ actions, senderId, receiverId }: Input) => {
 	const [value, setValue] = useState<string>("");
+	const { setError } = useCustomToast();
 	const onChange = (value: string) => {
 		setValue(value);
 	};
 	const onClick = () => {
 		if (!value) return;
-		if (senderId && receiverId) {
-			actions.createPost({
-				body: value,
-				senderId: parseInt(senderId),
-				receiverId: parseInt(receiverId),
+		if (!senderId || !receiverId) {
+			return setError({
+				title: "Authorization Error",
+				description: "Please reload and try again",
 			});
-			setValue("");
 		}
+		actions.createPost({
+			body: value,
+			senderId: parseInt(senderId),
+			receiverId: parseInt(receiverId),
+		});
+		setValue("");
 	};
 	return { models: { value }, operations: { onClick, onChange } };
 };
