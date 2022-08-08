@@ -1,10 +1,9 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo } from "react";
 import { ApolloClient, ApolloLink, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import storage from "utils/storage";
 import { onError } from "@apollo/client/link/error";
 import { cache } from "stores";
-import { Toast } from "types";
 import useCustomToast from "hooks/useCustomToast";
 
 const useClient = () => {
@@ -15,11 +14,7 @@ const useClient = () => {
 			credentials: "same-origin",
 		});
 	}, []);
-	const [state, setState] = useState<Toast>({
-		title: "",
-		description: "",
-	});
-	const { error } = useCustomToast(state);
+	const { setError } = useCustomToast();
 	const authLink = useMemo(() => {
 		return setContext((_, { headers }) => {
 			const token = storage.getToken();
@@ -35,7 +30,7 @@ const useClient = () => {
 		return onError(({ graphQLErrors, networkError }) => {
 			if (graphQLErrors) {
 				graphQLErrors.map(({ message, locations, path }) => {
-					setState({
+					setError({
 						title: `${message}`,
 						description: "Will you please try one more time?",
 					});
@@ -45,21 +40,14 @@ const useClient = () => {
 				});
 			}
 			if (networkError) {
-				setState({
+				setError({
 					title: `${networkError.message}`,
 					description: "Will you please try one more time?",
 				});
 				console.log(`[Network error]: ${networkError}`);
 			}
 		});
-	}, []);
-	useEffect(() => {
-		if (state.description || state.title)
-			error({
-				title: state.title,
-				description: state.description,
-			});
-	}, [error, state]);
+	}, [setError]);
 
 	const client = useMemo(() => {
 		return new ApolloClient({
