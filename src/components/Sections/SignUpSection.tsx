@@ -14,13 +14,9 @@ import { useNavigate } from "react-router-dom";
 import { emailValidation } from "utils/emailValidation";
 import { ICreateUser } from "types";
 
-type Props = {
-	actions: {
-		createUser: ICreateUser;
-	};
-};
+type Input = Props;
 
-const useSignUp = ({ actions }: Props) => {
+const useSignUp = ({ actions }: Input) => {
 	const list = [
 		{
 			id: "nickName",
@@ -83,6 +79,12 @@ const useSignUp = ({ actions }: Props) => {
 		list,
 		models: { error },
 		operations: { onChangeFormInput, onClickRegister, onClickLogin },
+	};
+};
+
+type Props = {
+	actions: {
+		createUser: ICreateUser;
 	};
 };
 

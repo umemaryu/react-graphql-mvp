@@ -6,9 +6,7 @@ import { Form } from "components/Form";
 import { authStore } from "stores";
 import { IUpdateTokenToNull } from "types";
 
-type Input = {
-	actions: { updateTokenToNull: IUpdateTokenToNull };
-};
+type Input = Props;
 
 const useAccount = ({ actions }: Input) => {
 	const list = [

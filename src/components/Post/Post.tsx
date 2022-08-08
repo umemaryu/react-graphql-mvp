@@ -4,17 +4,9 @@ import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
 import { ICreatePost } from "types";
 
-type Props =
-	| {
-			receiverId: string | undefined;
-			senderId: string | undefined;
-	  } & {
-			actions: {
-				createPost: ICreatePost;
-			};
-	  };
+type Input = Props;
 
-const usePost = ({ actions, senderId, receiverId }: Props) => {
+const usePost = ({ actions, senderId, receiverId }: Input) => {
 	const [value, setValue] = useState<string>("");
 	const onChange = (value: string) => {
 		setValue(value);
@@ -32,6 +24,16 @@ const usePost = ({ actions, senderId, receiverId }: Props) => {
 	};
 	return { models: { value }, operations: { onClick, onChange } };
 };
+
+type Props =
+	| {
+			receiverId: string | undefined;
+			senderId: string | undefined;
+	  } & {
+			actions: {
+				createPost: ICreatePost;
+			};
+	  };
 
 export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
 	const { models, operations } = usePost({ actions, senderId, receiverId });
