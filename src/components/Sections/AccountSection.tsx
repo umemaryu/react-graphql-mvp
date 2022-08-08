@@ -6,6 +6,7 @@ import { Form } from "components/Form";
 import { authStore } from "stores";
 import { IUpdatePassword, IUpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
+import { passwordValidation } from "utils/passwordValidation";
 
 type Input = Props;
 
@@ -24,8 +25,8 @@ const useAccount = ({ actions }: Input) => {
 	];
 
 	const [state, setState] = useState({
-		newPassword: "",
 		oldPassword: "",
+		newPassword: "",
 	});
 
 	const [error, setError] = useState<string>("");
@@ -36,13 +37,16 @@ const useAccount = ({ actions }: Input) => {
 	}, []);
 	const onClickUpdatePassword = useCallback(async () => {
 		const id = authStore();
-		for (let key in state) {
-			if (state[key as keyof typeof state] === "") {
-				return setError(`${[key as keyof typeof state]} should be filled`);
-			}
-		}
-		if (state.newPassword.length < 6 || state.oldPassword.length < 6) {
-			setError(`Password must be over 6 letters`);
+		const { passwordError: oldPasswordError } = passwordValidation(
+			state.oldPassword
+		);
+		const { passwordError: newPasswordError } = passwordValidation(
+			state.newPassword
+		);
+		if (oldPasswordError) {
+			setError(oldPasswordError);
+		} else if (newPasswordError) {
+			setError(newPasswordError);
 		} else if (!id) {
 			setToastError({
 				title: "Authorization Error",

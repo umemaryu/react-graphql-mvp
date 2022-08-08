@@ -13,6 +13,8 @@ import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { emailValidation } from "utils/emailValidation";
 import { ICreateUser } from "types";
+import { inputValidation } from "utils/inputValidation";
+import { passwordValidation } from "utils/passwordValidation";
 
 type Input = Props;
 
@@ -61,15 +63,19 @@ const useSignUp = ({ actions }: Input) => {
 		});
 	}, []);
 	const onClickRegister = useCallback(async () => {
-		for (let key in state) {
-			if (state[key as keyof typeof state] === "") {
-				setError(`${[key as keyof typeof state]} should be filled`);
-			}
-		}
+		const { inputError } = inputValidation(state);
 		const { emailError } = emailValidation(state.email);
-		if (emailError) setError(emailError);
-		const res = await actions.createUser({ ...state });
-		if (res?.createUser) window.location.reload();
+		const { passwordError } = passwordValidation(state.password);
+		if (inputError) {
+			setError(inputError);
+		} else if (emailError) {
+			setError(emailError);
+		} else if (passwordError) {
+			setError(passwordError);
+		} else {
+			const res = await actions.createUser({ ...state });
+			if (res?.createUser) window.location.reload();
+		}
 	}, [state, actions]);
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
