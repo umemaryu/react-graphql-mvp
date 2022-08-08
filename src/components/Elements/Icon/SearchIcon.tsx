@@ -1,3 +1,13 @@
 import { BiSearchAlt } from "react-icons/bi";
+import { theme } from "utils/theme";
 
-export const SearchIcon = () => <BiSearchAlt cursor={"pointer"} />;
+type Props = {
+	value: string;
+};
+
+export const SearchIcon = ({ value }: Props) => (
+	<BiSearchAlt
+		cursor={value ? "pointer" : "not-allowed"}
+		color={value ? theme.color.blue : theme.color.gray}
+	/>
+);

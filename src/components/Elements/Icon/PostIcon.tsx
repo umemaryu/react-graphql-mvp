@@ -1,3 +1,13 @@
 import { BiSend } from "react-icons/bi";
+import { theme } from "utils/theme";
 
-export const PostIcon = () => <BiSend cursor={"pointer"} />;
+type Props = {
+	value: string;
+};
+
+export const PostIcon = ({ value }: Props) => (
+	<BiSend
+		cursor={value ? "pointer" : "not-allowed"}
+		color={value ? theme.color.blue : theme.color.gray}
+	/>
+);
