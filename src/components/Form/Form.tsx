@@ -10,9 +10,7 @@ import { theme } from "utils/theme";
 type FormList = {
 	id: string;
 	text: string;
-	type?: React.HTMLInputTypeAttribute;
 	placeholder: string;
-	value?: string;
 };
 
 type Props = {
@@ -29,7 +27,6 @@ export const Form: React.FC<Props> = ({ list, error, values, onChange }) => (
 				<FormLabel>{ele.text}</FormLabel>
 				<FormInput
 					value={values[ele.id]}
-					type={ele.type}
 					placeholder={ele.placeholder}
 					id={ele.id}
 					onChange={onChange}

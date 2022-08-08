@@ -14,13 +14,11 @@ const useAccount = ({ actions }: Input) => {
 		{
 			id: "oldPassword",
 			text: "Old password(min 6 characters)",
-			type: "password",
 			placeholder: "abc123",
 		},
 		{
 			id: "newPassword",
 			text: "New password(min 6 characters)",
-			type: "password",
 			placeholder: "abc123",
 		},
 	];
@@ -30,9 +28,7 @@ const useAccount = ({ actions }: Input) => {
 	});
 	const { setError, setSuccess } = useCustomToast();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
-		setState((prevState) => {
-			return { ...prevState, [id]: value };
-		});
+		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
 	const onClickUpdatePassword = useCallback(async () => {
 		const id = authStore();

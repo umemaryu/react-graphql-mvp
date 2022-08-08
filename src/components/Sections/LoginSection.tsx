@@ -20,13 +20,11 @@ const useLogin = ({ actions }: Input) => {
 		{
 			id: "email",
 			text: "Email",
-			type: "email",
 			placeholder: "mail@example.com",
 		},
 		{
 			id: "password",
 			text: "Password(min 6 characters)",
-			type: "password",
 			placeholder: "abc123",
 		},
 	];
