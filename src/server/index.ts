@@ -126,18 +126,14 @@ const resolvers: Resolvers = {
 			return true;
 		},
 		createPost: async (_parent: unknown, args: MutationCreatePostArgs) => {
-			try {
-				await prisma.post.create({
-					data: {
-						createdAt: Math.floor(Date.now() / 1000),
-						userId: args.receiverId,
-						body: args.body,
-						senderId: args.senderId,
-					},
-				});
-			} catch (e) {
-				console.log(e);
-			}
+			await prisma.post.create({
+				data: {
+					createdAt: Math.floor(Date.now() / 1000),
+					userId: args.receiverId,
+					body: args.body,
+					senderId: args.senderId,
+				},
+			});
 			return true;
 		},
 	},
