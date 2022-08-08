@@ -11,8 +11,8 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { ICreateUser } from "types";
 import { emailValidation } from "utils/emailValidation";
+import { ICreateUser } from "types";
 
 type Props = {
 	actions: {

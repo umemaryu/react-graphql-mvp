@@ -3,8 +3,8 @@ import { Box, Button, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
-import { IUpdateTokenToNull } from "types";
 import { authStore } from "stores";
+import { IUpdateTokenToNull } from "types";
 
 type Input = {
 	actions: { updateTokenToNull: IUpdateTokenToNull };
