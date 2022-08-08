@@ -1,10 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
-
-type Toast = {
-	title: string;
-	description: string;
-};
+import { Toast } from "types";
 
 const useCustomToast = (state: Toast) => {
 	const error = useToast();

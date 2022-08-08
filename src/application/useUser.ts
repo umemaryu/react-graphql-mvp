@@ -1,5 +1,7 @@
-import { useFetchUserByEmailLazyQuery } from "gql/codegen";
-import { QueryFetchUserByEmailArgs } from "server/codegen";
+import {
+	QueryFetchUserByEmailArgs,
+	useFetchUserByEmailLazyQuery,
+} from "gql/codegen";
 
 export const useUser = () => {
 	const [FETCH_USER_BY_EMAIL, { data }] = useFetchUserByEmailLazyQuery();

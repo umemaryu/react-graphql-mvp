@@ -1,16 +1,11 @@
-import { useToast } from "@chakra-ui/react";
 import { useMemo, useState, useEffect } from "react";
 import { ApolloClient, ApolloLink, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import storage from "utils/storage";
 import { onError } from "@apollo/client/link/error";
 import { cache } from "stores";
-
-type Toast = {
-	title: string;
-	description: string;
-	status: "success" | "error" | "warning" | "info";
-};
+import { Toast } from "types";
+import useCustomToast from "hooks/useCustomToast";
 
 const useClient = () => {
 	const devURL = "http://localhost:4000/";
@@ -23,9 +18,8 @@ const useClient = () => {
 	const [state, setState] = useState<Toast>({
 		title: "",
 		description: "",
-		status: "error",
 	});
-	const toast = useToast();
+	const { error } = useCustomToast(state);
 	const authLink = useMemo(() => {
 		return setContext((_, { headers }) => {
 			const token = storage.getToken();
@@ -44,7 +38,6 @@ const useClient = () => {
 					setState({
 						title: `${message}`,
 						description: "Will you please try one more time?",
-						status: "error",
 					});
 					return console.log(
 						`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
@@ -55,7 +48,6 @@ const useClient = () => {
 				setState({
 					title: `${networkError.message}`,
 					description: "Will you please try one more time?",
-					status: "error",
 				});
 				console.log(`[Network error]: ${networkError}`);
 			}
@@ -63,14 +55,11 @@ const useClient = () => {
 	}, []);
 	useEffect(() => {
 		if (state.description || state.title)
-			toast({
+			error({
 				title: state.title,
 				description: state.description,
-				status: state.status,
-				duration: 3000,
-				isClosable: true,
 			});
-	}, [toast, state]);
+	}, [error, state]);
 
 	const client = useMemo(() => {
 		return new ApolloClient({

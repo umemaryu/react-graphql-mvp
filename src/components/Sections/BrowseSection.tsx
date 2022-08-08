@@ -7,7 +7,7 @@ import { Post } from "components/Post";
 import { Search } from "components/Search";
 import { FetchUserByEmailQuery } from "gql/codegen";
 import { IFetchUserByEmail } from "types";
-import { ICreatePost } from "types/ICreatePost";
+import { ICreatePost } from "types";
 import { authStore } from "stores";
 
 type Props = {

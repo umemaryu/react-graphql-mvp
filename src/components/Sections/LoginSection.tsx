@@ -13,11 +13,7 @@ import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { IUpdateTokenByLogin } from "types";
 
-type Input = {
-	actions: {
-		updateTokenByLogin: IUpdateTokenByLogin;
-	};
-};
+type Input = Props;
 
 const useLogin = ({ actions }: Input) => {
 	const list = [
