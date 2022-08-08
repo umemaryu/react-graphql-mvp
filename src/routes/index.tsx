@@ -4,14 +4,10 @@ import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
 import { Home } from "containers";
 import { authStore } from "stores";
-import { useFetchUserByTokenQuery } from "gql/codegen";
+import { useAuth } from "application";
 
 export const AppRoutes = () => {
-	const { data, loading } = useFetchUserByTokenQuery();
-	if (!loading && data) {
-		const id = parseInt(data.fetchUserByToken.id);
-		authStore(id);
-	}
+	const { loading } = useAuth();
 	const isAuth = authStore();
 	const Error404 = () => {
 		const navigate = useNavigate();

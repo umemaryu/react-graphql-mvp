@@ -3,15 +3,23 @@ import {
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
 	useCreateUserMutation,
+	useFetchUserByTokenQuery,
 	useUpdateTokenByLoginMutation,
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
 import useClient from "hooks/useClient";
 import { useCallback } from "react";
+import { authStore } from "stores";
 import storage from "utils/storage";
 
 export const useAuth = () => {
 	const { client } = useClient();
+
+	const { data, loading } = useFetchUserByTokenQuery();
+	if (!loading && data) {
+		const id = parseInt(data.fetchUserByToken.id);
+		authStore(id);
+	}
 
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin = useCallback(
@@ -51,6 +59,8 @@ export const useAuth = () => {
 	};
 
 	return {
+		loading,
+		models: { data },
 		operations: { createUser, updateTokenToNull, updateTokenByLogin },
 	};
 };
