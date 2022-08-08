@@ -5,6 +5,7 @@ import { ThreadLayout } from "components/Layout";
 import { useNavigate } from "react-router-dom";
 import { Form } from "components/Form";
 import { IUpdateTokenToNull } from "types";
+import { authStore } from "stores";
 
 type Input = {
 	actions: { updateTokenToNull: IUpdateTokenToNull };
@@ -39,8 +40,9 @@ const useAccount = ({ actions }: Input) => {
 		console.log(state);
 	}, [state]);
 	const onClickSignOut = useCallback(() => {
+		actions.updateTokenToNull({ id: authStore() as number });
 		navigate("/login");
-	}, [navigate]);
+	}, [navigate, actions]);
 	return {
 		list,
 		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },

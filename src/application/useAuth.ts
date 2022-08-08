@@ -5,15 +5,17 @@ import {
 	useFetchUserByTokenLazyQuery,
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
+import useClient from "hooks/useClient";
 import { useCallback, useEffect } from "react";
 import { authStore } from "stores";
 import storage from "utils/storage";
 
 export const useAuth = () => {
+	const { client } = useClient();
 	const [FETCH_USER_BY_TOKEN, { data }] = useFetchUserByTokenLazyQuery();
 	const fetchUserByToken = useCallback(async () => {
 		return await FETCH_USER_BY_TOKEN().then((res) => {
-			if (res.data) authStore(res.data.fetchUserByToken.id);
+			if (res.data) authStore(parseInt(res.data.fetchUserByToken.id));
 			return res.data;
 		});
 	}, [FETCH_USER_BY_TOKEN]);
@@ -35,6 +37,7 @@ export const useAuth = () => {
 		}).then((res) => {
 			if (res.data && res.data.updateTokenToNull) {
 				storage.clearToken();
+				client.resetStore();
 			}
 			return res.data;
 		});
