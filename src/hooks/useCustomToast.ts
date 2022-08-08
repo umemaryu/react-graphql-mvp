@@ -15,7 +15,17 @@ const useCustomToast = () => {
 				isClosable: true,
 			});
 	}, [error, toast]);
-
-	return { setError };
+	const [success, setSuccess] = useState<Toast>({ title: "", description: "" });
+	useEffect(() => {
+		if (success.description || success.title)
+			toast({
+				title: success.title,
+				description: success.description,
+				status: "success",
+				duration: 3000,
+				isClosable: true,
+			});
+	}, [success, toast]);
+	return { setError, setSuccess };
 };
 export default useCustomToast;
