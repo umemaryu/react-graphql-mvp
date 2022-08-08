@@ -49,8 +49,8 @@ const useLogin = ({ actions }: Input) => {
 			password: state.password,
 			email: state.email,
 		});
-		if (res && res.updateTokenByLogin.token) navigate("/profile");
-	}, [state, actions, navigate]);
+		if (res?.updateTokenByLogin) window.location.reload();
+	}, [state, actions]);
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);

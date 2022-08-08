@@ -3,31 +3,31 @@ import {
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
 	useCreateUserMutation,
-	useFetchUserByTokenLazyQuery,
+	useFetchUserByTokenQuery,
 	useUpdateTokenByLoginMutation,
 	useUpdateTokenToNullMutation,
 } from "gql/codegen";
 import useClient from "hooks/useClient";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { authStore } from "stores";
 import storage from "utils/storage";
 
 export const useAuth = () => {
 	const { client } = useClient();
-	const [FETCH_USER_BY_TOKEN, { data }] = useFetchUserByTokenLazyQuery();
-	const fetchUserByToken = useCallback(async () => {
-		return await FETCH_USER_BY_TOKEN().then((res) => {
-			if (res.data) authStore(parseInt(res.data.fetchUserByToken.id));
-			return res.data;
-		});
-	}, [FETCH_USER_BY_TOKEN]);
+
+	const { data, loading } = useFetchUserByTokenQuery();
+	if (!loading && data) {
+		const id = parseInt(data.fetchUserByToken.id);
+		authStore(id);
+	}
 
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
 			return await UPDATE_TOKEN_BY_LOGIN({ variables: args }).then((res) => {
-				if (res.data && res.data.updateTokenByLogin.token)
-					storage.setToken(res.data.updateTokenByLogin.token);
+				if (res.data && res.data.updateTokenByLogin) {
+					storage.setToken(res.data.updateTokenByLogin);
+				}
 				return res.data;
 			});
 		},
@@ -39,8 +39,8 @@ export const useAuth = () => {
 		return await CREATE_USER({
 			variables: args,
 		}).then((res) => {
-			if (res.data && res.data.createUser.token)
-				storage.setToken(res.data.createUser.token);
+			if (res.data && res.data.createUser)
+				storage.setToken(res.data.createUser);
 			return res.data;
 		});
 	};
@@ -52,17 +52,14 @@ export const useAuth = () => {
 		}).then((res) => {
 			if (res.data && res.data.updateTokenToNull) {
 				storage.clearToken();
-				client.resetStore();
+				client.clearStore();
 			}
 			return res.data;
 		});
 	};
 
-	useEffect(() => {
-		fetchUserByToken();
-	}, [fetchUserByToken]);
-
 	return {
+		loading,
 		models: { data },
 		operations: { createUser, updateTokenToNull, updateTokenByLogin },
 	};

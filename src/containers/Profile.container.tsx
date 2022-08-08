@@ -6,5 +6,5 @@ export const Profile = () => {
 	const data = models.data;
 	const { operations } = usePost({ data });
 	const { createPost } = operations;
-	return <ProfileSection user={models.data} actions={{ createPost }} />;
+	return <ProfileSection user={data} actions={{ createPost }} />;
 };

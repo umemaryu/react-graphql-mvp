@@ -35,9 +35,7 @@ query FetchUserByEmail($email: String!) {
 }
 
 mutation UpdateTokenByLogin($email: String!, $password: String!) {
-	updateTokenByLogin(email: $email, password: $password) {
-		token
-	}
+	updateTokenByLogin(email: $email, password: $password)
 }
 
 mutation CreateUser(
@@ -53,9 +51,7 @@ mutation CreateUser(
 		country: $country
 		city: $city
 		nickName: $nickName
-	) {
-		token
-	}
+	)
 }
 
 mutation UpdatePassword(

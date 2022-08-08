@@ -69,14 +69,14 @@ const resolvers: Resolvers = {
 				throw new UserInputError("The password must be over 6 characters");
 			emailValidation(args.email);
 			const token = createToken();
-			const res = await prisma.user.create({
+			await prisma.user.create({
 				data: {
 					token: token,
 					...args,
 					posts: {},
 				},
 			});
-			return res;
+			return token;
 		},
 		updateTokenByLogin: async (
 			_parent: unknown,
@@ -88,11 +88,11 @@ const resolvers: Resolvers = {
 			});
 			if (!user) throw new Error("Email or password is wrong");
 			const token = createToken();
-			const updatedUser = await prisma.user.update({
+			await prisma.user.update({
 				where: { email: args.email },
 				data: { token },
 			});
-			return updatedUser;
+			return token;
 		},
 		updatePassword: async (
 			_parent: unknown,
@@ -126,18 +126,14 @@ const resolvers: Resolvers = {
 			return true;
 		},
 		createPost: async (_parent: unknown, args: MutationCreatePostArgs) => {
-			try {
-				await prisma.post.create({
-					data: {
-						createdAt: Math.floor(Date.now() / 1000),
-						userId: args.receiverId,
-						body: args.body,
-						senderId: args.senderId,
-					},
-				});
-			} catch (e) {
-				console.log(e);
-			}
+			await prisma.post.create({
+				data: {
+					createdAt: Math.floor(Date.now() / 1000),
+					userId: args.receiverId,
+					body: args.body,
+					senderId: args.senderId,
+				},
+			});
 			return true;
 		},
 	},
