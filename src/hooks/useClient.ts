@@ -67,7 +67,7 @@ const useClient = () => {
 				title: state.title,
 				description: state.description,
 				status: state.status,
-				duration: 300,
+				duration: 3000,
 				isClosable: true,
 			});
 	}, [toast, state]);
