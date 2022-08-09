@@ -1,5 +1,9 @@
-import { FetchUserByEmailQuery, QueryFetchUserByEmailArgs } from "gql/codegen";
+import { LazyQueryExecFunction } from "@apollo/client";
+import { Exact, FetchUserByEmailQuery } from "infra/codegen";
 
-export type IFetchUserByEmail = (
-	args: QueryFetchUserByEmailArgs
-) => Promise<FetchUserByEmailQuery | undefined>;
+export type IFetchUserByEmail = LazyQueryExecFunction<
+	FetchUserByEmailQuery,
+	Exact<{
+		email: string;
+	}>
+>;

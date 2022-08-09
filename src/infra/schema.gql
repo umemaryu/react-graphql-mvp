@@ -12,6 +12,7 @@ type User {
 type Post {
 	id: ID!
 	senderId: Int!
+	senderEmail: String!
 	body: String!
 	createdAt: Int!
 	user: User!
@@ -34,5 +35,10 @@ type Mutation {
 	updateTokenByLogin(email: String!, password: String!): String!
 	updatePassword(oldPassword: String!, newPassword: String!, id: Int!): Boolean!
 	updateTokenToNull(id: Int!): Boolean!
-	createPost(senderId: Int!, body: String!, receiverId: Int!): Boolean!
+	createPost(
+		senderId: Int!
+		senderEmail: String!
+		body: String!
+		receiverId: Int!
+	): Post!
 }

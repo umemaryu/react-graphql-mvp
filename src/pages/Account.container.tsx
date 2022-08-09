@@ -2,11 +2,14 @@ import { useAuth, useUser } from "application";
 import { AccountSection } from "components/Sections";
 
 export const Account = () => {
-	const { id, operations: authOperations } = useAuth();
+	const { models, operations: authOperations } = useAuth();
 	const { operations: userOperations } = useUser();
 	const { updateTokenToNull } = authOperations;
 	const { updatePassword } = userOperations;
 	return (
-		<AccountSection actions={{ updateTokenToNull, updatePassword }} id={id} />
+		<AccountSection
+			actions={{ updateTokenToNull, updatePassword }}
+			id={models.id}
+		/>
 	);
 };

@@ -11,8 +11,8 @@ const useSearch = ({ actions }: SearchInput) => {
 	};
 	const onClick = async () => {
 		if (!value) return;
-		const res = await actions.fetchUserByEmail({ email: value });
-		if (res?.fetchUserByEmail) setValue("");
+		const res = await actions.fetchUserByEmail({ variables: { email: value } });
+		if (res.data) setValue("");
 	};
 	return { models: { value }, operations: { onChange, onClick } };
 };

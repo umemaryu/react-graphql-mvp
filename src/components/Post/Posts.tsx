@@ -2,13 +2,7 @@ import React from "react";
 import { Box, Flex, Spacer, Text, VStack } from "components/Elements";
 import { theme } from "utils/theme";
 import { timestampToDate } from "utils/timestampToDate";
-
-type Post = {
-	id: string;
-	body: string;
-	createdAt: number;
-	user: { email: string };
-};
+import { Post } from "types";
 
 type Props = {
 	posts: Post[] | undefined | null;
@@ -34,7 +28,7 @@ export const Posts: React.FC<Props> = ({ posts }) => {
 						borderColor={theme.color.gray}
 					>
 						<Flex w={theme.w.mobile}>
-							<Text ml={4}>{post.user.email}</Text>
+							<Text ml={4}>{post.senderEmail}</Text>
 							<Spacer />
 							<Text mr={4}>{date}</Text>
 						</Flex>

@@ -7,7 +7,7 @@ import useCustomToast from "hooks/useCustomToast";
 
 type Input = Props;
 
-const usePost = ({ actions, senderId, receiverId }: Input) => {
+const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 	const [value, setValue] = useState<string>("");
 	const { setError } = useCustomToast();
 	const onChange = (value: string) => {
@@ -15,7 +15,7 @@ const usePost = ({ actions, senderId, receiverId }: Input) => {
 	};
 	const onClick = () => {
 		if (!value) return;
-		if (!senderId || !receiverId) {
+		if (!senderId || !receiverId || !senderEmail) {
 			return setError({
 				title: "Authorization Error",
 				description: "Please reload and try again",
@@ -25,6 +25,7 @@ const usePost = ({ actions, senderId, receiverId }: Input) => {
 			body: value,
 			senderId: parseInt(senderId),
 			receiverId: parseInt(receiverId),
+			senderEmail: senderEmail,
 		});
 		setValue("");
 	};
@@ -34,13 +35,24 @@ const usePost = ({ actions, senderId, receiverId }: Input) => {
 type Props = {
 	receiverId: string | undefined;
 	senderId: string | undefined;
+	senderEmail: string | undefined;
 	actions: {
 		createPost: ICreatePost;
 	};
 };
 
-export const Post: React.FC<Props> = ({ actions, senderId, receiverId }) => {
-	const { models, operations } = usePost({ actions, senderId, receiverId });
+export const Post: React.FC<Props> = ({
+	actions,
+	senderId,
+	receiverId,
+	senderEmail,
+}) => {
+	const { models, operations } = usePost({
+		actions,
+		senderId,
+		receiverId,
+		senderEmail,
+	});
 	return (
 		<HStack
 			border="1px"

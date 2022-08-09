@@ -1,7 +1,7 @@
 import {
 	MutationUpdateTokenByLoginArgs,
 	UpdateTokenByLoginMutation,
-} from "gql/codegen";
+} from "infra/codegen";
 
 export type IUpdateTokenByLogin = (
 	args: MutationUpdateTokenByLoginArgs

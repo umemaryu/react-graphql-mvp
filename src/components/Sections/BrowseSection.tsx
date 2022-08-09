@@ -5,20 +5,28 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
-import { FetchUserByEmailQuery } from "gql/codegen";
-import { IFetchUserByEmail } from "types";
+import { FetchUserByEmailQuery } from "infra/codegen";
+import { IFetchUserByEmail, Post as IPost } from "types";
 import { ICreatePost } from "types";
 
 type Props = {
 	id: number | undefined;
 	user: FetchUserByEmailQuery | undefined;
+	senderEmail: string | undefined;
+	posts: IPost[] | null | undefined;
 	actions: {
 		fetchUserByEmail: IFetchUserByEmail;
 		createPost: ICreatePost;
 	};
 };
 
-export const BrowseSection: React.FC<Props> = ({ id, user, actions }) => {
+export const BrowseSection: React.FC<Props> = ({
+	id,
+	posts,
+	user,
+	senderEmail,
+	actions,
+}) => {
 	return (
 		<ThreadLayout page="Browse">
 			<Box pt={theme.m.md}>
@@ -28,10 +36,11 @@ export const BrowseSection: React.FC<Props> = ({ id, user, actions }) => {
 					)}
 					<Search actions={actions} />
 					{user && <UserInfoList user={user.fetchUserByEmail} />}
-					<Posts posts={user?.fetchUserByEmail.posts} />
+					<Posts posts={posts} />
 					{user && (
 						<Post
 							actions={actions}
+							senderEmail={senderEmail}
 							receiverId={user.fetchUserByEmail.id}
 							senderId={id?.toString()}
 						/>

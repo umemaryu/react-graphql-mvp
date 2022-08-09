@@ -1,7 +1,7 @@
 import {
 	MutationUpdatePasswordArgs,
 	UpdatePasswordMutation,
-} from "gql/codegen";
+} from "infra/codegen";
 
 export type IUpdatePassword = (
 	args: MutationUpdatePasswordArgs

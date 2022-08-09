@@ -24,6 +24,8 @@ model User {
 model Post {
   id        Int    @id @default(autoincrement())
   senderId  Int
+  //TODO:delete senderEmail
+  senderEmail String
   body      String
   createdAt Int
   user      User   @relation(fields: [userId], references: [id])

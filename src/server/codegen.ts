@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { UserPost, UserModel, Context } from 'gql/models';
+import { UserPost, UserModel, Context } from 'infra/models';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -17,7 +17,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createPost: Scalars['Boolean'];
+  createPost: Post;
   createUser: Scalars['String'];
   updatePassword: Scalars['Boolean'];
   updateTokenByLogin: Scalars['String'];
@@ -28,6 +28,7 @@ export type Mutation = {
 export type MutationCreatePostArgs = {
   body: Scalars['String'];
   receiverId: Scalars['Int'];
+  senderEmail: Scalars['String'];
   senderId: Scalars['Int'];
 };
 
@@ -63,6 +64,7 @@ export type Post = {
   body: Scalars['String'];
   createdAt: Scalars['Int'];
   id: Scalars['ID'];
+  senderEmail: Scalars['String'];
   senderId: Scalars['Int'];
   user: User;
   userId: Scalars['Int'];
@@ -184,7 +186,7 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createPost?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'body' | 'receiverId' | 'senderId'>>;
+  createPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'body' | 'receiverId' | 'senderEmail' | 'senderId'>>;
   createUser?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'city' | 'country' | 'email' | 'nickName' | 'password'>>;
   updatePassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationUpdatePasswordArgs, 'id' | 'newPassword' | 'oldPassword'>>;
   updateTokenByLogin?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationUpdateTokenByLoginArgs, 'email' | 'password'>>;
@@ -195,6 +197,7 @@ export type PostResolvers<ContextType = Context, ParentType extends ResolversPar
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  senderEmail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   senderId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   userId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;

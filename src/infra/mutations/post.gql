@@ -1,0 +1,18 @@
+mutation CreatePost(
+	$senderId: Int!
+	$senderEmail: String!
+	$body: String!
+	$receiverId: Int!
+) {
+	createPost(
+		senderId: $senderId
+		senderEmail: $senderEmail
+		body: $body
+		receiverId: $receiverId
+	) {
+		id
+		body
+		createdAt
+		senderEmail
+	}
+}
