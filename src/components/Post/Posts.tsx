@@ -2,13 +2,7 @@ import React from "react";
 import { Box, Flex, Spacer, Text, VStack } from "components/Elements";
 import { theme } from "utils/theme";
 import { timestampToDate } from "utils/timestampToDate";
-
-type Post = {
-	id: string;
-	body: string;
-	createdAt: number;
-	user: { email: string };
-};
+import { Post } from "types";
 
 type Props = {
 	posts: Post[] | undefined | null;

@@ -4,14 +4,16 @@ import { useFetchUserByEmailLazyQuery } from "gql/codegen";
 
 export const Browse = () => {
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
+	const posts = data?.fetchUserByEmail.posts;
 	const { models: authModels } = useAuth();
-	const { operations: postOperations } = usePost();
+	const { models: postModels, operations: postOperations } = usePost(posts);
 
 	const { createPost } = postOperations;
 	return (
 		<BrowseSection
 			id={authModels.id}
 			user={data}
+			posts={postModels.posts}
 			actions={{ fetchUserByEmail, createPost }}
 		/>
 	);

@@ -4,7 +4,10 @@ import { useFetchUserByTokenQuery } from "gql/codegen";
 
 export const Profile = () => {
 	const { data } = useFetchUserByTokenQuery();
-	const { operations } = usePost();
+	const posts = data?.fetchUserByToken.posts;
+	const { models, operations } = usePost(posts);
 	const { createPost } = operations;
-	return <ProfileSection user={data} actions={{ createPost }} />;
+	return (
+		<ProfileSection user={data} actions={{ createPost }} posts={models.posts} />
+	);
 };
