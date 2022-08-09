@@ -4,13 +4,15 @@ import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
 import { useAuth } from "application";
 import { Error404 } from "pages/Error404";
+import { useFetchUserByTokenQuery } from "gql/codegen";
 
 export const AppRoutes = () => {
-	const { loading, id } = useAuth();
+	const { data, loading } = useFetchUserByTokenQuery();
+	const { models } = useAuth(data);
 
-	const routes = id ? protectedRoutes : publicRoutes;
+	const routes = models.id ? protectedRoutes : publicRoutes;
 	const redirectRoutes = [
-		{ path: "*", element: <Error404 loading={loading} id={id} /> },
+		{ path: "*", element: <Error404 loading={loading} id={models.id} /> },
 	];
 
 	const element = useRoutes([...routes, ...redirectRoutes]);
