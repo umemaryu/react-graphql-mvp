@@ -1,26 +1,17 @@
-import { useNavigate, useRoutes } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useRoutes } from "react-router-dom";
+import React from "react";
 import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
-import { authStore } from "stores";
 import { useAuth } from "application";
+import { Error404 } from "pages/Error404";
 
 export const AppRoutes = () => {
-	const { loading } = useAuth();
-	const isAuth = authStore();
-	const Error404 = () => {
-		const navigate = useNavigate();
-		useEffect(() => {
-			if (!loading) {
-				if (isAuth) navigate("/profile");
-				else navigate("/login");
-			}
-		}, [navigate]);
-		return <></>;
-	};
+	const { loading, id } = useAuth();
 
-	const routes = isAuth ? protectedRoutes : publicRoutes;
-	const redirectRoutes = [{ path: "*", element: <Error404 /> }];
+	const routes = id ? protectedRoutes : publicRoutes;
+	const redirectRoutes = [
+		{ path: "*", element: <Error404 loading={loading} id={id} /> },
+	];
 
 	const element = useRoutes([...routes, ...redirectRoutes]);
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { lazyImport } from "utils/lazyImport";
 
-const { Profile } = lazyImport(() => import("containers"), "Profile");
-const { Browse } = lazyImport(() => import("containers"), "Browse");
-const { Account } = lazyImport(() => import("containers"), "Account");
+const { Profile } = lazyImport(() => import("pages"), "Profile");
+const { Browse } = lazyImport(() => import("pages"), "Browse");
+const { Account } = lazyImport(() => import("pages"), "Account");
 
 export const protectedRoutes = [
 	{
