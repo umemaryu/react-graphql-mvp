@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
-import { UserPost, UserModel, Context } from 'gql/models';
+import { UserPost, UserModel, Context } from 'infra/models';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -227,4 +227,3 @@ export type Resolvers<ContextType = Context> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 }>;
-

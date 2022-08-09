@@ -3,7 +3,7 @@ import { BrowseSection } from "components/Sections";
 import {
 	useFetchUserByEmailLazyQuery,
 	useFetchUserByTokenQuery,
-} from "gql/codegen";
+} from "infra/codegen";
 
 export const Browse = () => {
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();

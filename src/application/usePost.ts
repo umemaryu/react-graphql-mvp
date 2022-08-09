@@ -1,4 +1,4 @@
-import { MutationCreatePostArgs, useCreatePostMutation } from "gql/codegen";
+import { MutationCreatePostArgs, useCreatePostMutation } from "infra/codegen";
 import { useEffect, useState } from "react";
 import { Post } from "types";
 

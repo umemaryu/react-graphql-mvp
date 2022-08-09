@@ -4,7 +4,7 @@ import { ThreadLayout } from "components/Layout";
 import { UserInfoList } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
-import { FetchUserByTokenQuery } from "gql/codegen";
+import { FetchUserByTokenQuery } from "infra/codegen";
 import { Posts } from "components/Post";
 import { ICreatePost, Post as IPost } from "types";
 

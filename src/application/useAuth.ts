@@ -6,7 +6,7 @@ import {
 	useCreateUserMutation,
 	useUpdateTokenByLoginMutation,
 	useUpdateTokenToNullMutation,
-} from "gql/codegen";
+} from "infra/codegen";
 import useClient from "hooks/useClient";
 import { useCallback } from "react";
 import { authStore } from "stores/authStore";

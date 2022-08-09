@@ -1,7 +1,7 @@
 import {
 	MutationUpdatePasswordArgs,
 	useUpdatePasswordMutation,
-} from "gql/codegen";
+} from "infra/codegen";
 
 export const useUser = () => {
 	const [UPDATE_PASSWORD] = useUpdatePasswordMutation();

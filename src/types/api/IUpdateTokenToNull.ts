@@ -1,7 +1,7 @@
 import {
 	MutationUpdateTokenToNullArgs,
 	UpdateTokenToNullMutation,
-} from "gql/codegen";
+} from "infra/codegen";
 
 export type IUpdateTokenToNull = (
 	args: MutationUpdateTokenToNullArgs

@@ -4,7 +4,7 @@ import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
 import { useAuth } from "application";
 import { Error404 } from "pages/Error404";
-import { useFetchUserByTokenQuery } from "gql/codegen";
+import { useFetchUserByTokenQuery } from "infra/codegen";
 
 export const AppRoutes = () => {
 	const { data, loading } = useFetchUserByTokenQuery();

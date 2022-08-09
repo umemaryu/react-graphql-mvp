@@ -1,4 +1,4 @@
-import { CreatePostMutation, MutationCreatePostArgs } from "gql/codegen";
+import { CreatePostMutation, MutationCreatePostArgs } from "infra/codegen";
 
 export type ICreatePost = (
 	args: MutationCreatePostArgs

@@ -1,6 +1,6 @@
 import { usePost } from "application";
 import { ProfileSection } from "components/Sections";
-import { useFetchUserByTokenQuery } from "gql/codegen";
+import { useFetchUserByTokenQuery } from "infra/codegen";
 
 export const Profile = () => {
 	const { data } = useFetchUserByTokenQuery();

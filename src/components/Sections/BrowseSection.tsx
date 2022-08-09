@@ -5,7 +5,7 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
-import { FetchUserByEmailQuery } from "gql/codegen";
+import { FetchUserByEmailQuery } from "infra/codegen";
 import { IFetchUserByEmail, Post as IPost } from "types";
 import { ICreatePost } from "types";
 
