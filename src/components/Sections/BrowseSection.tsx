@@ -12,6 +12,7 @@ import { ICreatePost } from "types";
 type Props = {
 	id: number | undefined;
 	user: FetchUserByEmailQuery | undefined;
+	senderEmail: string | undefined;
 	posts: IPost[] | null | undefined;
 	actions: {
 		fetchUserByEmail: IFetchUserByEmail;
@@ -23,6 +24,7 @@ export const BrowseSection: React.FC<Props> = ({
 	id,
 	posts,
 	user,
+	senderEmail,
 	actions,
 }) => {
 	return (
@@ -38,6 +40,7 @@ export const BrowseSection: React.FC<Props> = ({
 					{user && (
 						<Post
 							actions={actions}
+							senderEmail={senderEmail}
 							receiverId={user.fetchUserByEmail.id}
 							senderId={id?.toString()}
 						/>

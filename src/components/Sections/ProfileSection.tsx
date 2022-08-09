@@ -27,6 +27,7 @@ export const ProfileSection: React.FC<Props> = ({ user, posts, actions }) => {
 					<Posts posts={posts} />
 					<Post
 						actions={actions}
+						senderEmail={user?.fetchUserByToken.email}
 						receiverId={user?.fetchUserByToken.id}
 						senderId={user?.fetchUserByToken.id}
 					/>

@@ -9,9 +9,7 @@ query FetchUserByToken {
 			id
 			body
 			createdAt
-			user {
-				email
-			}
+			senderEmail
 		}
 	}
 }
@@ -27,9 +25,7 @@ query FetchUserByEmail($email: String!) {
 			id
 			body
 			createdAt
-			user {
-				email
-			}
+			senderEmail
 		}
 	}
 }

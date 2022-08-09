@@ -133,8 +133,8 @@ const resolvers: Resolvers = {
 					userId: args.receiverId,
 					body: args.body,
 					senderId: args.senderId,
+					senderEmail: args.senderEmail,
 				},
-				include: { user: true },
 			});
 		},
 	},

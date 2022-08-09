@@ -28,6 +28,7 @@ export type Mutation = {
 export type MutationCreatePostArgs = {
   body: Scalars['String'];
   receiverId: Scalars['Int'];
+  senderEmail: Scalars['String'];
   senderId: Scalars['Int'];
 };
 
@@ -63,6 +64,7 @@ export type Post = {
   body: Scalars['String'];
   createdAt: Scalars['Int'];
   id: Scalars['ID'];
+  senderEmail: Scalars['String'];
   senderId: Scalars['Int'];
   user: User;
   userId: Scalars['Int'];
@@ -93,24 +95,25 @@ export type User = {
 
 export type CreatePostMutationVariables = Exact<{
   senderId: Scalars['Int'];
+  senderEmail: Scalars['String'];
   body: Scalars['String'];
   receiverId: Scalars['Int'];
 }>;
 
 
-export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } } };
+export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string } };
 
 export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> | null } };
 
 export type FetchUserByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } }> | null } };
+export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> | null } };
 
 export type UpdateTokenByLoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -149,14 +152,17 @@ export type UpdateTokenToNullMutation = { __typename?: 'Mutation', updateTokenTo
 
 
 export const CreatePostDocument = gql`
-    mutation CreatePost($senderId: Int!, $body: String!, $receiverId: Int!) {
-  createPost(senderId: $senderId, body: $body, receiverId: $receiverId) {
+    mutation CreatePost($senderId: Int!, $senderEmail: String!, $body: String!, $receiverId: Int!) {
+  createPost(
+    senderId: $senderId
+    senderEmail: $senderEmail
+    body: $body
+    receiverId: $receiverId
+  ) {
     id
     body
     createdAt
-    user {
-      email
-    }
+    senderEmail
   }
 }
     `;
@@ -176,6 +182,7 @@ export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, C
  * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
  *   variables: {
  *      senderId: // value for 'senderId'
+ *      senderEmail: // value for 'senderEmail'
  *      body: // value for 'body'
  *      receiverId: // value for 'receiverId'
  *   },
@@ -200,9 +207,7 @@ export const FetchUserByTokenDocument = gql`
       id
       body
       createdAt
-      user {
-        email
-      }
+      senderEmail
     }
   }
 }
@@ -246,9 +251,7 @@ export const FetchUserByEmailDocument = gql`
       id
       body
       createdAt
-      user {
-        email
-      }
+      senderEmail
     }
   }
 }

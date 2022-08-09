@@ -28,7 +28,7 @@ export const Posts: React.FC<Props> = ({ posts }) => {
 						borderColor={theme.color.gray}
 					>
 						<Flex w={theme.w.mobile}>
-							<Text ml={4}>{post.user.email}</Text>
+							<Text ml={4}>{post.senderEmail}</Text>
 							<Spacer />
 							<Text mr={4}>{date}</Text>
 						</Flex>
