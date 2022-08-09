@@ -21,6 +21,8 @@ export const useAuth = () => {
 		authStore(id);
 	}
 
+	const id = authStore();
+
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
@@ -60,6 +62,7 @@ export const useAuth = () => {
 
 	return {
 		loading,
+		id,
 		models: { data },
 		operations: { createUser, updateTokenToNull, updateTokenByLogin },
 	};

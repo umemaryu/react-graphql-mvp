@@ -3,14 +3,13 @@ import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
-import { authStore } from "stores";
 import { IUpdatePassword, IUpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
 import { passwordValidation } from "utils/passwordValidation";
 
 type Input = Props;
 
-const useAccount = ({ actions }: Input) => {
+const useAccount = ({ id, actions }: Input) => {
 	const list = [
 		{
 			id: "oldPassword",
@@ -36,7 +35,6 @@ const useAccount = ({ actions }: Input) => {
 		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
 	const onClickUpdatePassword = useCallback(async () => {
-		const id = authStore();
 		const { passwordError: oldPasswordError } = passwordValidation(
 			state.oldPassword
 		);
@@ -65,11 +63,12 @@ const useAccount = ({ actions }: Input) => {
 				});
 			}
 		}
-	}, [state, actions, setError, setSuccess, setToastError]);
+	}, [state, actions, setError, setSuccess, setToastError, id]);
 	const onClickSignOut = useCallback(async () => {
-		const res = await actions.updateTokenToNull({ id: authStore() as number });
+		if (!id) return;
+		const res = await actions.updateTokenToNull({ id: id });
 		if (res?.updateTokenToNull) window.location.reload();
-	}, [actions]);
+	}, [actions, id]);
 	return {
 		list,
 		models: { state, error },
@@ -78,14 +77,15 @@ const useAccount = ({ actions }: Input) => {
 };
 
 type Props = {
+	id: number | undefined;
 	actions: {
 		updateTokenToNull: IUpdateTokenToNull;
 		updatePassword: IUpdatePassword;
 	};
 };
 
-export const AccountSection: React.FC<Props> = ({ actions }) => {
-	const { list, models, operations } = useAccount({ actions });
+export const AccountSection: React.FC<Props> = ({ id, actions }) => {
+	const { list, models, operations } = useAccount({ id, actions });
 	return (
 		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>

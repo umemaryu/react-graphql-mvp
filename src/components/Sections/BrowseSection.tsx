@@ -8,17 +8,17 @@ import { Search } from "components/Search";
 import { FetchUserByEmailQuery } from "gql/codegen";
 import { IFetchUserByEmail } from "types";
 import { ICreatePost } from "types";
-import { authStore } from "stores";
 
 type Props = {
-	user?: FetchUserByEmailQuery | undefined;
+	id: number | undefined;
+	user: FetchUserByEmailQuery | undefined;
 	actions: {
 		fetchUserByEmail: IFetchUserByEmail;
 		createPost: ICreatePost;
 	};
 };
 
-export const BrowseSection: React.FC<Props> = ({ user, actions }) => {
+export const BrowseSection: React.FC<Props> = ({ id, user, actions }) => {
 	return (
 		<ThreadLayout page="Browse">
 			<Box pt={theme.m.md}>
@@ -33,7 +33,7 @@ export const BrowseSection: React.FC<Props> = ({ user, actions }) => {
 						<Post
 							actions={actions}
 							receiverId={user.fetchUserByEmail.id}
-							senderId={authStore()?.toString()}
+							senderId={id?.toString()}
 						/>
 					)}
 				</VStack>
