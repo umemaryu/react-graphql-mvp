@@ -1,7 +1,9 @@
-schema: src/gql/schema.gql
-documents: src/gql/query/*.gql
+schema: src/infra/schema.gql
+documents:
+  - src/infra/queries/*.gql
+  - src/infra/mutations/*.gql
 generates:
-  src/gql/codegen.ts:
+  src/infra/codegen.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -9,10 +11,10 @@ generates:
   src/server/codegen.ts:
     config:
       useIndexSignature: true
-      contextType: gql/models#Context
+      contextType: infra/models#Context
       mappers:
-        Post: gql/models#UserPost
-        User: gql/models#UserModel
+        Post: infra/models#UserPost
+        User: infra/models#UserModel
     plugins:
       - typescript
       - typescript-resolvers

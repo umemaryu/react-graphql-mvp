@@ -1,35 +1,3 @@
-query FetchUserByToken {
-	fetchUserByToken {
-		id
-		email
-		country
-		city
-		nickName
-		posts {
-			id
-			body
-			createdAt
-			senderEmail
-		}
-	}
-}
-
-query FetchUserByEmail($email: String!) {
-	fetchUserByEmail(email: $email) {
-		id
-		email
-		country
-		city
-		nickName
-		posts {
-			id
-			body
-			createdAt
-			senderEmail
-		}
-	}
-}
-
 mutation UpdateTokenByLogin($email: String!, $password: String!) {
 	updateTokenByLogin(email: $email, password: $password)
 }
