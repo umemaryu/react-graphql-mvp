@@ -9,7 +9,7 @@ import {
 } from "gql/codegen";
 import useClient from "hooks/useClient";
 import { useCallback } from "react";
-import { authStore } from "stores";
+import { authStore } from "stores/authStore";
 import storage from "utils/storage";
 
 export const useAuth = () => {
