@@ -13,7 +13,7 @@ export const Browse = () => {
 		<BrowseSection
 			id={authModels.id}
 			user={data}
-			posts={postModels.posts}
+			posts={postModels.postsState}
 			actions={{ fetchUserByEmail, createPost }}
 		/>
 	);

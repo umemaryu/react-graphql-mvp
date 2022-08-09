@@ -17,7 +17,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createPost: Scalars['Boolean'];
+  createPost: Post;
   createUser: Scalars['String'];
   updatePassword: Scalars['Boolean'];
   updateTokenByLogin: Scalars['String'];
@@ -184,7 +184,7 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  createPost?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'body' | 'receiverId' | 'senderId'>>;
+  createPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationCreatePostArgs, 'body' | 'receiverId' | 'senderId'>>;
   createUser?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'city' | 'country' | 'email' | 'nickName' | 'password'>>;
   updatePassword?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationUpdatePasswordArgs, 'id' | 'newPassword' | 'oldPassword'>>;
   updateTokenByLogin?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationUpdateTokenByLoginArgs, 'email' | 'password'>>;

@@ -1,3 +1,10 @@
 mutation CreatePost($senderId: Int!, $body: String!, $receiverId: Int!) {
-	createPost(senderId: $senderId, body: $body, receiverId: $receiverId)
+	createPost(senderId: $senderId, body: $body, receiverId: $receiverId) {
+		id
+		body
+		createdAt
+		user {
+			email
+		}
+	}
 }

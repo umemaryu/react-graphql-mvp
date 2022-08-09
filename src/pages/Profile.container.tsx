@@ -8,6 +8,10 @@ export const Profile = () => {
 	const { models, operations } = usePost(posts);
 	const { createPost } = operations;
 	return (
-		<ProfileSection user={data} actions={{ createPost }} posts={models.posts} />
+		<ProfileSection
+			user={data}
+			actions={{ createPost }}
+			posts={models.postsState}
+		/>
 	);
 };

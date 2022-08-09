@@ -17,7 +17,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createPost: Scalars['Boolean'];
+  createPost: Post;
   createUser: Scalars['String'];
   updatePassword: Scalars['Boolean'];
   updateTokenByLogin: Scalars['String'];
@@ -98,7 +98,7 @@ export type CreatePostMutationVariables = Exact<{
 }>;
 
 
-export type CreatePostMutation = { __typename?: 'Mutation', createPost: boolean };
+export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'Post', id: string, body: string, createdAt: number, user: { __typename?: 'User', email: string } } };
 
 export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -150,7 +150,14 @@ export type UpdateTokenToNullMutation = { __typename?: 'Mutation', updateTokenTo
 
 export const CreatePostDocument = gql`
     mutation CreatePost($senderId: Int!, $body: String!, $receiverId: Int!) {
-  createPost(senderId: $senderId, body: $body, receiverId: $receiverId)
+  createPost(senderId: $senderId, body: $body, receiverId: $receiverId) {
+    id
+    body
+    createdAt
+    user {
+      email
+    }
+  }
 }
     `;
 export type CreatePostMutationFn = Apollo.MutationFunction<CreatePostMutation, CreatePostMutationVariables>;

@@ -1,12 +1,24 @@
 import { MutationCreatePostArgs, useCreatePostMutation } from "gql/codegen";
+import { useEffect, useState } from "react";
 import { Post } from "types";
 
 export const usePost = (posts: Post[] | null | undefined) => {
+	const [postsState, setPosts] = useState<Post[] | null | undefined>(posts);
+
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
 	const createPost = async (args: MutationCreatePostArgs) => {
-		return await CREATE_POST_MUTATION({
+		const res = await CREATE_POST_MUTATION({
 			variables: args,
-		}).then((res) => res.data);
+		});
+		if (!res || !res.data || !postsState) {
+			throw new Error("error!!");
+		}
+		setPosts([...postsState, res.data.createPost]);
+		return res.data;
 	};
-	return { models: { posts }, operations: { createPost } };
+
+	useEffect(() => {
+		setPosts(posts);
+	}, [posts]);
+	return { models: { postsState }, operations: { createPost } };
 };

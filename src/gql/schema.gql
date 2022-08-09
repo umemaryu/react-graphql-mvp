@@ -34,5 +34,5 @@ type Mutation {
 	updateTokenByLogin(email: String!, password: String!): String!
 	updatePassword(oldPassword: String!, newPassword: String!, id: Int!): Boolean!
 	updateTokenToNull(id: Int!): Boolean!
-	createPost(senderId: Int!, body: String!, receiverId: Int!): Boolean!
+	createPost(senderId: Int!, body: String!, receiverId: Int!): Post!
 }
