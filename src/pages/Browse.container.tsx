@@ -1,16 +1,17 @@
-import { useAuth, usePost, useUser } from "application";
+import { useAuth, usePost } from "application";
 import { BrowseSection } from "components/Sections";
+import { useFetchUserByEmailLazyQuery } from "gql/codegen";
 
 export const Browse = () => {
+	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
 	const { models: authModels } = useAuth();
-	const { models: userModels, operations: userOperations } = useUser();
 	const { operations: postOperations } = usePost();
-	const { fetchUserByEmail } = userOperations;
+
 	const { createPost } = postOperations;
 	return (
 		<BrowseSection
 			id={authModels.id}
-			user={userModels.data}
+			user={data}
 			actions={{ fetchUserByEmail, createPost }}
 		/>
 	);
