@@ -10,7 +10,7 @@ import {
 import useClient from "hooks/useClient";
 import { useCallback } from "react";
 import { authStore } from "stores/authStore";
-import storage from "utils/storage";
+import storage from "stores/storage";
 import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {

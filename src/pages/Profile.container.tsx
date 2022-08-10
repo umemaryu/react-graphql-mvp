@@ -1,4 +1,4 @@
-import { usePost } from "application";
+import { usePost } from "applications";
 import { ProfileSection } from "components/Sections";
 import { useFetchUserByTokenQuery } from "infra/codegen";
 

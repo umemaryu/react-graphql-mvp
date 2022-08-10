@@ -1,4 +1,4 @@
-import { useAuth } from "application";
+import { useAuth } from "applications";
 import { LoginSection } from "components/Sections";
 
 export const Login = () => {

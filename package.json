@@ -8,7 +8,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"generate": "graphql-codegen",
-		"server": "node --loader ts-node/esm src/server/index.ts",
+		"server": "node --loader ts-node/esm server/index.ts",
 		"mig": "prisma migrate dev --name init --preview-feature"
 	},
 	"dependencies": {
