@@ -10,7 +10,7 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { IUpdateTokenByLogin } from "types";
+import { UpdateTokenByLogin } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { inputValidation } from "utils/inputValidation";
 import { passwordValidation } from "utils/passwordValidation";
@@ -74,7 +74,7 @@ const useLogin = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		updateTokenByLogin: IUpdateTokenByLogin;
+		updateTokenByLogin: UpdateTokenByLogin;
 	};
 };
 

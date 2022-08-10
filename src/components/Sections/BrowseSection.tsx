@@ -6,8 +6,7 @@ import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
 import { FetchUserByEmailQuery } from "infra/codegen";
-import { IFetchUserByEmail, Post as IPost } from "types";
-import { ICreatePost } from "types";
+import { CreatePost, FetchUserByEmail, Post as IPost } from "types";
 
 type Props = {
 	id: number | undefined;
@@ -15,8 +14,8 @@ type Props = {
 	senderEmail: string | undefined;
 	posts: IPost[] | null | undefined;
 	actions: {
-		fetchUserByEmail: IFetchUserByEmail;
-		createPost: ICreatePost;
+		fetchUserByEmail: FetchUserByEmail;
+		createPost: CreatePost;
 	};
 };
 

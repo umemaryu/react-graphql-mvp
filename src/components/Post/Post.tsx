@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
-import { ICreatePost } from "types";
+import { CreatePost } from "types";
 import useCustomToast from "hooks/useCustomToast";
 
 type Input = Props;
@@ -37,7 +37,7 @@ type Props = {
 	senderId: string | undefined;
 	senderEmail: string | undefined;
 	actions: {
-		createPost: ICreatePost;
+		createPost: CreatePost;
 	};
 };
 

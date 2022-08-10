@@ -3,6 +3,6 @@ import {
 	UpdateTokenByLoginMutation,
 } from "infra/codegen";
 
-export type IUpdateTokenByLogin = (
+export type UpdateTokenByLogin = (
 	args: MutationUpdateTokenByLoginArgs
 ) => Promise<UpdateTokenByLoginMutation | null | undefined>;

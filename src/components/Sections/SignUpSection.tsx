@@ -11,7 +11,7 @@ import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { emailValidation } from "utils/emailValidation";
-import { ICreateUser } from "types";
+import { CreateUser } from "types";
 import { inputValidation } from "utils/inputValidation";
 import { passwordValidation } from "utils/passwordValidation";
 
@@ -87,7 +87,7 @@ const useSignUp = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		createUser: ICreateUser;
+		createUser: CreateUser;
 	};
 };
 

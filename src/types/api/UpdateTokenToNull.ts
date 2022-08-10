@@ -3,6 +3,6 @@ import {
 	UpdateTokenToNullMutation,
 } from "infra/codegen";
 
-export type IUpdateTokenToNull = (
+export type UpdateTokenToNull = (
 	args: MutationUpdateTokenToNullArgs
 ) => Promise<UpdateTokenToNullMutation | null | undefined>;

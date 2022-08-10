@@ -3,6 +3,6 @@ import {
 	UpdatePasswordMutation,
 } from "infra/codegen";
 
-export type IUpdatePassword = (
+export type UpdatePassword = (
 	args: MutationUpdatePasswordArgs
 ) => Promise<UpdatePasswordMutation | null | undefined>;

@@ -3,7 +3,7 @@ import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
-import { IUpdatePassword, IUpdateTokenToNull } from "types";
+import { UpdatePassword, UpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
 import { passwordValidation } from "utils/passwordValidation";
 
@@ -78,8 +78,8 @@ const useAccount = ({ id, actions }: Input) => {
 type Props = {
 	id: number | undefined;
 	actions: {
-		updateTokenToNull: IUpdateTokenToNull;
-		updatePassword: IUpdatePassword;
+		updateTokenToNull: UpdateTokenToNull;
+		updatePassword: UpdatePassword;
 	};
 };
 
