@@ -1,4 +1,4 @@
-import { useAuth, usePost } from "application";
+import { useAuth, usePost } from "applications";
 import { BrowseSection } from "components/Sections";
 import {
 	useFetchUserByEmailLazyQuery,
