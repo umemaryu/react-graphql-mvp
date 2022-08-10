@@ -8,17 +8,21 @@ import {
 export const Browse = () => {
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
 	const { data: authData } = useFetchUserByTokenQuery();
-	const posts = data?.fetchUserByEmail.posts;
-	const { models: authModels } = useAuth();
-	const { models: postModels, operations: postOperations } = usePost(posts);
+	const user = data?.fetchUserByEmail;
+	const kind = "fetchUserByEmail";
+	const { models: postModels, operations: postOperations } = usePost({
+		user,
+		kind,
+	});
 
+	const { models: authModels } = useAuth();
 	const { createPost } = postOperations;
 	return (
 		<BrowseSection
 			id={authModels.id}
 			user={data}
 			senderEmail={authData?.fetchUserByToken.email}
-			posts={postModels.postsState}
+			posts={postModels.posts}
 			actions={{ fetchUserByEmail, createPost }}
 		/>
 	);

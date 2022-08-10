@@ -4,14 +4,11 @@ import { useFetchUserByTokenQuery } from "infra/codegen";
 
 export const Profile = () => {
 	const { data } = useFetchUserByTokenQuery();
-	const posts = data?.fetchUserByToken.posts;
-	const { models, operations } = usePost(posts);
+	const user = data?.fetchUserByToken;
+	const kind = "fetchUserByToken";
+	const { models, operations } = usePost({ user, kind });
 	const { createPost } = operations;
 	return (
-		<ProfileSection
-			user={data}
-			actions={{ createPost }}
-			posts={models.postsState}
-		/>
+		<ProfileSection user={data} actions={{ createPost }} posts={models.posts} />
 	);
 };
