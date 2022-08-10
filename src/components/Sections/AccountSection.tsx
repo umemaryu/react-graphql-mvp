@@ -3,7 +3,7 @@ import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
-import { IUpdatePassword, IUpdateTokenToNull } from "types";
+import { UpdatePassword, UpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
 import { passwordValidation } from "utils/passwordValidation";
 
@@ -51,23 +51,21 @@ const useAccount = ({ id, actions }: Input) => {
 				description: "Please reload and try again",
 			});
 		} else {
-			const res = await actions.updatePassword({
+			await actions.updatePassword({
 				id: id,
 				...state,
 			});
-			if (res?.updatePassword) {
-				setSuccess({ title: "Password is changed ", description: "" });
-				setState({
-					newPassword: "",
-					oldPassword: "",
-				});
-			}
+			setSuccess({ title: "Password changed ", description: "" });
+			setState({
+				newPassword: "",
+				oldPassword: "",
+			});
 		}
 	}, [state, actions, setError, setSuccess, setToastError, id]);
 	const onClickSignOut = useCallback(async () => {
 		if (!id) return;
-		const res = await actions.updateTokenToNull({ id: id });
-		if (res?.updateTokenToNull) window.location.reload();
+		await actions.updateTokenToNull({ id: id });
+		window.location.reload();
 	}, [actions, id]);
 	return {
 		models: { list, state, error },
@@ -78,8 +76,8 @@ const useAccount = ({ id, actions }: Input) => {
 type Props = {
 	id: number | undefined;
 	actions: {
-		updateTokenToNull: IUpdateTokenToNull;
-		updatePassword: IUpdatePassword;
+		updateTokenToNull: UpdateTokenToNull;
+		updatePassword: UpdatePassword;
 	};
 };
 

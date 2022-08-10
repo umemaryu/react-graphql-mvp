@@ -6,13 +6,13 @@ import { Post } from "components/Post";
 import { theme } from "utils/theme";
 import { FetchUserByTokenQuery } from "infra/codegen";
 import { Posts } from "components/Post";
-import { ICreatePost, Post as IPost } from "types";
+import { CreatePost, Post as IPost } from "types";
 
 type Props = {
 	user?: FetchUserByTokenQuery;
 	posts: IPost[] | null | undefined;
 	actions: {
-		createPost: ICreatePost;
+		createPost: CreatePost;
 	};
 };
 

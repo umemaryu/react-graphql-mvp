@@ -10,7 +10,7 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { IUpdateTokenByLogin } from "types";
+import { UpdateTokenByLogin } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { inputValidation } from "utils/inputValidation";
 import { passwordValidation } from "utils/passwordValidation";
@@ -56,10 +56,10 @@ const useLogin = ({ actions }: Input) => {
 		} else if (passwordError) {
 			setError(passwordError);
 		} else {
-			const res = await actions.updateTokenByLogin({
+			await actions.updateTokenByLogin({
 				...state,
 			});
-			if (res?.updateTokenByLogin) window.location.reload();
+			window.location.reload();
 		}
 	}, [state, actions]);
 
@@ -74,7 +74,7 @@ const useLogin = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		updateTokenByLogin: IUpdateTokenByLogin;
+		updateTokenByLogin: UpdateTokenByLogin;
 	};
 };
 

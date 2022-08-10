@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
-import { ICreatePost } from "types";
+import { CreatePost } from "types";
 import useCustomToast from "hooks/useCustomToast";
 
 type Input = Props;
@@ -13,7 +13,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 	const onChange = (value: string) => {
 		setValue(value);
 	};
-	const onClick = () => {
+	const onClick = async () => {
 		if (!value) return;
 		if (!senderId || !receiverId || !senderEmail) {
 			return setError({
@@ -21,7 +21,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 				description: "Please reload and try again",
 			});
 		}
-		actions.createPost({
+		await actions.createPost({
 			body: value,
 			senderId: parseInt(senderId),
 			receiverId: parseInt(receiverId),
@@ -37,7 +37,7 @@ type Props = {
 	senderId: string | undefined;
 	senderEmail: string | undefined;
 	actions: {
-		createPost: ICreatePost;
+		createPost: CreatePost;
 	};
 };
 

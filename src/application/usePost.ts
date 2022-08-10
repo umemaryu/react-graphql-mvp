@@ -5,7 +5,7 @@ import {
 	useCreatePostMutation,
 } from "infra/codegen";
 import { cache } from "stores/cache";
-import { Post } from "types";
+import { CreatePost, Post } from "types";
 
 type Input = {
 	user:
@@ -25,7 +25,7 @@ type Input = {
 export const usePost = ({ user, kind }: Input) => {
 	const posts = user?.posts;
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
-	const createPost = async (args: MutationCreatePostArgs) => {
+	const createPost: CreatePost = async (args: MutationCreatePostArgs) => {
 		const res = await CREATE_POST_MUTATION({
 			variables: args,
 		});
@@ -55,8 +55,6 @@ export const usePost = ({ user, kind }: Input) => {
 				}));
 				break;
 		}
-
-		return res.data;
 	};
 
 	return { models: { posts }, operations: { createPost } };
