@@ -28,7 +28,7 @@ const createToken = () => {
 	return r;
 };
 
-const syncedTypeDefs = readFileSync("src/gql/schema.gql", "utf8");
+const syncedTypeDefs = readFileSync("src/infra/schema.gql", "utf8");
 const typeDefs = `${syncedTypeDefs}`;
 const prisma = new PrismaClient();
 const resolvers: Resolvers = {
@@ -40,7 +40,7 @@ const resolvers: Resolvers = {
 		) => {
 			const user = await prisma.user.findFirst({
 				where: { token: context.token },
-				include: { posts: { include: { user: true } } },
+				include: { posts: { orderBy: { createdAt: "desc" } } },
 			});
 			if (!user || !context.token) throw new ValidationError("Invalid token");
 			return user;
@@ -52,7 +52,7 @@ const resolvers: Resolvers = {
 			emailValidation(args.email);
 			const user = await prisma.user.findFirst({
 				where: { email: args.email },
-				include: { posts: { include: { user: true } } },
+				include: { posts: { orderBy: { createdAt: "desc" } } },
 			});
 			if (!user)
 				throw new ValidationError("There is no corresponding e-mail address");

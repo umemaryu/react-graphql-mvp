@@ -70,8 +70,7 @@ const useAccount = ({ id, actions }: Input) => {
 		if (res?.updateTokenToNull) window.location.reload();
 	}, [actions, id]);
 	return {
-		list,
-		models: { state, error },
+		models: { list, state, error },
 		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },
 	};
 };
@@ -85,13 +84,13 @@ type Props = {
 };
 
 export const AccountSection: React.FC<Props> = ({ id, actions }) => {
-	const { list, models, operations } = useAccount({ id, actions });
+	const { models, operations } = useAccount({ id, actions });
 	return (
 		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>
 				<Form
 					error={models.error}
-					list={list}
+					list={models.list}
 					onChange={operations.onChangeFormInput}
 					values={models.state}
 				/>

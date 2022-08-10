@@ -67,8 +67,7 @@ const useLogin = ({ actions }: Input) => {
 		navigate("/sign-up");
 	}, [navigate]);
 	return {
-		list,
-		models: { state, error },
+		models: { list, state, error },
 		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
 	};
 };
@@ -80,14 +79,14 @@ type Props = {
 };
 
 export const LoginSection: React.FC<Props> = ({ actions }) => {
-	const { list, models, operations } = useLogin({ actions });
+	const { models, operations } = useLogin({ actions });
 	return (
 		<Center h={theme.h.full}>
 			<VStack mb={100} w={theme.w.mobile}>
 				<Text fontSize={theme.fs.h3}>Login</Text>
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form
-						list={list}
+						list={models.list}
 						onChange={operations.onChangeFormInput}
 						values={models.state}
 						error={models.error}
