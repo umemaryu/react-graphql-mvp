@@ -1,5 +1,3 @@
-import { CreateUserMutation, MutationCreateUserArgs } from "infra/codegen";
+import { MutationCreateUserArgs } from "infra/codegen";
 
-export type CreateUser = (
-	args: MutationCreateUserArgs
-) => Promise<CreateUserMutation | null | undefined>;
+export type CreateUser = (args: MutationCreateUserArgs) => Promise<void>;

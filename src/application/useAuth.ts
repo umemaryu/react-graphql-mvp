@@ -11,7 +11,7 @@ import useClient from "hooks/useClient";
 import { useCallback } from "react";
 import { authStore } from "stores/authStore";
 import storage from "utils/storage";
-import { UpdateTokenByLogin } from "types";
+import { CreateUser, UpdateTokenByLogin } from "types";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	if (data) {
@@ -32,14 +32,13 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	);
 
 	const [CREATE_USER] = useCreateUserMutation();
-	const createUser = async (args: MutationCreateUserArgs) => {
-		return await CREATE_USER({
+	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
+		const res = await CREATE_USER({
 			variables: args,
-		}).then((res) => {
-			if (res.data && res.data.createUser)
-				storage.setToken(res.data.createUser);
-			return res.data;
 		});
+		if (res.data && res.data.createUser) {
+			storage.setToken(res.data.createUser);
+		}
 	};
 
 	const { client } = useClient();

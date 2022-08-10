@@ -72,8 +72,8 @@ const useSignUp = ({ actions }: Input) => {
 		} else if (passwordError) {
 			setError(passwordError);
 		} else {
-			const res = await actions.createUser({ ...state });
-			if (res?.createUser) window.location.reload();
+			await actions.createUser({ ...state });
+			window.location.reload();
 		}
 	}, [state, actions]);
 	const onClickLogin = useCallback(() => {
