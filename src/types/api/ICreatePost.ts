@@ -1,5 +1,3 @@
-import { CreatePostMutation, MutationCreatePostArgs } from "infra/codegen";
+import { MutationCreatePostArgs } from "infra/codegen";
 
-export type ICreatePost = (
-	args: MutationCreatePostArgs
-) => Promise<CreatePostMutation | null | undefined>;
+export type ICreatePost = (args: MutationCreatePostArgs) => Promise<void>;

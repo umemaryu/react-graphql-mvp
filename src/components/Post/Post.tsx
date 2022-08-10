@@ -13,7 +13,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 	const onChange = (value: string) => {
 		setValue(value);
 	};
-	const onClick = () => {
+	const onClick = async () => {
 		if (!value) return;
 		if (!senderId || !receiverId || !senderEmail) {
 			return setError({
@@ -21,7 +21,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 				description: "Please reload and try again",
 			});
 		}
-		actions.createPost({
+		await actions.createPost({
 			body: value,
 			senderId: parseInt(senderId),
 			receiverId: parseInt(receiverId),
