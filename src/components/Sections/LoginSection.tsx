@@ -56,10 +56,10 @@ const useLogin = ({ actions }: Input) => {
 		} else if (passwordError) {
 			setError(passwordError);
 		} else {
-			const res = await actions.updateTokenByLogin({
+			await actions.updateTokenByLogin({
 				...state,
 			});
-			if (res?.updateTokenByLogin) window.location.reload();
+			window.location.reload();
 		}
 	}, [state, actions]);
 

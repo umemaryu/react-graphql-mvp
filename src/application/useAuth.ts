@@ -11,6 +11,7 @@ import useClient from "hooks/useClient";
 import { useCallback } from "react";
 import { authStore } from "stores/authStore";
 import storage from "utils/storage";
+import { UpdateTokenByLogin } from "types";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	if (data) {
@@ -20,14 +21,12 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	const id = authStore();
 
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
-	const updateTokenByLogin = useCallback(
+	const updateTokenByLogin: UpdateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
-			return await UPDATE_TOKEN_BY_LOGIN({ variables: args }).then((res) => {
-				if (res.data && res.data.updateTokenByLogin) {
-					storage.setToken(res.data.updateTokenByLogin);
-				}
-				return res.data;
-			});
+			const res = await UPDATE_TOKEN_BY_LOGIN({ variables: args });
+			if (res.data && res.data.updateTokenByLogin) {
+				storage.setToken(res.data.updateTokenByLogin);
+			}
 		},
 		[UPDATE_TOKEN_BY_LOGIN]
 	);
