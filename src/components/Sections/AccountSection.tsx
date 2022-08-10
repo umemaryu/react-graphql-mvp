@@ -66,8 +66,8 @@ const useAccount = ({ id, actions }: Input) => {
 	}, [state, actions, setError, setSuccess, setToastError, id]);
 	const onClickSignOut = useCallback(async () => {
 		if (!id) return;
-		const res = await actions.updateTokenToNull({ id: id });
-		if (res?.updateTokenToNull) window.location.reload();
+		await actions.updateTokenToNull({ id: id });
+		window.location.reload();
 	}, [actions, id]);
 	return {
 		models: { list, state, error },

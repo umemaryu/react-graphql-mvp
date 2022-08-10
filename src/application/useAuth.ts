@@ -11,7 +11,7 @@ import useClient from "hooks/useClient";
 import { useCallback } from "react";
 import { authStore } from "stores/authStore";
 import storage from "utils/storage";
-import { CreateUser, UpdateTokenByLogin } from "types";
+import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	if (data) {
@@ -43,16 +43,16 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 
 	const { client } = useClient();
 	const [UPDATE_TOKEN_TO_NULL] = useUpdateTokenToNullMutation();
-	const updateTokenToNull = async (args: MutationUpdateTokenToNullArgs) => {
-		return await UPDATE_TOKEN_TO_NULL({
+	const updateTokenToNull: UpdateTokenToNull = async (
+		args: MutationUpdateTokenToNullArgs
+	) => {
+		const res = await UPDATE_TOKEN_TO_NULL({
 			variables: args,
-		}).then((res) => {
-			if (res.data && res.data.updateTokenToNull) {
-				storage.clearToken();
-				client.clearStore();
-			}
-			return res.data;
 		});
+		if (res.data && res.data.updateTokenToNull) {
+			storage.clearToken();
+			client.clearStore();
+		}
 	};
 
 	return {
