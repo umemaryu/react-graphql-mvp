@@ -10,7 +10,7 @@ import {
 	MutationUpdateTokenToNullArgs,
 	QueryFetchUserByEmailArgs,
 	Resolvers,
-} from "server/codegen";
+} from "../server/codegen";
 
 const emailValidation = (value: string) => {
 	const reg = /[\w\-._]+@[\w\-._]+\.[A-Za-z]+/;

@@ -8,7 +8,7 @@ generates:
       - typescript
       - typescript-operations
       - typescript-react-apollo
-  src/server/codegen.ts:
+  server/codegen.ts:
     config:
       useIndexSignature: true
       contextType: infra/models#Context
