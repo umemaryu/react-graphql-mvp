@@ -6,10 +6,5 @@
 
 ## Design
 
-- <a href="https://dev.to/bespoyasov/clean-architecture-on-frontend-4311">Clean Architecture on Frontend</a>
-- <a href="https://dev.to/thekarel/end-to-end-type-safety-in-clean-architecture-48la">End-to-end Type Safety in Clean Architecture</a>
-- <a href="https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a>
-- <a href="https://www.apollographql.com/blog/apollo-client/architecture/client-side-architecture-basics/">Apollo Client & Client-side Architecture
-  Basics</a>
-  <a href="https://itnext.io/dependency-injection-in-react-using-inversifyjs-now-with-react-hooks-64f7f077cde6"></a>
+- <a href="https://khalilstemmler.com/articles/client-side-architecture/introduction/">Client-Side Architecture Basics [Guide]</a>
   <a href=""></a>
