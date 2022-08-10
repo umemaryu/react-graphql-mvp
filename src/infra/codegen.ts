@@ -160,7 +160,6 @@ export const CreatePostDocument = gql`
     receiverId: $receiverId
   ) {
     id
-    fsdaf
     body
     createdAt
     senderEmail

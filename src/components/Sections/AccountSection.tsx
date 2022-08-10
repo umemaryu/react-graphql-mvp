@@ -51,17 +51,15 @@ const useAccount = ({ id, actions }: Input) => {
 				description: "Please reload and try again",
 			});
 		} else {
-			const res = await actions.updatePassword({
+			await actions.updatePassword({
 				id: id,
 				...state,
 			});
-			if (res?.updatePassword) {
-				setSuccess({ title: "Password is changed ", description: "" });
-				setState({
-					newPassword: "",
-					oldPassword: "",
-				});
-			}
+			setSuccess({ title: "Password changed ", description: "" });
+			setState({
+				newPassword: "",
+				oldPassword: "",
+			});
 		}
 	}, [state, actions, setError, setSuccess, setToastError, id]);
 	const onClickSignOut = useCallback(async () => {
