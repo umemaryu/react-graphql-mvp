@@ -13,7 +13,7 @@ export const usePost = (posts: Post[] | null | undefined) => {
 		if (!res || !res.data || !postsState) {
 			throw new Error("error!!");
 		}
-		setPosts([...postsState, res.data.createPost]);
+		setPosts([res.data.createPost, ...postsState]);
 		return res.data;
 	};
 
