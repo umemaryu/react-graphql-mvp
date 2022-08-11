@@ -5,9 +5,14 @@ import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
 import { UpdatePassword, UpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
-import { passwordValidation } from "utils/passwordValidation";
 
-type Input = Props;
+type Input = {
+	id: number | undefined;
+	actions: {
+		updateTokenToNull: UpdateTokenToNull;
+		updatePassword: UpdatePassword;
+	};
+};
 
 const useAccount = ({ id, actions }: Input) => {
 	const list = [
@@ -28,25 +33,14 @@ const useAccount = ({ id, actions }: Input) => {
 		newPassword: "",
 	});
 
-	const [error, setError] = useState<string>("");
-	const { setError: setToastError, setSuccess } = useCustomToast();
+	const { setError, setSuccess } = useCustomToast();
 
 	const onChangeFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
 	const onClickUpdatePassword = useCallback(async () => {
-		const { passwordError: oldPasswordError } = passwordValidation(
-			state.oldPassword
-		);
-		const { passwordError: newPasswordError } = passwordValidation(
-			state.newPassword
-		);
-		if (oldPasswordError) {
-			setError(oldPasswordError);
-		} else if (newPasswordError) {
-			setError(newPasswordError);
-		} else if (!id) {
-			setToastError({
+		if (!id) {
+			setError({
 				title: "Authorization Error",
 				description: "Please reload and try again",
 			});
@@ -61,14 +55,14 @@ const useAccount = ({ id, actions }: Input) => {
 				oldPassword: "",
 			});
 		}
-	}, [state, actions, setError, setSuccess, setToastError, id]);
+	}, [state, actions, setSuccess, setError, id]);
 	const onClickSignOut = useCallback(async () => {
 		if (!id) return;
 		await actions.updateTokenToNull({ id: id });
 		window.location.reload();
 	}, [actions, id]);
 	return {
-		models: { list, state, error },
+		models: { list, state },
 		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },
 	};
 };
@@ -79,15 +73,16 @@ type Props = {
 		updateTokenToNull: UpdateTokenToNull;
 		updatePassword: UpdatePassword;
 	};
+	error: string;
 };
 
-export const AccountSection: React.FC<Props> = ({ id, actions }) => {
+export const AccountSection: React.FC<Props> = ({ id, actions, error }) => {
 	const { models, operations } = useAccount({ id, actions });
 	return (
 		<ThreadLayout page="Account">
 			<Box w={theme.w.mobile}>
 				<Form
-					error={models.error}
+					error={error}
 					list={models.list}
 					onChange={operations.onChangeFormInput}
 					values={models.state}
