@@ -14,6 +14,7 @@ import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";
 import storage from "stores/storage";
+import { inputValidation } from "utils/inputValidation";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	if (data) {
@@ -44,11 +45,20 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 
 	const [CREATE_USER] = useCreateUserMutation();
 	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
-		const res = await CREATE_USER({
-			variables: args,
-		});
-		if (res.data && res.data.createUser) {
-			storage.setToken(res.data.createUser);
+		const { inputError } = inputValidation(args);
+		const { emailError } = emailValidation(args.email);
+		const { passwordError } = passwordValidation(args.password);
+		const errorMessage = inputError || emailError || passwordError;
+		if (errorMessage) {
+			setError(errorMessage);
+			throw new Error(errorMessage);
+		} else {
+			const res = await CREATE_USER({
+				variables: args,
+			});
+			if (res.data && res.data.createUser) {
+				storage.setToken(res.data.createUser);
+			}
 		}
 	};
 
