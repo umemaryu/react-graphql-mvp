@@ -2,7 +2,6 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Spinner } from "components/Elements";
 import { IconContext } from "react-icons";
 import { theme } from "utils/theme";
 import { ApolloProvider } from "@apollo/client";
@@ -15,7 +14,7 @@ type Props = {
 export const AppProvider = ({ children }: Props) => {
 	const { client } = useClient();
 	return (
-		<Suspense fallback={<Spinner size="xl" />}>
+		<Suspense fallback={<>Loading</>}>
 			<ErrorBoundary
 				FallbackComponent={() => (
 					<h2>Something went wrong, please reload page</h2>
