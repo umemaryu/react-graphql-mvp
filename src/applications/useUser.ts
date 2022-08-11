@@ -13,12 +13,8 @@ export const useUser = () => {
 	const updatePassword: UpdatePassword = async (
 		args: MutationUpdatePasswordArgs
 	) => {
-		const { passwordError: oldPasswordError } = passwordValidation(
-			args.oldPassword
-		);
-		const { passwordError: newPasswordError } = passwordValidation(
-			args.newPassword
-		);
+		const oldPasswordError = passwordValidation(args.oldPassword);
+		const newPasswordError = passwordValidation(args.newPassword);
 		const errorMessage = oldPasswordError || newPasswordError;
 		if (errorMessage) {
 			setError(errorMessage);

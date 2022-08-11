@@ -27,8 +27,8 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin: UpdateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
-			const { emailError } = emailValidation(args.email);
-			const { passwordError } = passwordValidation(args.password);
+			const emailError = emailValidation(args.email);
+			const passwordError = passwordValidation(args.password);
 			const errorMessage = emailError || passwordError;
 			if (errorMessage) {
 				setError(errorMessage);
@@ -45,9 +45,9 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 
 	const [CREATE_USER] = useCreateUserMutation();
 	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
-		const { inputError } = inputValidation(args);
-		const { emailError } = emailValidation(args.email);
-		const { passwordError } = passwordValidation(args.password);
+		const inputError = inputValidation(args);
+		const emailError = emailValidation(args.email);
+		const passwordError = passwordValidation(args.password);
 		const errorMessage = inputError || emailError || passwordError;
 		if (errorMessage) {
 			setError(errorMessage);
