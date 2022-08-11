@@ -8,10 +8,12 @@ import {
 	useUpdateTokenToNullMutation,
 } from "infra/codegen";
 import useClient from "hooks/useClient";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { authStore } from "stores/authStore";
-import storage from "stores/storage";
 import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
+import { emailValidation } from "utils/emailValidation";
+import { passwordValidation } from "utils/passwordValidation";
+import storage from "stores/storage";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	if (data) {
@@ -19,13 +21,22 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		authStore(id);
 	}
 	const id = authStore();
+	const [error, setError] = useState("");
 
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin: UpdateTokenByLogin = useCallback(
 		async (args: MutationUpdateTokenByLoginArgs) => {
-			const res = await UPDATE_TOKEN_BY_LOGIN({ variables: args });
-			if (res.data && res.data.updateTokenByLogin) {
-				storage.setToken(res.data.updateTokenByLogin);
+			const { emailError } = emailValidation(args.email);
+			const { passwordError } = passwordValidation(args.password);
+			const errorMessage = emailError || passwordError;
+			if (errorMessage) {
+				setError(errorMessage);
+				throw new Error(errorMessage);
+			} else {
+				const res = await UPDATE_TOKEN_BY_LOGIN({ variables: args });
+				if (res.data && res.data.updateTokenByLogin) {
+					storage.setToken(res.data.updateTokenByLogin);
+				}
 			}
 		},
 		[UPDATE_TOKEN_BY_LOGIN]
@@ -56,7 +67,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	};
 
 	return {
-		models: { id },
+		models: { id, error },
 		operations: { createUser, updateTokenToNull, updateTokenByLogin },
 	};
 };
