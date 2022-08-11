@@ -10,12 +10,13 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { emailValidation } from "utils/emailValidation";
 import { CreateUser } from "types";
-import { inputValidation } from "utils/inputValidation";
-import { passwordValidation } from "utils/passwordValidation";
 
-type Input = Props;
+type Input = {
+	actions: {
+		createUser: CreateUser;
+	};
+};
 
 const useSignUp = ({ actions }: Input) => {
 	const list = [
@@ -53,7 +54,6 @@ const useSignUp = ({ actions }: Input) => {
 		email: "",
 		password: "",
 	});
-	const [error, setError] = useState<string>("");
 
 	const navigate = useNavigate();
 	const onChangeFormInput = useCallback((value: string, id: string) => {
@@ -62,25 +62,14 @@ const useSignUp = ({ actions }: Input) => {
 		});
 	}, []);
 	const onClickRegister = useCallback(async () => {
-		const { inputError } = inputValidation(state);
-		const { emailError } = emailValidation(state.email);
-		const { passwordError } = passwordValidation(state.password);
-		if (inputError) {
-			setError(inputError);
-		} else if (emailError) {
-			setError(emailError);
-		} else if (passwordError) {
-			setError(passwordError);
-		} else {
-			await actions.createUser({ ...state });
-			window.location.reload();
-		}
+		await actions.createUser({ ...state });
+		window.location.reload();
 	}, [state, actions]);
 	const onClickLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
 	return {
-		models: { list, error, state },
+		models: { list, state },
 		operations: { onChangeFormInput, onClickRegister, onClickLogin },
 	};
 };
@@ -89,9 +78,10 @@ type Props = {
 	actions: {
 		createUser: CreateUser;
 	};
+	error: string;
 };
 
-export const SignUpSection: React.FC<Props> = ({ actions }) => {
+export const SignUpSection: React.FC<Props> = ({ actions, error }) => {
 	const { models, operations } = useSignUp({ actions });
 	return (
 		<Center h={theme.h.full}>
@@ -102,7 +92,7 @@ export const SignUpSection: React.FC<Props> = ({ actions }) => {
 						list={models.list}
 						values={models.state}
 						onChange={operations.onChangeFormInput}
-						error={models.error}
+						error={error}
 					/>
 					<Button
 						w={"100%"}

@@ -11,11 +11,12 @@ import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
 import { UpdateTokenByLogin } from "types";
-import { emailValidation } from "utils/emailValidation";
-import { inputValidation } from "utils/inputValidation";
-import { passwordValidation } from "utils/passwordValidation";
 
-type Input = Props;
+type Input = {
+	actions: {
+		updateTokenByLogin: UpdateTokenByLogin;
+	};
+};
 
 const useLogin = ({ actions }: Input) => {
 	const list = [
@@ -35,7 +36,6 @@ const useLogin = ({ actions }: Input) => {
 		email: "",
 		password: "",
 	});
-	const [error, setError] = useState<string>("");
 
 	const navigate = useNavigate();
 
@@ -46,28 +46,17 @@ const useLogin = ({ actions }: Input) => {
 	}, []);
 
 	const onClickLogin = useCallback(async () => {
-		const { inputError } = inputValidation(state);
-		const { emailError } = emailValidation(state.email);
-		const { passwordError } = passwordValidation(state.password);
-		if (emailError) {
-			setError(emailError);
-		} else if (inputError) {
-			setError(inputError);
-		} else if (passwordError) {
-			setError(passwordError);
-		} else {
-			await actions.updateTokenByLogin({
-				...state,
-			});
-			window.location.reload();
-		}
+		await actions.updateTokenByLogin({
+			...state,
+		});
+		window.location.reload();
 	}, [state, actions]);
 
 	const onClickSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
 	return {
-		models: { list, state, error },
+		models: { list, state },
 		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
 	};
 };
@@ -76,9 +65,10 @@ type Props = {
 	actions: {
 		updateTokenByLogin: UpdateTokenByLogin;
 	};
+	error: string;
 };
 
-export const LoginSection: React.FC<Props> = ({ actions }) => {
+export const LoginSection: React.FC<Props> = ({ actions, error }) => {
 	const { models, operations } = useLogin({ actions });
 	return (
 		<Center h={theme.h.full}>
@@ -89,7 +79,7 @@ export const LoginSection: React.FC<Props> = ({ actions }) => {
 						list={models.list}
 						onChange={operations.onChangeFormInput}
 						values={models.state}
-						error={models.error}
+						error={error}
 					/>
 					<Button w={"100%"} mb={theme.m.sm} onClick={operations.onClickLogin}>
 						Login
