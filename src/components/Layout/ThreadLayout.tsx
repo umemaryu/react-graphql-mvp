@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { theme } from "utils/theme";
 import { Center, Layout, VStack } from "components/Elements";
 import { Header } from "components/Header";

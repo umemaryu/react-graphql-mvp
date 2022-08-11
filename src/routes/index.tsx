@@ -1,5 +1,4 @@
 import { useRoutes } from "react-router-dom";
-import React from "react";
 import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
 import { useAuth } from "applications";

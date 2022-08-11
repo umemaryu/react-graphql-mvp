@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, VStack, Text, Divider } from "components/Elements";
 import { ThreadLayout } from "components/Layout";
 import { UserInfoList } from "components/List";

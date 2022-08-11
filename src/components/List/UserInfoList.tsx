@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Flex, Spacer, Text, Box } from "components/Elements";
 import { theme } from "utils/theme";
 

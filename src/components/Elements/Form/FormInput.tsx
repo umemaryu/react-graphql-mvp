@@ -1,5 +1,4 @@
 import { Input as ChakraInput, InputProps } from "@chakra-ui/react";
-import React from "react";
 
 type Props = Omit<InputProps, "onChange"> & {
 	id: string;

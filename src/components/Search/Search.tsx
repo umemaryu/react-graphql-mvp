@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input, Box, HStack, SearchIcon } from "components/Elements";
 import { CreatePost, FetchUserByEmail } from "types";
 
