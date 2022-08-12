@@ -13,7 +13,7 @@ import { authStore } from "stores/authStore";
 import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";
-import storage from "stores/storage";
+import storage from "utils/storage";
 import { inputValidation } from "utils/inputValidation";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {

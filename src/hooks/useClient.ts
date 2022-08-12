@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { ApolloClient, ApolloLink, createHttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import storage from "stores/storage";
+import storage from "utils/storage";
 import { onError } from "@apollo/client/link/error";
 import { cache } from "stores/cache";
 import useCustomToast from "hooks/useCustomToast";
