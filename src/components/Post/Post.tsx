@@ -33,7 +33,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 };
 
 type Props = {
-	receiverId: string | undefined;
+	receiverId: string;
 	senderId: string | undefined;
 	senderEmail: string | undefined;
 	actions: {

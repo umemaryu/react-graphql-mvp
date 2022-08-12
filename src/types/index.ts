@@ -1,3 +1,3 @@
 export * from "./api";
-export * from "./domain";
+export * from "./models";
 export * from "./Toast";

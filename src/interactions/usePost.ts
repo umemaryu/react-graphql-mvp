@@ -5,20 +5,10 @@ import {
 	useCreatePostMutation,
 } from "infra/codegen";
 import { cache } from "infra/stores/cache";
-import { CreatePost, Post } from "types";
+import { CreatePost, User } from "types";
 
 type Input = {
-	user:
-		| {
-				__typename?: "User" | undefined;
-				id: string;
-				email: string;
-				country: string;
-				city: string;
-				nickName: string;
-				posts?: Post[] | null | undefined;
-		  }
-		| undefined;
+	user: User | undefined;
 	kind: "fetchUserByToken" | "fetchUserByEmail";
 };
 
