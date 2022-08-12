@@ -1,4 +1,4 @@
-import { useAuth, useUser } from "applications";
+import { useAuth, useUser } from "interactions";
 import { AccountSection } from "components/Sections";
 
 export const Account = () => {
