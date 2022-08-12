@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Flex, Spacer, Text, VStack } from "components/Elements";
 import { theme } from "utils/theme";
 import { timestampToDate } from "utils/timestampToDate";

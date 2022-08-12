@@ -1,4 +1,4 @@
-import { usePost } from "applications";
+import { usePost } from "interactions";
 import { Spinner } from "components/Elements";
 import { ProfileSection } from "components/Sections";
 import { useFetchUserByTokenQuery } from "infra/codegen";

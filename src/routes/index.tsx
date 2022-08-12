@@ -1,8 +1,7 @@
 import { useRoutes } from "react-router-dom";
-import React from "react";
 import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
-import { useAuth } from "applications";
+import { useAuth } from "interactions";
 import { Error404 } from "pages/Error404";
 import { useFetchUserByTokenQuery } from "infra/codegen";
 

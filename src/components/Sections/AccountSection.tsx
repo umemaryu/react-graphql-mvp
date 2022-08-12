@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";

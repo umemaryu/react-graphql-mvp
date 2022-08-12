@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { theme } from "utils/theme";
 import { Text, Grid } from "components/Elements";
 import { useNavigate } from "react-router-dom";

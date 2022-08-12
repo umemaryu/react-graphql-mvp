@@ -1,4 +1,4 @@
-import { useAuth } from "applications";
+import { useAuth } from "interactions";
 import { SignUpSection } from "components/Sections";
 
 export const SignUp = () => {
