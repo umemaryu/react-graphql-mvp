@@ -4,7 +4,7 @@ import { theme } from "utils/theme";
 import { User } from "types/models";
 
 type Props = {
-	user: User;
+	user: Omit<User, "posts">;
 };
 
 export const UserInfoList: React.FC<Props> = ({ user }) => {
