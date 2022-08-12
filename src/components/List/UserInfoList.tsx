@@ -1,14 +1,10 @@
 import { Fragment } from "react";
 import { Flex, Spacer, Text, Box } from "components/Elements";
 import { theme } from "utils/theme";
+import { User } from "types/models";
 
 type Props = {
-	user: {
-		email: string;
-		country: string;
-		city: string;
-		nickName: string;
-	};
+	user: User;
 };
 
 export const UserInfoList: React.FC<Props> = ({ user }) => {

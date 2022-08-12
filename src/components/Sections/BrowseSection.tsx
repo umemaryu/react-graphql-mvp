@@ -4,12 +4,11 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
-import { FetchUserByEmailQuery } from "infra/codegen";
-import { CreatePost, FetchUserByEmail, Post as IPost } from "types";
+import { CreatePost, FetchUserByEmail, Post as IPost, User } from "types";
 
 type Props = {
 	id: number | undefined;
-	user: FetchUserByEmailQuery | undefined;
+	user: User | undefined;
 	senderEmail: string | undefined;
 	posts: IPost[] | null | undefined;
 	actions: {
@@ -33,13 +32,13 @@ export const BrowseSection: React.FC<Props> = ({
 						<Text textAlign="center">Search the other user by email</Text>
 					)}
 					<Search actions={actions} />
-					{user && <UserInfoList user={user.fetchUserByEmail} />}
+					{user && <UserInfoList user={user} />}
 					<Posts posts={posts} />
 					{user && (
 						<Post
 							actions={actions}
 							senderEmail={senderEmail}
-							receiverId={user.fetchUserByEmail.id}
+							receiverId={user.id}
 							senderId={id?.toString()}
 						/>
 					)}

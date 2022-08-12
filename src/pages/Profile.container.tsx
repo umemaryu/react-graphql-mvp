@@ -12,6 +12,10 @@ export const Profile = () => {
 
 	if (loading) return <Spinner />;
 	return (
-		<ProfileSection user={data} actions={{ createPost }} posts={models.posts} />
+		<ProfileSection
+			user={data?.fetchUserByToken}
+			actions={{ createPost }}
+			posts={models.posts}
+		/>
 	);
 };

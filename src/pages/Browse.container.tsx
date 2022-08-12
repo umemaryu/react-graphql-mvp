@@ -21,7 +21,7 @@ export const Browse = () => {
 	return (
 		<BrowseSection
 			id={id}
-			user={data}
+			user={data?.fetchUserByEmail}
 			senderEmail={authData?.fetchUserByToken.email}
 			posts={postModels.posts}
 			actions={{ fetchUserByEmail, createPost }}
