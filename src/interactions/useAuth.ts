@@ -9,7 +9,7 @@ import {
 } from "infra/codegen";
 import useClient from "hooks/useClient";
 import { useCallback, useState } from "react";
-import { authStore } from "stores/authStore";
+import { authStore } from "infra/stores/authStore";
 import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";

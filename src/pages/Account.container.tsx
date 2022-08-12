@@ -1,6 +1,6 @@
 import { useAuth, useUser } from "interactions";
 import { AccountSection } from "components/Sections";
-import { authStore } from "stores/authStore";
+import { authStore } from "infra/stores/authStore";
 
 export const Account = () => {
 	const id = authStore();

@@ -4,7 +4,7 @@ import {
 	useFetchUserByEmailLazyQuery,
 	useFetchUserByTokenQuery,
 } from "infra/codegen";
-import { authStore } from "stores/authStore";
+import { authStore } from "infra/stores/authStore";
 
 export const Browse = () => {
 	const id = authStore();

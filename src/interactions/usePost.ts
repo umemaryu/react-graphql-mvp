@@ -4,7 +4,7 @@ import {
 	MutationCreatePostArgs,
 	useCreatePostMutation,
 } from "infra/codegen";
-import { cache } from "stores/cache";
+import { cache } from "infra/stores/cache";
 import { CreatePost, Post } from "types";
 
 type Input = {
