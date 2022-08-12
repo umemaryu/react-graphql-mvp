@@ -1,11 +1,13 @@
-import { useAuth, usePost } from "interactions";
+import { usePost } from "interactions";
 import { BrowseSection } from "components/Sections";
 import {
 	useFetchUserByEmailLazyQuery,
 	useFetchUserByTokenQuery,
 } from "infra/codegen";
+import { authStore } from "stores/authStore";
 
 export const Browse = () => {
+	const id = authStore();
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
 	const { data: authData } = useFetchUserByTokenQuery();
 	const user = data?.fetchUserByEmail;
@@ -15,11 +17,10 @@ export const Browse = () => {
 		kind,
 	});
 
-	const { models: authModels } = useAuth();
 	const { createPost } = postOperations;
 	return (
 		<BrowseSection
-			id={authModels.id}
+			id={id}
 			user={data}
 			senderEmail={authData?.fetchUserByToken.email}
 			posts={postModels.posts}

@@ -21,7 +21,6 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		const id = parseInt(data.fetchUserByToken.id);
 		authStore(id);
 	}
-	const id = authStore();
 	const [error, setError] = useState("");
 
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
@@ -77,7 +76,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	};
 
 	return {
-		models: { id, error },
+		models: { error },
 		operations: { createUser, updateTokenToNull, updateTokenByLogin },
 	};
 };
