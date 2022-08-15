@@ -10,10 +10,10 @@ type Input = Props;
 const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 	const [value, setValue] = useState<string>("");
 	const { setError } = useCustomToast();
-	const onChange = (value: string) => {
+	const handleChange = (value: string) => {
 		setValue(value);
 	};
-	const onClick = async () => {
+	const handleClick = async () => {
 		if (!value) return;
 		if (!senderId || !receiverId || !senderEmail) {
 			return setError({
@@ -29,7 +29,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 		});
 		setValue("");
 	};
-	return { models: { value }, operations: { onClick, onChange } };
+	return { models: { value }, operations: { handleClick, handleChange } };
 };
 
 type Props = {
@@ -67,9 +67,9 @@ export const Post: React.FC<Props> = ({
 				my={2}
 				ml={2}
 				value={models.value}
-				onChange={(e) => operations.onChange(e.target.value)}
+				onChange={(e) => operations.handleChange(e.target.value)}
 			/>
-			<Box onClick={() => operations.onClick()}>
+			<Box onClick={() => operations.handleClick()}>
 				<PostIcon value={models.value} />
 			</Box>
 		</HStack>

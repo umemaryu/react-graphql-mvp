@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 const useHeader = () => {
 	const navigate = useNavigate();
-	const onClickText = useCallback(
+	const handleClick = useCallback(
 		(path: string) => {
 			navigate(`/${path}`);
 		},
 		[navigate]
 	);
 
-	return { operations: { onClickText } };
+	return { operations: { handleClick } };
 };
 
 type Props = { page: "Profile" | "Browse" | "Account" };
@@ -38,7 +38,7 @@ export const Header: React.FC<Props> = ({ page }) => {
 					borderRight={index === list.length - 1 ? theme.border : ""}
 					borderBottom={theme.border}
 					textAlign={"center"}
-					onClick={() => operations.onClickText(ele.path)}
+					onClick={() => operations.handleClick(ele.path)}
 				>
 					{ele.text}
 				</Text>
