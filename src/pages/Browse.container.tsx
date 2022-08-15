@@ -11,10 +11,10 @@ export const Browse = () => {
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
 	const { data: authData } = useFetchUserByTokenQuery();
 	const user = data?.fetchUserByEmail;
-	const kind = "fetchUserByEmail";
+	const queryName = "fetchUserByEmail";
 	const { models: postModels, operations: postOperations } = usePost({
 		user,
-		kind,
+		queryName,
 	});
 
 	const { createPost } = postOperations;
