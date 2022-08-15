@@ -28,17 +28,19 @@ const useAccount = ({ id, actions }: Input) => {
 		},
 	];
 
-	const [state, setState] = useState({
+	const initValue = {
 		oldPassword: "",
 		newPassword: "",
-	});
+	};
+	const [state, setState] = useState(initValue);
 
 	const { setError, setSuccess } = useCustomToast();
 
 	const handleFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
-	const handleUpdatePassword = useCallback(async () => {
+
+	const handleUpdatePassword = async () => {
 		if (!id) {
 			setError({
 				title: "Authorization Error",
@@ -50,12 +52,10 @@ const useAccount = ({ id, actions }: Input) => {
 				...state,
 			});
 			setSuccess({ title: "Password changed ", description: "" });
-			setState({
-				newPassword: "",
-				oldPassword: "",
-			});
+			setState(initValue);
 		}
-	}, [state, actions, setSuccess, setError, id]);
+	};
+
 	const handleSignOut = useCallback(async () => {
 		if (!id) return;
 		await actions.updateTokenToNull({ id: id });
