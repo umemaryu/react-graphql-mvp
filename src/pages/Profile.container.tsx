@@ -1,18 +1,15 @@
-import { usePost } from "interactions";
+import { useAuth, usePost } from "interactions";
 import { Spinner } from "components/Elements";
 import { ProfileSection } from "components/Sections";
-import { useFetchUserByTokenQuery } from "infra/codegen";
 
 export const Profile = () => {
-	const { data, loading } = useFetchUserByTokenQuery();
-	if (!data) throw new Error("User are undefined");
-	const user = data.fetchUserByToken;
+	const { models, loading } = useAuth();
+	const { user } = models;
+	if (!user) throw new Error("User are undefined");
 	const queryName = "fetchUserByToken";
 	const { operations } = usePost({ user, queryName });
 	const { postOnThread } = operations;
 
 	if (loading) return <Spinner />;
-	return (
-		<ProfileSection user={data.fetchUserByToken} actions={{ postOnThread }} />
-	);
+	return <ProfileSection user={user} actions={{ postOnThread }} />;
 };

@@ -1,20 +1,18 @@
-import { usePost } from "interactions";
+import { useAuth, usePost } from "interactions";
 import { BrowseSection } from "components/Sections";
-import {
-	useFetchUserByEmailLazyQuery,
-	useFetchUserByTokenQuery,
-} from "infra/codegen";
+import { useFetchUserByEmailLazyQuery } from "infra/codegen";
 
 type Props = {
 	id: number;
 };
 
 export const Browse = ({ id }: Props) => {
-	const { data: authData } = useFetchUserByTokenQuery();
-	if (!authData) throw new Error("auth data is undefined");
+	const { models } = useAuth();
+	const { user } = models;
+	if (!user) throw new Error("auth data is undefined");
+
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
 
-	const user = data?.fetchUserByEmail;
 	const queryName = "fetchUserByEmail";
 	const { operations: postOperations } = usePost({
 		user,
@@ -26,7 +24,7 @@ export const Browse = ({ id }: Props) => {
 		<BrowseSection
 			id={id}
 			user={data?.fetchUserByEmail}
-			senderEmail={authData.fetchUserByToken.email}
+			senderEmail={user.email}
 			actions={{ fetchUserByEmail, postOnThread }}
 		/>
 	);

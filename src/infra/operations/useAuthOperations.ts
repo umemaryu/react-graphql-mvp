@@ -4,9 +4,12 @@ import {
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
 	useCreateUserMutation,
+	useFetchUserByTokenQuery,
 	useUpdateTokenByLoginMutation,
 	useUpdateTokenToNullMutation,
 } from "infra/codegen";
+import { authStore } from "infra/stores/authStore";
+import { User } from "types";
 import storage from "utils/storage";
 
 type Mutations = {
@@ -15,7 +18,18 @@ type Mutations = {
 	updateTokenToNull: (args: MutationUpdateTokenToNullArgs) => Promise<void>;
 };
 
-export const useAuthOperations: () => { mutations: Mutations } = () => {
+export const useAuthOperations: () => {
+	user: User | undefined;
+	loading: boolean;
+	mutations: Mutations;
+} = () => {
+	const { data, loading } = useFetchUserByTokenQuery();
+	if (!authStore() && data) {
+		const id = parseInt(data.fetchUserByToken.id);
+		authStore(id);
+	}
+	const user: User | undefined = data?.fetchUserByToken;
+
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin = async (args: MutationUpdateTokenByLoginArgs) => {
 		await UPDATE_TOKEN_BY_LOGIN({
@@ -47,7 +61,11 @@ export const useAuthOperations: () => { mutations: Mutations } = () => {
 			client.clearStore();
 		});
 	};
-	return { mutations: { updateTokenByLogin, createUser, updateTokenToNull } };
+	return {
+		user,
+		loading,
+		mutations: { updateTokenByLogin, createUser, updateTokenToNull },
+	};
 };
 
 export default useAuthOperations;
