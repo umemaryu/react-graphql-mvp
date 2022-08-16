@@ -1,10 +1,5 @@
-import {
-	FetchUserByEmailDocument,
-	FetchUserByTokenDocument,
-	MutationCreatePostArgs,
-	useCreatePostMutation,
-} from "infra/codegen";
-import { cache } from "infra/stores/cache";
+import { MutationCreatePostArgs } from "infra/codegen";
+import usePostOperations from "infra/operations/usePostOperations";
 import { CreatePost, User } from "types";
 
 type Input = {
@@ -14,25 +9,10 @@ type Input = {
 
 export const usePost = ({ user, queryName }: Input) => {
 	const posts = user?.posts;
-
-	const [CREATE_POST_MUTATION] = useCreatePostMutation();
+	const { mutations } = usePostOperations();
 	const createPost: CreatePost = async (args: MutationCreatePostArgs) => {
-		await CREATE_POST_MUTATION({
-			variables: args,
-		}).then((res) => {
-			if (!posts) throw new Error("Posts are undefined");
-			const newPost = res.data?.createPost;
-			const query =
-				queryName === "fetchUserByToken"
-					? FetchUserByTokenDocument
-					: FetchUserByEmailDocument;
-			cache.updateQuery({ query }, () => ({
-				[queryName]: {
-					...user,
-					posts: [newPost, ...posts],
-				},
-			}));
-		});
+		if (!posts) throw new Error("Posts are undefined");
+		await mutations.createPost(args, user, posts, queryName);
 	};
 
 	return { models: { posts }, operations: { createPost } };
