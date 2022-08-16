@@ -28,19 +28,23 @@ export const BrowseSection: React.FC<Props> = ({
 		<ThreadLayout page="Browse">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					{!user && (
-						<Text textAlign="center">Search the other user by email</Text>
-					)}
-					<Search actions={actions} />
-					{user && <UserInfoList user={user} />}
-					<Posts posts={posts} />
-					{user && (
-						<Post
-							actions={actions}
-							senderEmail={senderEmail}
-							receiverId={user.id}
-							senderId={id?.toString()}
-						/>
+					{user ? (
+						<>
+							<Search actions={actions} />
+							<UserInfoList user={user} />
+							<Posts posts={posts} />
+							<Post
+								actions={actions}
+								senderEmail={senderEmail}
+								receiverId={user.id}
+								senderId={id?.toString()}
+							/>
+						</>
+					) : (
+						<>
+							<Text textAlign="center">Search the other user by email</Text>
+							<Search actions={actions} />
+						</>
 					)}
 				</VStack>
 			</Box>
