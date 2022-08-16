@@ -17,5 +17,5 @@ export const useUser = () => {
 			await mutations.updatePassword(args);
 		}
 	};
-	return { models: { error }, operations: { changePassword } };
+	return { error, operations: { changePassword } };
 };

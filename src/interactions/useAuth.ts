@@ -18,7 +18,6 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		authStore(id);
 	}
 	const [error, setError] = useState("");
-
 	const { mutations } = useAuthOperations();
 
 	const login: UpdateTokenByLogin = async (
@@ -53,7 +52,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	};
 
 	return {
-		models: { error },
+		error,
 		operations: { signUp, singOut, login },
 	};
 };

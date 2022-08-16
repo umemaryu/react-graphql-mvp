@@ -7,14 +7,14 @@ type Props = {
 
 export const Account = ({ id }: Props) => {
 	const { operations: authOperations } = useAuth();
-	const { models: userModels, operations: userOperations } = useUser();
+	const { error, operations: userOperations } = useUser();
 	const { singOut } = authOperations;
 	const { changePassword } = userOperations;
 	return (
 		<AccountSection
 			actions={{ singOut, changePassword }}
 			id={id}
-			error={userModels.error}
+			error={error}
 		/>
 	);
 };

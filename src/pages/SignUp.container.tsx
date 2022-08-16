@@ -2,7 +2,7 @@ import { useAuth } from "interactions";
 import { SignUpSection } from "components/Sections";
 
 export const SignUp = () => {
-	const { models, operations } = useAuth();
+	const { error, operations } = useAuth();
 	const { signUp } = operations;
-	return <SignUpSection actions={{ signUp }} error={models.error} />;
+	return <SignUpSection actions={{ signUp }} error={error} />;
 };
