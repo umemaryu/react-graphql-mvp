@@ -3,15 +3,12 @@ import {
 	MutationCreateUserArgs,
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
-	useUpdateTokenToNullMutation,
 } from "infra/codegen";
-import useClient from "hooks/useClient";
 import { useState } from "react";
 import { authStore } from "infra/stores/authStore";
 import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";
-import storage from "utils/storage";
 import { inputValidation } from "utils/inputValidation";
 import useAuthOperations from "infra/operations/useAuthOperations";
 
@@ -49,18 +46,10 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		await mutations.createUser(args);
 	};
 
-	const { client } = useClient();
-	const [UPDATE_TOKEN_TO_NULL] = useUpdateTokenToNullMutation();
 	const updateTokenToNull: UpdateTokenToNull = async (
 		args: MutationUpdateTokenToNullArgs
 	) => {
-		const res = await UPDATE_TOKEN_TO_NULL({
-			variables: args,
-		});
-		if (res.data && res.data.updateTokenToNull) {
-			storage.clearToken();
-			client.clearStore();
-		}
+		await mutations.updateTokenToNull(args);
 	};
 
 	return {

@@ -1,8 +1,11 @@
+import useClient from "hooks/useClient";
 import {
 	MutationCreateUserArgs,
 	MutationUpdateTokenByLoginArgs,
+	MutationUpdateTokenToNullArgs,
 	useCreateUserMutation,
 	useUpdateTokenByLoginMutation,
+	useUpdateTokenToNullMutation,
 } from "infra/codegen";
 import storage from "utils/storage";
 
@@ -31,7 +34,20 @@ export const useAuthOperations = () => {
 		});
 	};
 
-	return { mutations: { updateTokenByLogin, createUser } };
+	const { client } = useClient();
+	const [UPDATE_TOKEN_TO_NULL] = useUpdateTokenToNullMutation();
+	const updateTokenToNull: (
+		args: MutationUpdateTokenToNullArgs
+	) => Promise<void> = async (args) => {
+		await UPDATE_TOKEN_TO_NULL({
+			variables: args,
+		}).then((res) => {
+			if (!res.data) throw new Error("Response data is undefined");
+			storage.clearToken();
+			client.clearStore();
+		});
+	};
+	return { mutations: { updateTokenByLogin, createUser, updateTokenToNull } };
 };
 
 export default useAuthOperations;
