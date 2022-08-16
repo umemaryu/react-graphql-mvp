@@ -6,15 +6,15 @@ type SearchInput = Props;
 
 const useSearch = ({ actions }: SearchInput) => {
 	const [value, setValue] = useState<string>("");
-	const onChange = (value: string) => {
+	const handleInput = (value: string) => {
 		setValue(value);
 	};
-	const onClick = async () => {
+	const handleClick = async () => {
 		if (!value) return;
 		const res = await actions.fetchUserByEmail({ variables: { email: value } });
 		if (res.data) setValue("");
 	};
-	return { models: { value }, operations: { onChange, onClick } };
+	return { models: { value }, operations: { handleInput, handleClick } };
 };
 
 type Props = {
@@ -31,9 +31,9 @@ export const Search: React.FC<Props> = ({ actions }) => {
 			<Input
 				placeholder="mail@example.com"
 				value={models.value}
-				onChange={(e) => operations.onChange(e.target.value)}
+				onChange={(e) => operations.handleInput(e.target.value)}
 			/>
-			<Box onClick={() => operations.onClick()}>
+			<Box onClick={() => operations.handleClick()}>
 				<SearchIcon value={models.value} />
 			</Box>
 		</HStack>

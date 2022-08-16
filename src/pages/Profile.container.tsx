@@ -6,8 +6,8 @@ import { useFetchUserByTokenQuery } from "infra/codegen";
 export const Profile = () => {
 	const { data, loading } = useFetchUserByTokenQuery();
 	const user = data?.fetchUserByToken;
-	const kind = "fetchUserByToken";
-	const { models, operations } = usePost({ user, kind });
+	const queryName = "fetchUserByToken";
+	const { models, operations } = usePost({ user, queryName });
 	const { createPost } = operations;
 
 	if (loading) return <Spinner />;

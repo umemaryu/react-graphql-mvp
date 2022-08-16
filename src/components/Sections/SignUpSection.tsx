@@ -56,21 +56,21 @@ const useSignUp = ({ actions }: Input) => {
 	});
 
 	const navigate = useNavigate();
-	const onChangeFormInput = useCallback((value: string, id: string) => {
+	const handleFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
-	const onClickRegister = useCallback(async () => {
+	const handleRegister = useCallback(async () => {
 		await actions.createUser({ ...state });
 		window.location.reload();
 	}, [state, actions]);
-	const onClickLogin = useCallback(() => {
+	const handleLogin = useCallback(() => {
 		navigate("/login");
 	}, [navigate]);
 	return {
 		models: { list, state },
-		operations: { onChangeFormInput, onClickRegister, onClickLogin },
+		operations: { handleFormInput, handleRegister, handleLogin },
 	};
 };
 
@@ -91,13 +91,13 @@ export const SignUpSection: React.FC<Props> = ({ actions, error }) => {
 					<Form
 						list={models.list}
 						values={models.state}
-						onChange={operations.onChangeFormInput}
+						onChange={operations.handleFormInput}
 						error={error}
 					/>
 					<Button
 						w={"100%"}
 						mb={theme.m.sm}
-						onClick={operations.onClickRegister}
+						onClick={operations.handleRegister}
 					>
 						Resister
 					</Button>
@@ -107,7 +107,7 @@ export const SignUpSection: React.FC<Props> = ({ actions, error }) => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={operations.onClickLogin}
+							onClick={operations.handleLogin}
 						>
 							Login
 						</Text>

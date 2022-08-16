@@ -28,17 +28,19 @@ const useAccount = ({ id, actions }: Input) => {
 		},
 	];
 
-	const [state, setState] = useState({
+	const initValue = {
 		oldPassword: "",
 		newPassword: "",
-	});
+	};
+	const [state, setState] = useState(initValue);
 
 	const { setError, setSuccess } = useCustomToast();
 
-	const onChangeFormInput = useCallback((value: string, id: string) => {
+	const handleFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
-	const onClickUpdatePassword = useCallback(async () => {
+
+	const handleUpdatePassword = async () => {
 		if (!id) {
 			setError({
 				title: "Authorization Error",
@@ -50,20 +52,18 @@ const useAccount = ({ id, actions }: Input) => {
 				...state,
 			});
 			setSuccess({ title: "Password changed ", description: "" });
-			setState({
-				newPassword: "",
-				oldPassword: "",
-			});
+			setState(initValue);
 		}
-	}, [state, actions, setSuccess, setError, id]);
-	const onClickSignOut = useCallback(async () => {
+	};
+
+	const handleSignOut = useCallback(async () => {
 		if (!id) return;
 		await actions.updateTokenToNull({ id: id });
 		window.location.reload();
 	}, [actions, id]);
 	return {
 		models: { list, state },
-		operations: { onChangeFormInput, onClickUpdatePassword, onClickSignOut },
+		operations: { handleFormInput, handleUpdatePassword, handleSignOut },
 	};
 };
 
@@ -84,11 +84,11 @@ export const AccountSection: React.FC<Props> = ({ id, actions, error }) => {
 				<Form
 					error={error}
 					list={models.list}
-					onChange={operations.onChangeFormInput}
+					onChange={operations.handleFormInput}
 					values={models.state}
 				/>
 				<Button
-					onClick={operations.onClickUpdatePassword}
+					onClick={operations.handleUpdatePassword}
 					w={"100%"}
 					mb={theme.m.md}
 				>
@@ -98,7 +98,7 @@ export const AccountSection: React.FC<Props> = ({ id, actions, error }) => {
 					<Text
 						display={"inline-block"}
 						cursor="pointer"
-						onClick={operations.onClickSignOut}
+						onClick={operations.handleSignOut}
 					>
 						Sign out
 					</Text>

@@ -9,42 +9,30 @@ import { CreatePost, User } from "types";
 
 type Input = {
 	user: User | undefined;
-	kind: "fetchUserByToken" | "fetchUserByEmail";
+	queryName: "fetchUserByToken" | "fetchUserByEmail";
 };
 
-export const usePost = ({ user, kind }: Input) => {
+export const usePost = ({ user, queryName }: Input) => {
 	const posts = user?.posts;
+
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
 	const createPost: CreatePost = async (args: MutationCreatePostArgs) => {
-		const res = await CREATE_POST_MUTATION({
+		await CREATE_POST_MUTATION({
 			variables: args,
+		}).then((res) => {
+			if (!posts) throw new Error("Posts are undefined");
+			const newPost = res.data?.createPost;
+			const query =
+				queryName === "fetchUserByToken"
+					? FetchUserByTokenDocument
+					: FetchUserByEmailDocument;
+			cache.updateQuery({ query }, () => ({
+				[queryName]: {
+					...user,
+					posts: [newPost, ...posts],
+				},
+			}));
 		});
-		if (!res || !res.data || !user || !posts) {
-			throw new Error("error!!");
-		}
-		const post = res.data.createPost;
-		const query =
-			kind === "fetchUserByToken"
-				? FetchUserByTokenDocument
-				: FetchUserByEmailDocument;
-		switch (kind) {
-			case "fetchUserByToken":
-				cache.updateQuery({ query }, () => ({
-					fetchUserByToken: {
-						...user,
-						posts: [post, ...posts],
-					},
-				}));
-				break;
-			case "fetchUserByEmail":
-				cache.updateQuery({ query }, () => ({
-					fetchUserByEmail: {
-						...user,
-						posts: [post, ...posts],
-					},
-				}));
-				break;
-		}
 	};
 
 	return { models: { posts }, operations: { createPost } };

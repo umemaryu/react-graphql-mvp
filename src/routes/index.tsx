@@ -2,7 +2,7 @@ import { useRoutes } from "react-router-dom";
 import { publicRoutes } from "routes/public";
 import { protectedRoutes } from "routes/protected";
 import { useAuth } from "interactions";
-import { Error404 } from "pages/Error404";
+import { Error404 } from "pages";
 import { useFetchUserByTokenQuery } from "infra/codegen";
 import { authStore } from "infra/stores/authStore";
 
@@ -17,6 +17,5 @@ export const AppRoutes = () => {
 	];
 
 	const element = useRoutes([...routes, ...redirectRoutes]);
-
 	return <>{element}</>;
 };

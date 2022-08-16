@@ -39,25 +39,25 @@ const useLogin = ({ actions }: Input) => {
 
 	const navigate = useNavigate();
 
-	const onChangeFormInput = useCallback((value: string, id: string) => {
+	const handleFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => {
 			return { ...prevState, [id]: value };
 		});
 	}, []);
 
-	const onClickLogin = useCallback(async () => {
+	const handleLogin = useCallback(async () => {
 		await actions.updateTokenByLogin({
 			...state,
 		});
 		window.location.reload();
 	}, [state, actions]);
 
-	const onClickSignUp = useCallback(() => {
+	const handleSignUp = useCallback(() => {
 		navigate("/sign-up");
 	}, [navigate]);
 	return {
 		models: { list, state },
-		operations: { onChangeFormInput, onClickLogin, onClickSignUp },
+		operations: { handleFormInput, handleLogin, handleSignUp },
 	};
 };
 
@@ -77,11 +77,11 @@ export const LoginSection: React.FC<Props> = ({ actions, error }) => {
 				<Layout borderRadius={theme.borderRadius.md} border={theme.border}>
 					<Form
 						list={models.list}
-						onChange={operations.onChangeFormInput}
+						onChange={operations.handleFormInput}
 						values={models.state}
 						error={error}
 					/>
-					<Button w={"100%"} mb={theme.m.sm} onClick={operations.onClickLogin}>
+					<Button w={"100%"} mb={theme.m.sm} onClick={operations.handleLogin}>
 						Login
 					</Button>
 					<Divider mb={theme.m.sm} />
@@ -90,7 +90,7 @@ export const LoginSection: React.FC<Props> = ({ actions, error }) => {
 							cursor={"pointer"}
 							mb={theme.m.sm}
 							borderBottom={theme.border}
-							onClick={operations.onClickSignUp}
+							onClick={operations.handleSignUp}
 						>
 							Sign up
 						</Text>
