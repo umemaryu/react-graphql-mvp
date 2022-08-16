@@ -3,14 +3,15 @@ import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
-import { UpdatePassword, UpdateTokenToNull } from "types";
+import { UpdateTokenToNull } from "types";
 import useCustomToast from "hooks/useCustomToast";
+import { MutationUpdatePasswordArgs } from "infra/codegen";
 
 type Input = {
 	id: number | undefined;
 	actions: {
 		updateTokenToNull: UpdateTokenToNull;
-		updatePassword: UpdatePassword;
+		updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
 	};
 };
 
@@ -71,7 +72,7 @@ type Props = {
 	id: number | undefined;
 	actions: {
 		updateTokenToNull: UpdateTokenToNull;
-		updatePassword: UpdatePassword;
+		updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
 	};
 	error: string;
 };

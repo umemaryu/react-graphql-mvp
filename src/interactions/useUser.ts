@@ -1,18 +1,12 @@
-import {
-	MutationUpdatePasswordArgs,
-	useUpdatePasswordMutation,
-} from "infra/codegen";
+import { MutationUpdatePasswordArgs } from "infra/codegen";
+import useUserOperations from "infra/operations/useUserOperations";
 import { useState } from "react";
-import { UpdatePassword } from "types";
 import { passwordValidation } from "utils/passwordValidation";
 
 export const useUser = () => {
 	const [error, setError] = useState("");
-
-	const [UPDATE_PASSWORD] = useUpdatePasswordMutation();
-	const updatePassword: UpdatePassword = async (
-		args: MutationUpdatePasswordArgs
-	) => {
+	const { mutations } = useUserOperations();
+	const updatePassword = async (args: MutationUpdatePasswordArgs) => {
 		const oldPasswordError = passwordValidation(args.oldPassword);
 		const newPasswordError = passwordValidation(args.newPassword);
 		const errorMessage = oldPasswordError || newPasswordError;
@@ -20,9 +14,7 @@ export const useUser = () => {
 			setError(errorMessage);
 			throw new Error(errorMessage);
 		} else {
-			await UPDATE_PASSWORD({
-				variables: args,
-			});
+			await mutations.updatePassword(args);
 		}
 	};
 	return { models: { error }, operations: { updatePassword } };
