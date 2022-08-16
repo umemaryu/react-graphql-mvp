@@ -2,32 +2,33 @@ import { useState } from "react";
 import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
-import { CreatePost } from "types";
+import { CreatePost, User } from "types";
 
 type Input = Props;
 
-const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
+const usePost = ({ actions, sender, receiver, queryName }: Input) => {
 	const [value, setValue] = useState<string>("");
 	const handleChange = (value: string) => {
 		setValue(value);
 	};
 	const handleClick = async () => {
 		if (!value) return;
-		await actions.postOnThread({
+		const args = {
 			body: value,
-			senderId: parseInt(senderId),
-			receiverId: parseInt(receiverId),
-			senderEmail: senderEmail,
-		});
+			receiverId: parseInt(receiver.id),
+			senderId: parseInt(sender.id),
+			senderEmail: sender.email,
+		};
+		await actions.postOnThread(args, receiver, queryName);
 		setValue("");
 	};
 	return { models: { value }, operations: { handleClick, handleChange } };
 };
 
 type Props = {
-	receiverId: string;
-	senderId: string;
-	senderEmail: string;
+	receiver: User;
+	sender: User;
+	queryName: "fetchUserByToken" | "fetchUserByEmail";
 	actions: {
 		postOnThread: CreatePost;
 	};
@@ -35,15 +36,15 @@ type Props = {
 
 export const Post: React.FC<Props> = ({
 	actions,
-	senderId,
-	receiverId,
-	senderEmail,
+	sender,
+	receiver,
+	queryName,
 }) => {
 	const { models, operations } = usePost({
 		actions,
-		senderId,
-		receiverId,
-		senderEmail,
+		sender,
+		receiver,
+		queryName,
 	});
 	return (
 		<HStack

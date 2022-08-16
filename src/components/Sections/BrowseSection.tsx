@@ -7,9 +7,8 @@ import { Search } from "components/Search";
 import { CreatePost, FetchUserByEmail, User } from "types";
 
 type Props = {
-	id: number;
 	receiver: User | undefined;
-	senderEmail: string;
+	sender: User;
 	actions: {
 		fetchUserByEmail: FetchUserByEmail;
 		postOnThread: CreatePost;
@@ -17,9 +16,8 @@ type Props = {
 };
 
 export const BrowseSection: React.FC<Props> = ({
-	id,
 	receiver,
-	senderEmail,
+	sender,
 	actions,
 }) => {
 	return (
@@ -33,9 +31,9 @@ export const BrowseSection: React.FC<Props> = ({
 							<Posts posts={receiver.posts} />
 							<Post
 								actions={actions}
-								senderEmail={senderEmail}
-								receiverId={receiver.id}
-								senderId={id.toString()}
+								sender={sender}
+								receiver={receiver}
+								queryName="fetchUserByEmail"
 							/>
 						</>
 					) : (

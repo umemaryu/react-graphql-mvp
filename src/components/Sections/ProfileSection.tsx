@@ -23,9 +23,9 @@ export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 					<Posts posts={user.posts} />
 					<Post
 						actions={actions}
-						senderEmail={user.email}
-						receiverId={user.id}
-						senderId={user.id}
+						receiver={user}
+						sender={user}
+						queryName={"fetchUserByToken"}
 					/>
 				</VStack>
 			</Box>

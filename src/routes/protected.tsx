@@ -12,7 +12,7 @@ export const protectedRoutes = (id: number) => {
 		},
 		{
 			path: "/browse",
-			element: <Browse id={id} />,
+			element: <Browse />,
 		},
 		{
 			path: "/account",
