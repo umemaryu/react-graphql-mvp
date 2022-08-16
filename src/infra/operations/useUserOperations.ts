@@ -3,7 +3,11 @@ import {
 	useUpdatePasswordMutation,
 } from "infra/codegen";
 
-export const useUserOperations = () => {
+type Mutations = {
+	updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
+};
+
+export const useUserOperations: () => { mutations: Mutations } = () => {
 	const [UPDATE_PASSWORD] = useUpdatePasswordMutation();
 	const updatePassword: (
 		args: MutationUpdatePasswordArgs

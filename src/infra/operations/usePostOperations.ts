@@ -7,7 +7,16 @@ import {
 import { cache } from "infra/stores/cache";
 import { Post, User } from "types";
 
-export const usePostOperations = () => {
+type Mutations = {
+	createPost: (
+		args: MutationCreatePostArgs,
+		user: User,
+		posts: Post[],
+		queryName: "fetchUserByToken" | "fetchUserByEmail"
+	) => Promise<void>;
+};
+
+export const usePostOperations: () => { mutations: Mutations } = () => {
 	const [CREATE_POST_MUTATION] = useCreatePostMutation();
 	const createPost: (
 		args: MutationCreatePostArgs,

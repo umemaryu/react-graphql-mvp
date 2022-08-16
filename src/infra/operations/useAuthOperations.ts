@@ -9,11 +9,15 @@ import {
 } from "infra/codegen";
 import storage from "utils/storage";
 
-export const useAuthOperations = () => {
+type Mutations = {
+	updateTokenByLogin: (args: MutationUpdateTokenByLoginArgs) => Promise<void>;
+	createUser: (args: MutationCreateUserArgs) => Promise<void>;
+	updateTokenToNull: (args: MutationUpdateTokenToNullArgs) => Promise<void>;
+};
+
+export const useAuthOperations: () => { mutations: Mutations } = () => {
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
-	const updateTokenByLogin: (
-		args: MutationUpdateTokenByLoginArgs
-	) => Promise<void> = async (args) => {
+	const updateTokenByLogin = async (args: MutationUpdateTokenByLoginArgs) => {
 		await UPDATE_TOKEN_BY_LOGIN({
 			variables: args,
 		}).then((res) => {
@@ -23,9 +27,7 @@ export const useAuthOperations = () => {
 	};
 
 	const [CREATE_USER] = useCreateUserMutation();
-	const createUser: (args: MutationCreateUserArgs) => Promise<void> = async (
-		args
-	) => {
+	const createUser = async (args: MutationCreateUserArgs) => {
 		await CREATE_USER({
 			variables: args,
 		}).then((res) => {
@@ -36,9 +38,7 @@ export const useAuthOperations = () => {
 
 	const { client } = useClient();
 	const [UPDATE_TOKEN_TO_NULL] = useUpdateTokenToNullMutation();
-	const updateTokenToNull: (
-		args: MutationUpdateTokenToNullArgs
-	) => Promise<void> = async (args) => {
+	const updateTokenToNull = async (args: MutationUpdateTokenToNullArgs) => {
 		await UPDATE_TOKEN_TO_NULL({
 			variables: args,
 		}).then((res) => {
