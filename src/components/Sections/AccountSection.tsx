@@ -3,15 +3,14 @@ import { Box, Button, Center, Text } from "components/Elements";
 import { theme } from "utils/theme";
 import { ThreadLayout } from "components/Layout";
 import { Form } from "components/Form";
-import { UpdateTokenToNull } from "types";
+import { ChangePassword, SignOut } from "types";
 import useCustomToast from "hooks/useCustomToast";
-import { MutationUpdatePasswordArgs } from "infra/codegen";
 
 type Input = {
-	id: number | undefined;
+	id: number;
 	actions: {
-		updateTokenToNull: UpdateTokenToNull;
-		updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
+		singOut: SignOut;
+		changePassword: ChangePassword;
 	};
 };
 
@@ -35,31 +34,23 @@ const useAccount = ({ id, actions }: Input) => {
 	};
 	const [state, setState] = useState(initValue);
 
-	const { setError, setSuccess } = useCustomToast();
+	const { setSuccess } = useCustomToast();
 
 	const handleFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
 
 	const handleUpdatePassword = async () => {
-		if (!id) {
-			setError({
-				title: "Authorization Error",
-				description: "Please reload and try again",
-			});
-		} else {
-			await actions.updatePassword({
-				id: id,
-				...state,
-			});
-			setSuccess({ title: "Password changed ", description: "" });
-			setState(initValue);
-		}
+		await actions.changePassword({
+			id: id,
+			...state,
+		});
+		setSuccess({ title: "Password changed ", description: "" });
+		setState(initValue);
 	};
 
 	const handleSignOut = useCallback(async () => {
-		if (!id) return;
-		await actions.updateTokenToNull({ id: id });
+		await actions.singOut({ id: id });
 		window.location.reload();
 	}, [actions, id]);
 	return {
@@ -69,10 +60,10 @@ const useAccount = ({ id, actions }: Input) => {
 };
 
 type Props = {
-	id: number | undefined;
+	id: number;
 	actions: {
-		updateTokenToNull: UpdateTokenToNull;
-		updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
+		singOut: SignOut;
+		changePassword: ChangePassword;
 	};
 	error: string;
 };

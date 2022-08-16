@@ -6,5 +6,5 @@ export type User = {
 	country: string;
 	city: string;
 	nickName: string;
-	posts?: Post[] | null | undefined;
+	posts: Post[];
 };

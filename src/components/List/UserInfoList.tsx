@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Flex, Spacer, Text, Box } from "components/Elements";
 import { theme } from "utils/theme";
-import { User } from "types/models";
+import { User } from "types";
 
 type Props = {
 	user: Omit<User, "posts">;

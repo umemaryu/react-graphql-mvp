@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input, Box, HStack, SearchIcon } from "components/Elements";
-import { CreatePost, FetchUserByEmail } from "types";
+import { PostOnThread, SearchUser } from "types";
 
 type SearchInput = Props;
 
@@ -11,16 +11,16 @@ const useSearch = ({ actions }: SearchInput) => {
 	};
 	const handleClick = async () => {
 		if (!value) return;
-		const res = await actions.fetchUserByEmail({ variables: { email: value } });
-		if (res.data) setValue("");
+		await actions.searchUser({ email: value });
+		setValue("");
 	};
 	return { models: { value }, operations: { handleInput, handleClick } };
 };
 
 type Props = {
 	actions: {
-		fetchUserByEmail: FetchUserByEmail;
-		createPost: CreatePost;
+		searchUser: SearchUser;
+		postOnThread: PostOnThread;
 	};
 };
 

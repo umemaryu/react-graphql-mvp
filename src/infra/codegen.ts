@@ -89,7 +89,7 @@ export type User = {
   id: Scalars['ID'];
   nickName: Scalars['String'];
   password: Scalars['String'];
-  posts?: Maybe<Array<Post>>;
+  posts: Array<Post>;
   token?: Maybe<Scalars['String']>;
 };
 
@@ -141,14 +141,14 @@ export type UpdateTokenToNullMutation = { __typename?: 'Mutation', updateTokenTo
 export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> | null } };
+export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> } };
 
 export type FetchUserByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> | null } };
+export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> } };
 
 
 export const CreatePostDocument = gql`

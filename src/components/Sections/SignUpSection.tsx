@@ -10,11 +10,11 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { CreateUser } from "types";
+import { SignUp } from "types";
 
 type Input = {
 	actions: {
-		createUser: CreateUser;
+		signUp: SignUp;
 	};
 };
 
@@ -62,7 +62,7 @@ const useSignUp = ({ actions }: Input) => {
 		});
 	}, []);
 	const handleRegister = useCallback(async () => {
-		await actions.createUser({ ...state });
+		await actions.signUp({ ...state });
 		window.location.reload();
 	}, [state, actions]);
 	const handleLogin = useCallback(() => {
@@ -76,7 +76,7 @@ const useSignUp = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		createUser: CreateUser;
+		signUp: SignUp;
 	};
 	error: string;
 };

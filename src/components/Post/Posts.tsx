@@ -4,37 +4,36 @@ import { timestampToDate } from "utils/timestampToDate";
 import { Post } from "types";
 
 type Props = {
-	posts: Post[] | undefined | null;
+	posts: Post[];
 };
 
 export const Posts: React.FC<Props> = ({ posts }) => {
 	return (
 		<Box>
-			{posts &&
-				posts.map((post, index) => {
-					const timestamp = post.createdAt * 1000;
-					const date = timestampToDate(timestamp);
-					return (
-						<VStack
-							w={theme.w.mobile}
-							key={post.id}
-							borderTop="1px"
-							borderRight="1px"
-							borderLeft="1px"
-							borderBottom={index === posts.length - 1 ? "1px" : "initial"}
-							borderColor={theme.color.gray}
-						>
-							<Flex w={theme.w.mobile}>
-								<Text ml={4}>{post.senderEmail}</Text>
-								<Spacer />
-								<Text mr={4}>{date}</Text>
-							</Flex>
-							<Text w={theme.w.mobile} pl={4}>
-								{post.body}
-							</Text>
-						</VStack>
-					);
-				})}
+			{posts.map((post, index) => {
+				const timestamp = post.createdAt * 1000;
+				const date = timestampToDate(timestamp);
+				return (
+					<VStack
+						w={theme.w.mobile}
+						key={post.id}
+						borderTop="1px"
+						borderRight="1px"
+						borderLeft="1px"
+						borderBottom={index === posts.length - 1 ? "1px" : "initial"}
+						borderColor={theme.color.gray}
+					>
+						<Flex w={theme.w.mobile}>
+							<Text ml={4}>{post.senderEmail}</Text>
+							<Spacer />
+							<Text mr={4}>{date}</Text>
+						</Flex>
+						<Text w={theme.w.mobile} pl={4}>
+							{post.body}
+						</Text>
+					</VStack>
+				);
+			})}
 		</Box>
 	);
 };

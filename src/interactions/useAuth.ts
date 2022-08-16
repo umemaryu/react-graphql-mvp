@@ -1,29 +1,19 @@
 import {
-	FetchUserByTokenQuery,
 	MutationCreateUserArgs,
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
 } from "infra/codegen";
 import { useState } from "react";
-import { authStore } from "infra/stores/authStore";
-import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";
 import { inputValidation } from "utils/inputValidation";
-import useAuthOperations from "infra/operations/useAuthOperations";
+import { useAuthOperations } from "infra/operations";
 
-export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
-	if (data) {
-		const id = parseInt(data.fetchUserByToken.id);
-		authStore(id);
-	}
+export const useAuth = () => {
 	const [error, setError] = useState("");
+	const { user, loading, mutations } = useAuthOperations();
 
-	const { mutations } = useAuthOperations();
-
-	const updateTokenByLogin: UpdateTokenByLogin = async (
-		args: MutationUpdateTokenByLoginArgs
-	) => {
+	const login = async (args: MutationUpdateTokenByLoginArgs) => {
 		const emailError = emailValidation(args.email);
 		const passwordError = passwordValidation(args.password);
 		const errorMessage = emailError || passwordError;
@@ -34,7 +24,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		await mutations.updateTokenByLogin(args);
 	};
 
-	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
+	const signUp = async (args: MutationCreateUserArgs) => {
 		const inputError = inputValidation(args);
 		const emailError = emailValidation(args.email);
 		const passwordError = passwordValidation(args.password);
@@ -46,14 +36,14 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		await mutations.createUser(args);
 	};
 
-	const updateTokenToNull: UpdateTokenToNull = async (
-		args: MutationUpdateTokenToNullArgs
-	) => {
+	const singOut = async (args: MutationUpdateTokenToNullArgs) => {
 		await mutations.updateTokenToNull(args);
 	};
 
 	return {
-		models: { error },
-		operations: { createUser, updateTokenToNull, updateTokenByLogin },
+		models: { user },
+		operations: { signUp, singOut, login },
+		loading,
+		error,
 	};
 };

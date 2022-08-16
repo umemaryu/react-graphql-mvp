@@ -4,43 +4,43 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
-import { CreatePost, FetchUserByEmail, Post as IPost, User } from "types";
+import { PostOnThread, SearchUser, User } from "types";
 
 type Props = {
-	id: number | undefined;
-	user: User | undefined;
-	senderEmail: string | undefined;
-	posts: IPost[] | null | undefined;
+	receiver: User | undefined;
+	sender: User;
 	actions: {
-		fetchUserByEmail: FetchUserByEmail;
-		createPost: CreatePost;
+		searchUser: SearchUser;
+		postOnThread: PostOnThread;
 	};
 };
 
 export const BrowseSection: React.FC<Props> = ({
-	id,
-	posts,
-	user,
-	senderEmail,
+	receiver,
+	sender,
 	actions,
 }) => {
 	return (
 		<ThreadLayout page="Browse">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					{!user && (
-						<Text textAlign="center">Search the other user by email</Text>
-					)}
-					<Search actions={actions} />
-					{user && <UserInfoList user={user} />}
-					<Posts posts={posts} />
-					{user && (
-						<Post
-							actions={actions}
-							senderEmail={senderEmail}
-							receiverId={user.id}
-							senderId={id?.toString()}
-						/>
+					{receiver ? (
+						<>
+							<Search actions={actions} />
+							<UserInfoList user={receiver} />
+							<Posts posts={receiver.posts} />
+							<Post
+								actions={actions}
+								sender={sender}
+								receiver={receiver}
+								queryName="fetchUserByEmail"
+							/>
+						</>
+					) : (
+						<>
+							<Text textAlign="center">Search the other user by email</Text>
+							<Search actions={actions} />
+						</>
 					)}
 				</VStack>
 			</Box>

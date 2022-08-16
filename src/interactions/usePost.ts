@@ -1,19 +1,16 @@
 import { MutationCreatePostArgs } from "infra/codegen";
-import usePostOperations from "infra/operations/usePostOperations";
-import { CreatePost, User } from "types";
+import { usePostOperations } from "infra/operations";
+import { User } from "types";
 
-type Input = {
-	user: User | undefined;
-	queryName: "fetchUserByToken" | "fetchUserByEmail";
-};
-
-export const usePost = ({ user, queryName }: Input) => {
-	const posts = user?.posts;
+export const usePost = () => {
 	const { mutations } = usePostOperations();
-	const createPost: CreatePost = async (args: MutationCreatePostArgs) => {
-		if (!posts) throw new Error("Posts are undefined");
-		await mutations.createPost(args, user, posts, queryName);
+	const postOnThread = async (
+		args: MutationCreatePostArgs,
+		user: User,
+		queryName: "fetchUserByToken" | "fetchUserByEmail"
+	) => {
+		await mutations.createPost(args, user, queryName);
 	};
 
-	return { models: { posts }, operations: { createPost } };
+	return { operations: { postOnThread } };
 };
