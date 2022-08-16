@@ -7,7 +7,7 @@ import { ChangePassword, SignOut } from "types";
 import useCustomToast from "hooks/useCustomToast";
 
 type Input = {
-	id: number | undefined;
+	id: number;
 	actions: {
 		singOut: SignOut;
 		changePassword: ChangePassword;
@@ -34,30 +34,22 @@ const useAccount = ({ id, actions }: Input) => {
 	};
 	const [state, setState] = useState(initValue);
 
-	const { setError, setSuccess } = useCustomToast();
+	const { setSuccess } = useCustomToast();
 
 	const handleFormInput = useCallback((value: string, id: string) => {
 		setState((prevState) => ({ ...prevState, [id]: value }));
 	}, []);
 
 	const handleUpdatePassword = async () => {
-		if (!id) {
-			setError({
-				title: "Authorization Error",
-				description: "Please reload and try again",
-			});
-		} else {
-			await actions.changePassword({
-				id: id,
-				...state,
-			});
-			setSuccess({ title: "Password changed ", description: "" });
-			setState(initValue);
-		}
+		await actions.changePassword({
+			id: id,
+			...state,
+		});
+		setSuccess({ title: "Password changed ", description: "" });
+		setState(initValue);
 	};
 
 	const handleSignOut = useCallback(async () => {
-		if (!id) return;
 		await actions.singOut({ id: id });
 		window.location.reload();
 	}, [actions, id]);
@@ -68,7 +60,7 @@ const useAccount = ({ id, actions }: Input) => {
 };
 
 type Props = {
-	id: number | undefined;
+	id: number;
 	actions: {
 		singOut: SignOut;
 		changePassword: ChangePassword;
