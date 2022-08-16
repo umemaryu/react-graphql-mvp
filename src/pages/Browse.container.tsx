@@ -8,14 +8,14 @@ type Props = {
 
 export const Browse = ({ id }: Props) => {
 	const { models } = useAuth();
-	const { user } = models;
-	if (!user) throw new Error("auth data is undefined");
+	const { user: sender } = models;
+	if (!sender) throw new Error("auth data is undefined");
 
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
-
+	const receiver = data?.fetchUserByEmail;
 	const queryName = "fetchUserByEmail";
 	const { operations: postOperations } = usePost({
-		user,
+		user: receiver,
 		queryName,
 	});
 
@@ -23,8 +23,8 @@ export const Browse = ({ id }: Props) => {
 	return (
 		<BrowseSection
 			id={id}
-			user={data?.fetchUserByEmail}
-			senderEmail={user.email}
+			receiver={receiver}
+			senderEmail={sender.email}
 			actions={{ fetchUserByEmail, postOnThread }}
 		/>
 	);

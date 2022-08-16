@@ -8,7 +8,7 @@ import { CreatePost, FetchUserByEmail, User } from "types";
 
 type Props = {
 	id: number;
-	user: User | undefined;
+	receiver: User | undefined;
 	senderEmail: string;
 	actions: {
 		fetchUserByEmail: FetchUserByEmail;
@@ -18,7 +18,7 @@ type Props = {
 
 export const BrowseSection: React.FC<Props> = ({
 	id,
-	user,
+	receiver,
 	senderEmail,
 	actions,
 }) => {
@@ -26,15 +26,15 @@ export const BrowseSection: React.FC<Props> = ({
 		<ThreadLayout page="Browse">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					{user ? (
+					{receiver ? (
 						<>
 							<Search actions={actions} />
-							<UserInfoList user={user} />
-							<Posts posts={user.posts} />
+							<UserInfoList user={receiver} />
+							<Posts posts={receiver.posts} />
 							<Post
 								actions={actions}
 								senderEmail={senderEmail}
-								receiverId={user.id}
+								receiverId={receiver.id}
 								senderId={id.toString()}
 							/>
 						</>
