@@ -5,8 +5,8 @@ import { useFetchUserByTokenQuery } from "infra/codegen";
 
 export const Profile = () => {
 	const { data, loading } = useFetchUserByTokenQuery();
-	const user = data?.fetchUserByToken;
-	if (!user) throw new Error("User are undefined");
+	if (!data) throw new Error("User are undefined");
+	const user = data.fetchUserByToken;
 	const queryName = "fetchUserByToken";
 	const { operations } = usePost({ user, queryName });
 	const { postOnThread } = operations;

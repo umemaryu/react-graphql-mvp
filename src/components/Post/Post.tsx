@@ -3,24 +3,16 @@ import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
 import { CreatePost } from "types";
-import useCustomToast from "hooks/useCustomToast";
 
 type Input = Props;
 
 const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 	const [value, setValue] = useState<string>("");
-	const { setError } = useCustomToast();
 	const handleChange = (value: string) => {
 		setValue(value);
 	};
 	const handleClick = async () => {
 		if (!value) return;
-		if (!senderId || !receiverId || !senderEmail) {
-			return setError({
-				title: "Authorization Error",
-				description: "Please reload and try again",
-			});
-		}
 		await actions.postOnThread({
 			body: value,
 			senderId: parseInt(senderId),
@@ -34,8 +26,8 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 
 type Props = {
 	receiverId: string;
-	senderId: string | undefined;
-	senderEmail: string | undefined;
+	senderId: string;
+	senderEmail: string;
 	actions: {
 		postOnThread: CreatePost;
 	};

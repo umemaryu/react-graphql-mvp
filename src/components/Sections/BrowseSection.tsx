@@ -7,10 +7,10 @@ import { Search } from "components/Search";
 import { CreatePost, FetchUserByEmail, Post as IPost, User } from "types";
 
 type Props = {
-	id: number | undefined;
+	id: number;
 	user: User | undefined;
-	senderEmail: string | undefined;
-	posts: IPost[] | null | undefined;
+	senderEmail: string;
+	posts: IPost[];
 	actions: {
 		fetchUserByEmail: FetchUserByEmail;
 		postOnThread: CreatePost;
@@ -32,12 +32,12 @@ export const BrowseSection: React.FC<Props> = ({
 						<>
 							<Search actions={actions} />
 							<UserInfoList user={user} />
-							{posts && <Posts posts={posts} />}
+							<Posts posts={posts} />
 							<Post
 								actions={actions}
 								senderEmail={senderEmail}
 								receiverId={user.id}
-								senderId={id?.toString()}
+								senderId={id.toString()}
 							/>
 						</>
 					) : (
