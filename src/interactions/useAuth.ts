@@ -3,7 +3,6 @@ import {
 	MutationCreateUserArgs,
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
-	useCreateUserMutation,
 	useUpdateTokenToNullMutation,
 } from "infra/codegen";
 import useClient from "hooks/useClient";
@@ -34,12 +33,10 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		if (errorMessage) {
 			setError(errorMessage);
 			throw new Error(errorMessage);
-		} else {
-			await mutations.updateTokenByLogin(args);
 		}
+		await mutations.updateTokenByLogin(args);
 	};
 
-	const [CREATE_USER] = useCreateUserMutation();
 	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
 		const inputError = inputValidation(args);
 		const emailError = emailValidation(args.email);
@@ -48,14 +45,8 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		if (errorMessage) {
 			setError(errorMessage);
 			throw new Error(errorMessage);
-		} else {
-			const res = await CREATE_USER({
-				variables: args,
-			});
-			if (res.data && res.data.createUser) {
-				storage.setToken(res.data.createUser);
-			}
 		}
+		await mutations.createUser(args);
 	};
 
 	const { client } = useClient();

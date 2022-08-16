@@ -1,5 +1,7 @@
 import {
+	MutationCreateUserArgs,
 	MutationUpdateTokenByLoginArgs,
+	useCreateUserMutation,
 	useUpdateTokenByLoginMutation,
 } from "infra/codegen";
 import storage from "utils/storage";
@@ -12,12 +14,24 @@ export const useAuthOperations = () => {
 		await UPDATE_TOKEN_BY_LOGIN({
 			variables: args,
 		}).then((res) => {
-			if (res.data && res.data.updateTokenByLogin) {
-				storage.setToken(res.data.updateTokenByLogin);
-			}
+			if (!res.data) throw new Error("Response data is undefined");
+			storage.setToken(res.data.updateTokenByLogin);
 		});
 	};
-	return { mutations: { updateTokenByLogin } };
+
+	const [CREATE_USER] = useCreateUserMutation();
+	const createUser: (args: MutationCreateUserArgs) => Promise<void> = async (
+		args
+	) => {
+		await CREATE_USER({
+			variables: args,
+		}).then((res) => {
+			if (!res.data) throw new Error("Response data is undefined");
+			storage.setToken(res.data.createUser);
+		});
+	};
+
+	return { mutations: { updateTokenByLogin, createUser } };
 };
 
 export default useAuthOperations;
