@@ -10,7 +10,7 @@ type Props = {
 	user: User | undefined;
 	posts: IPost[] | null | undefined;
 	actions: {
-		createPost: CreatePost;
+		postOnThread: CreatePost;
 	};
 };
 

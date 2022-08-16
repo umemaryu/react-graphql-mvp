@@ -8,13 +8,13 @@ export const Profile = () => {
 	const user = data?.fetchUserByToken;
 	const queryName = "fetchUserByToken";
 	const { models, operations } = usePost({ user, queryName });
-	const { createPost } = operations;
+	const { postOnThread } = operations;
 
 	if (loading) return <Spinner />;
 	return (
 		<ProfileSection
 			user={data?.fetchUserByToken}
-			actions={{ createPost }}
+			actions={{ postOnThread }}
 			posts={models.posts}
 		/>
 	);

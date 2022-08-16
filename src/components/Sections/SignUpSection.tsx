@@ -14,7 +14,7 @@ import { CreateUser } from "types";
 
 type Input = {
 	actions: {
-		createUser: CreateUser;
+		signUp: CreateUser;
 	};
 };
 
@@ -62,7 +62,7 @@ const useSignUp = ({ actions }: Input) => {
 		});
 	}, []);
 	const handleRegister = useCallback(async () => {
-		await actions.createUser({ ...state });
+		await actions.signUp({ ...state });
 		window.location.reload();
 	}, [state, actions]);
 	const handleLogin = useCallback(() => {
@@ -76,7 +76,7 @@ const useSignUp = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		createUser: CreateUser;
+		signUp: CreateUser;
 	};
 	error: string;
 };

@@ -6,11 +6,11 @@ export const Account = () => {
 	const id = authStore();
 	const { operations: authOperations } = useAuth();
 	const { models: userModels, operations: userOperations } = useUser();
-	const { updateTokenToNull } = authOperations;
-	const { updatePassword } = userOperations;
+	const { singOut } = authOperations;
+	const { changePassword } = userOperations;
 	return (
 		<AccountSection
-			actions={{ updateTokenToNull, updatePassword }}
+			actions={{ singOut, changePassword }}
 			id={id}
 			error={userModels.error}
 		/>

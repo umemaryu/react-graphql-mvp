@@ -21,7 +21,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 
 	const { mutations } = useAuthOperations();
 
-	const updateTokenByLogin: UpdateTokenByLogin = async (
+	const login: UpdateTokenByLogin = async (
 		args: MutationUpdateTokenByLoginArgs
 	) => {
 		const emailError = emailValidation(args.email);
@@ -34,7 +34,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		await mutations.updateTokenByLogin(args);
 	};
 
-	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
+	const signUp: CreateUser = async (args: MutationCreateUserArgs) => {
 		const inputError = inputValidation(args);
 		const emailError = emailValidation(args.email);
 		const passwordError = passwordValidation(args.password);
@@ -46,7 +46,7 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 		await mutations.createUser(args);
 	};
 
-	const updateTokenToNull: UpdateTokenToNull = async (
+	const singOut: UpdateTokenToNull = async (
 		args: MutationUpdateTokenToNullArgs
 	) => {
 		await mutations.updateTokenToNull(args);
@@ -54,6 +54,6 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 
 	return {
 		models: { error },
-		operations: { createUser, updateTokenToNull, updateTokenByLogin },
+		operations: { signUp, singOut, login },
 	};
 };

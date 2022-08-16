@@ -13,7 +13,7 @@ type Props = {
 	posts: IPost[] | null | undefined;
 	actions: {
 		fetchUserByEmail: FetchUserByEmail;
-		createPost: CreatePost;
+		postOnThread: CreatePost;
 	};
 };
 

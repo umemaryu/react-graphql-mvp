@@ -20,7 +20,7 @@ const useSearch = ({ actions }: SearchInput) => {
 type Props = {
 	actions: {
 		fetchUserByEmail: FetchUserByEmail;
-		createPost: CreatePost;
+		postOnThread: CreatePost;
 	};
 };
 

@@ -10,8 +10,8 @@ import { MutationUpdatePasswordArgs } from "infra/codegen";
 type Input = {
 	id: number | undefined;
 	actions: {
-		updateTokenToNull: UpdateTokenToNull;
-		updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
+		singOut: UpdateTokenToNull;
+		changePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
 	};
 };
 
@@ -48,7 +48,7 @@ const useAccount = ({ id, actions }: Input) => {
 				description: "Please reload and try again",
 			});
 		} else {
-			await actions.updatePassword({
+			await actions.changePassword({
 				id: id,
 				...state,
 			});
@@ -59,7 +59,7 @@ const useAccount = ({ id, actions }: Input) => {
 
 	const handleSignOut = useCallback(async () => {
 		if (!id) return;
-		await actions.updateTokenToNull({ id: id });
+		await actions.singOut({ id: id });
 		window.location.reload();
 	}, [actions, id]);
 	return {
@@ -71,8 +71,8 @@ const useAccount = ({ id, actions }: Input) => {
 type Props = {
 	id: number | undefined;
 	actions: {
-		updateTokenToNull: UpdateTokenToNull;
-		updatePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
+		singOut: UpdateTokenToNull;
+		changePassword: (args: MutationUpdatePasswordArgs) => Promise<void>;
 	};
 	error: string;
 };

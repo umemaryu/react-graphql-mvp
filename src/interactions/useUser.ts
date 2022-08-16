@@ -6,7 +6,7 @@ import { passwordValidation } from "utils/passwordValidation";
 export const useUser = () => {
 	const [error, setError] = useState("");
 	const { mutations } = useUserOperations();
-	const updatePassword = async (args: MutationUpdatePasswordArgs) => {
+	const changePassword = async (args: MutationUpdatePasswordArgs) => {
 		const oldPasswordError = passwordValidation(args.oldPassword);
 		const newPasswordError = passwordValidation(args.newPassword);
 		const errorMessage = oldPasswordError || newPasswordError;
@@ -17,5 +17,5 @@ export const useUser = () => {
 			await mutations.updatePassword(args);
 		}
 	};
-	return { models: { error }, operations: { updatePassword } };
+	return { models: { error }, operations: { changePassword } };
 };

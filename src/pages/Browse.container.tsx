@@ -17,14 +17,14 @@ export const Browse = () => {
 		queryName,
 	});
 
-	const { createPost } = postOperations;
+	const { postOnThread } = postOperations;
 	return (
 		<BrowseSection
 			id={id}
 			user={data?.fetchUserByEmail}
 			senderEmail={authData?.fetchUserByToken.email}
 			posts={postModels.posts}
-			actions={{ fetchUserByEmail, createPost }}
+			actions={{ fetchUserByEmail, postOnThread }}
 		/>
 	);
 };

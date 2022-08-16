@@ -21,7 +21,7 @@ const usePost = ({ actions, senderId, receiverId, senderEmail }: Input) => {
 				description: "Please reload and try again",
 			});
 		}
-		await actions.createPost({
+		await actions.postOnThread({
 			body: value,
 			senderId: parseInt(senderId),
 			receiverId: parseInt(receiverId),
@@ -37,7 +37,7 @@ type Props = {
 	senderId: string | undefined;
 	senderEmail: string | undefined;
 	actions: {
-		createPost: CreatePost;
+		postOnThread: CreatePost;
 	};
 };
 

@@ -14,7 +14,7 @@ import { UpdateTokenByLogin } from "types";
 
 type Input = {
 	actions: {
-		updateTokenByLogin: UpdateTokenByLogin;
+		login: UpdateTokenByLogin;
 	};
 };
 
@@ -46,7 +46,7 @@ const useLogin = ({ actions }: Input) => {
 	}, []);
 
 	const handleLogin = useCallback(async () => {
-		await actions.updateTokenByLogin({
+		await actions.login({
 			...state,
 		});
 		window.location.reload();
@@ -63,7 +63,7 @@ const useLogin = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		updateTokenByLogin: UpdateTokenByLogin;
+		login: UpdateTokenByLogin;
 	};
 	error: string;
 };
