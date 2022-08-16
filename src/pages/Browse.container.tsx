@@ -4,12 +4,14 @@ import {
 	useFetchUserByEmailLazyQuery,
 	useFetchUserByTokenQuery,
 } from "infra/codegen";
-import { authStore } from "infra/stores/authStore";
 
-export const Browse = () => {
-	const id = authStore();
+type Props = {
+	id: number;
+};
+
+export const Browse = ({ id }: Props) => {
 	const { data: authData } = useFetchUserByTokenQuery();
-	if (!authData || !id) throw new Error("auth data is undefined");
+	if (!authData) throw new Error("auth data is undefined");
 	const [fetchUserByEmail, { data }] = useFetchUserByEmailLazyQuery();
 
 	const user = data?.fetchUserByEmail;

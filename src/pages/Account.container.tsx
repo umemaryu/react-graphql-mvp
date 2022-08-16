@@ -1,9 +1,11 @@
 import { useAuth, useUser } from "interactions";
 import { AccountSection } from "components/Sections";
-import { authStore } from "infra/stores/authStore";
 
-export const Account = () => {
-	const id = authStore();
+type Props = {
+	id: number;
+};
+
+export const Account = ({ id }: Props) => {
 	const { operations: authOperations } = useAuth();
 	const { models: userModels, operations: userOperations } = useUser();
 	const { singOut } = authOperations;

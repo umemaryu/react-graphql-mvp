@@ -11,7 +11,7 @@ export const AppRoutes = () => {
 	useAuth(data);
 	const id = authStore();
 
-	const routes = id ? protectedRoutes : publicRoutes;
+	const routes = id ? protectedRoutes(id) : publicRoutes;
 	const redirectRoutes = [
 		{ path: "*", element: <Error404 loading={loading} id={id} /> },
 	];
