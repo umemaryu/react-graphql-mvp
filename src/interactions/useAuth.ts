@@ -4,17 +4,17 @@ import {
 	MutationUpdateTokenByLoginArgs,
 	MutationUpdateTokenToNullArgs,
 	useCreateUserMutation,
-	useUpdateTokenByLoginMutation,
 	useUpdateTokenToNullMutation,
 } from "infra/codegen";
 import useClient from "hooks/useClient";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { authStore } from "infra/stores/authStore";
 import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";
 import storage from "utils/storage";
 import { inputValidation } from "utils/inputValidation";
+import useAuthOperations from "infra/operations/useAuthOperations";
 
 export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	if (data) {
@@ -23,24 +23,21 @@ export const useAuth = (data?: FetchUserByTokenQuery | undefined) => {
 	}
 	const [error, setError] = useState("");
 
-	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
-	const updateTokenByLogin: UpdateTokenByLogin = useCallback(
-		async (args: MutationUpdateTokenByLoginArgs) => {
-			const emailError = emailValidation(args.email);
-			const passwordError = passwordValidation(args.password);
-			const errorMessage = emailError || passwordError;
-			if (errorMessage) {
-				setError(errorMessage);
-				throw new Error(errorMessage);
-			} else {
-				const res = await UPDATE_TOKEN_BY_LOGIN({ variables: args });
-				if (res.data && res.data.updateTokenByLogin) {
-					storage.setToken(res.data.updateTokenByLogin);
-				}
-			}
-		},
-		[UPDATE_TOKEN_BY_LOGIN]
-	);
+	const { mutations } = useAuthOperations();
+
+	const updateTokenByLogin: UpdateTokenByLogin = async (
+		args: MutationUpdateTokenByLoginArgs
+	) => {
+		const emailError = emailValidation(args.email);
+		const passwordError = passwordValidation(args.password);
+		const errorMessage = emailError || passwordError;
+		if (errorMessage) {
+			setError(errorMessage);
+			throw new Error(errorMessage);
+		} else {
+			await mutations.updateTokenByLogin(args);
+		}
+	};
 
 	const [CREATE_USER] = useCreateUserMutation();
 	const createUser: CreateUser = async (args: MutationCreateUserArgs) => {
