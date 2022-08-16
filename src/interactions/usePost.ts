@@ -1,5 +1,5 @@
 import { MutationCreatePostArgs } from "infra/codegen";
-import usePostOperations from "infra/operations/usePostOperations";
+import { usePostOperations } from "infra/operations";
 import { CreatePost, User } from "types";
 
 export const usePost = () => {

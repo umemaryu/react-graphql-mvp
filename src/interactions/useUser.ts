@@ -2,7 +2,7 @@ import {
 	MutationUpdatePasswordArgs,
 	QueryFetchUserByEmailArgs,
 } from "infra/codegen";
-import useUserOperations from "infra/operations/useUserOperations";
+import { useUserOperations } from "infra/operations";
 import { useState } from "react";
 import { passwordValidation } from "utils/passwordValidation";
 

@@ -8,7 +8,7 @@ import { CreateUser, UpdateTokenByLogin, UpdateTokenToNull } from "types";
 import { emailValidation } from "utils/emailValidation";
 import { passwordValidation } from "utils/passwordValidation";
 import { inputValidation } from "utils/inputValidation";
-import useAuthOperations from "infra/operations/useAuthOperations";
+import { useAuthOperations } from "infra/operations";
 
 export const useAuth = () => {
 	const [error, setError] = useState("");
