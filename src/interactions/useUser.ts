@@ -13,9 +13,8 @@ export const useUser = () => {
 		if (errorMessage) {
 			setError(errorMessage);
 			throw new Error(errorMessage);
-		} else {
-			await mutations.updatePassword(args);
 		}
+		await mutations.updatePassword(args);
 	};
 	return { error, operations: { changePassword } };
 };
