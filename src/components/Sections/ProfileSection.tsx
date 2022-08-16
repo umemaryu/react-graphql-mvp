@@ -7,7 +7,7 @@ import { Posts } from "components/Post";
 import { CreatePost, User } from "types";
 
 type Props = {
-	user: User | undefined;
+	user: User;
 	actions: {
 		postOnThread: CreatePost;
 	};
@@ -18,19 +18,15 @@ export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 		<ThreadLayout page="Profile">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					{user && user.posts && (
-						<>
-							<Text textAlign="center">Write a post to your thread</Text>
-							<UserInfoList user={user} /> <Divider />
-							<Posts posts={user.posts} />
-							<Post
-								actions={actions}
-								senderEmail={user.email}
-								receiverId={user.id}
-								senderId={user.id}
-							/>
-						</>
-					)}
+					<Text textAlign="center">Write a post to your thread</Text>
+					<UserInfoList user={user} /> <Divider />
+					<Posts posts={user.posts} />
+					<Post
+						actions={actions}
+						senderEmail={user.email}
+						receiverId={user.id}
+						senderId={user.id}
+					/>
 				</VStack>
 			</Box>
 		</ThreadLayout>

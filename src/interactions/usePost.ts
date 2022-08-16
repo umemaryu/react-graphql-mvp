@@ -8,10 +8,10 @@ type Input = {
 };
 
 export const usePost = ({ user, queryName }: Input) => {
-	const posts = user?.posts;
+	if (!user) throw new Error("user is undefined");
+	const posts = user.posts;
 	const { mutations } = usePostOperations();
 	const postOnThread: CreatePost = async (args: MutationCreatePostArgs) => {
-		if (!posts) throw new Error("Posts are undefined");
 		await mutations.createPost(args, user, posts, queryName);
 	};
 
