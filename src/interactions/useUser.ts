@@ -16,7 +16,7 @@ export const useUser = () => {
 		const errorMessage = oldPasswordError || newPasswordError;
 		if (errorMessage) {
 			setError(errorMessage);
-			throw new Error(errorMessage);
+			return;
 		}
 		await mutations.updatePassword(args);
 	};

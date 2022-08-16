@@ -19,7 +19,7 @@ export const useAuth = () => {
 		const errorMessage = emailError || passwordError;
 		if (errorMessage) {
 			setError(errorMessage);
-			throw new Error(errorMessage);
+			return;
 		}
 		await mutations.updateTokenByLogin(args);
 	};
@@ -31,7 +31,7 @@ export const useAuth = () => {
 		const errorMessage = inputError || emailError || passwordError;
 		if (errorMessage) {
 			setError(errorMessage);
-			throw new Error(errorMessage);
+			return;
 		}
 		await mutations.createUser(args);
 	};
