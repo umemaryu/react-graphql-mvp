@@ -1,5 +1,5 @@
 import { MutationUpdatePasswordArgs } from "infra/codegen";
 
-export type UpdatePassword = (
+export type ChangePassword = (
 	args: MutationUpdatePasswordArgs
 ) => Promise<void>;

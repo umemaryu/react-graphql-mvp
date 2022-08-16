@@ -4,12 +4,12 @@ import { UserInfoList } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
 import { Posts } from "components/Post";
-import { CreatePost, User } from "types";
+import { PostOnThread, User } from "types";
 
 type Props = {
 	user: User;
 	actions: {
-		postOnThread: CreatePost;
+		postOnThread: PostOnThread;
 	};
 };
 

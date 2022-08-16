@@ -10,11 +10,11 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { UpdateTokenByLogin } from "types";
+import { Login } from "types";
 
 type Input = {
 	actions: {
-		login: UpdateTokenByLogin;
+		login: Login;
 	};
 };
 
@@ -63,7 +63,7 @@ const useLogin = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		login: UpdateTokenByLogin;
+		login: Login;
 	};
 	error: string;
 };

@@ -1,7 +1,7 @@
 import { MutationCreatePostArgs } from "infra/codegen";
 import { User } from "types";
 
-export type CreatePost = (
+export type PostOnThread = (
 	args: MutationCreatePostArgs,
 	user: User,
 	queryName: "fetchUserByToken" | "fetchUserByEmail"

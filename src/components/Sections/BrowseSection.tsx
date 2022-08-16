@@ -4,14 +4,14 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
-import { CreatePost, FetchUserByEmail, User } from "types";
+import { PostOnThread, SearchUser, User } from "types";
 
 type Props = {
 	receiver: User | undefined;
 	sender: User;
 	actions: {
-		searchUser: FetchUserByEmail;
-		postOnThread: CreatePost;
+		searchUser: SearchUser;
+		postOnThread: PostOnThread;
 	};
 };
 

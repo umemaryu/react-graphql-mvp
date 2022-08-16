@@ -10,11 +10,11 @@ import {
 import { Form } from "components/Form";
 import { theme } from "utils/theme";
 import { useNavigate } from "react-router-dom";
-import { CreateUser } from "types";
+import { SignUp } from "types";
 
 type Input = {
 	actions: {
-		signUp: CreateUser;
+		signUp: SignUp;
 	};
 };
 
@@ -76,7 +76,7 @@ const useSignUp = ({ actions }: Input) => {
 
 type Props = {
 	actions: {
-		signUp: CreateUser;
+		signUp: SignUp;
 	};
 	error: string;
 };

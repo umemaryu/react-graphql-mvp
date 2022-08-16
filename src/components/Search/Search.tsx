@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input, Box, HStack, SearchIcon } from "components/Elements";
-import { CreatePost, FetchUserByEmail } from "types";
+import { PostOnThread, SearchUser } from "types";
 
 type SearchInput = Props;
 
@@ -19,8 +19,8 @@ const useSearch = ({ actions }: SearchInput) => {
 
 type Props = {
 	actions: {
-		searchUser: FetchUserByEmail;
-		postOnThread: CreatePost;
+		searchUser: SearchUser;
+		postOnThread: PostOnThread;
 	};
 };
 

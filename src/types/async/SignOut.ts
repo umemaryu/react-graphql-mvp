@@ -1,5 +1,5 @@
 import { MutationUpdateTokenToNullArgs } from "infra/codegen";
 
-export type UpdateTokenToNull = (
+export type SignOut = (
 	args: MutationUpdateTokenToNullArgs
 ) => Promise<void>;

@@ -1,5 +1,5 @@
 import { QueryFetchUserByEmailArgs } from "infra/codegen";
 
-export type FetchUserByEmail = (
+export type SearchUser = (
 	args: QueryFetchUserByEmailArgs
 ) => Promise<void>;

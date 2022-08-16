@@ -1,10 +1,10 @@
 import { MutationCreatePostArgs } from "infra/codegen";
 import { usePostOperations } from "infra/operations";
-import { CreatePost, User } from "types";
+import { User } from "types";
 
 export const usePost = () => {
 	const { mutations } = usePostOperations();
-	const postOnThread: CreatePost = async (
+	const postOnThread = async (
 		args: MutationCreatePostArgs,
 		user: User,
 		queryName: "fetchUserByToken" | "fetchUserByEmail"

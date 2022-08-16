@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, HStack, PostIcon } from "components/Elements";
 import { theme } from "utils/theme";
 import { Textarea } from "components/Elements/Textarea";
-import { CreatePost, User } from "types";
+import { PostOnThread, User } from "types";
 
 type Input = Props;
 
@@ -30,7 +30,7 @@ type Props = {
 	sender: User;
 	queryName: "fetchUserByToken" | "fetchUserByEmail";
 	actions: {
-		postOnThread: CreatePost;
+		postOnThread: PostOnThread;
 	};
 };
 
