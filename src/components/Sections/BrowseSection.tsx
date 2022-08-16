@@ -10,7 +10,7 @@ type Props = {
 	receiver: User | undefined;
 	sender: User;
 	actions: {
-		fetchUserByEmail: FetchUserByEmail;
+		searchUser: FetchUserByEmail;
 		postOnThread: CreatePost;
 	};
 };

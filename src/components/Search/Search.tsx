@@ -11,15 +11,15 @@ const useSearch = ({ actions }: SearchInput) => {
 	};
 	const handleClick = async () => {
 		if (!value) return;
-		const res = await actions.fetchUserByEmail({ variables: { email: value } });
-		if (res.data) setValue("");
+		await actions.searchUser({ email: value });
+		setValue("");
 	};
 	return { models: { value }, operations: { handleInput, handleClick } };
 };
 
 type Props = {
 	actions: {
-		fetchUserByEmail: FetchUserByEmail;
+		searchUser: FetchUserByEmail;
 		postOnThread: CreatePost;
 	};
 };

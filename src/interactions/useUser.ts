@@ -1,11 +1,15 @@
-import { MutationUpdatePasswordArgs } from "infra/codegen";
+import {
+	MutationUpdatePasswordArgs,
+	QueryFetchUserByEmailArgs,
+} from "infra/codegen";
 import useUserOperations from "infra/operations/useUserOperations";
 import { useState } from "react";
 import { passwordValidation } from "utils/passwordValidation";
 
 export const useUser = () => {
 	const [error, setError] = useState("");
-	const { mutations } = useUserOperations();
+	const { models, queries, mutations } = useUserOperations();
+	const { user } = models;
 	const changePassword = async (args: MutationUpdatePasswordArgs) => {
 		const oldPasswordError = passwordValidation(args.oldPassword);
 		const newPasswordError = passwordValidation(args.newPassword);
@@ -16,5 +20,14 @@ export const useUser = () => {
 		}
 		await mutations.updatePassword(args);
 	};
-	return { error, operations: { changePassword } };
+
+	const searchUser = async (args: QueryFetchUserByEmailArgs) => {
+		await queries.fetchUserByEmail(args);
+	};
+
+	return {
+		models: { user },
+		error,
+		operations: { changePassword, searchUser },
+	};
 };
