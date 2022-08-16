@@ -16,7 +16,7 @@ export const Browse = ({ id }: Props) => {
 
 	const user = data?.fetchUserByEmail;
 	const queryName = "fetchUserByEmail";
-	const { models: postModels, operations: postOperations } = usePost({
+	const { operations: postOperations } = usePost({
 		user,
 		queryName,
 	});
@@ -27,7 +27,6 @@ export const Browse = ({ id }: Props) => {
 			id={id}
 			user={data?.fetchUserByEmail}
 			senderEmail={authData.fetchUserByToken.email}
-			posts={postModels.posts}
 			actions={{ fetchUserByEmail, postOnThread }}
 		/>
 	);

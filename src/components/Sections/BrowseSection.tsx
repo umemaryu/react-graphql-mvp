@@ -4,13 +4,12 @@ import { UserInfoList } from "components/List";
 import { theme } from "utils/theme";
 import { Post, Posts } from "components/Post";
 import { Search } from "components/Search";
-import { CreatePost, FetchUserByEmail, Post as IPost, User } from "types";
+import { CreatePost, FetchUserByEmail, User } from "types";
 
 type Props = {
 	id: number;
 	user: User | undefined;
 	senderEmail: string;
-	posts: IPost[];
 	actions: {
 		fetchUserByEmail: FetchUserByEmail;
 		postOnThread: CreatePost;
@@ -19,7 +18,6 @@ type Props = {
 
 export const BrowseSection: React.FC<Props> = ({
 	id,
-	posts,
 	user,
 	senderEmail,
 	actions,
@@ -32,7 +30,7 @@ export const BrowseSection: React.FC<Props> = ({
 						<>
 							<Search actions={actions} />
 							<UserInfoList user={user} />
-							<Posts posts={posts} />
+							<Posts posts={user.posts} />
 							<Post
 								actions={actions}
 								senderEmail={senderEmail}
