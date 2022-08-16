@@ -4,32 +4,32 @@ import { UserInfoList } from "components/List";
 import { Post } from "components/Post";
 import { theme } from "utils/theme";
 import { Posts } from "components/Post";
-import { CreatePost, Post as IPost, User } from "types";
+import { CreatePost, User } from "types";
 
 type Props = {
 	user: User | undefined;
-	posts: IPost[] | null | undefined;
 	actions: {
 		postOnThread: CreatePost;
 	};
 };
 
-export const ProfileSection: React.FC<Props> = ({ user, posts, actions }) => {
+export const ProfileSection: React.FC<Props> = ({ user, actions }) => {
 	return (
 		<ThreadLayout page="Profile">
 			<Box pt={theme.m.md}>
 				<VStack spacing={theme.m.md}>
-					{user && <UserInfoList user={user} />}
-					<Divider />
-					<Text textAlign="center">Write a post to your thread</Text>
-					<Posts posts={posts} />
-					{user && (
-						<Post
-							actions={actions}
-							senderEmail={user.email}
-							receiverId={user.id}
-							senderId={user.id}
-						/>
+					{user && user.posts && (
+						<>
+							<Text textAlign="center">Write a post to your thread</Text>
+							<UserInfoList user={user} /> <Divider />
+							<Posts posts={user.posts} />
+							<Post
+								actions={actions}
+								senderEmail={user.email}
+								receiverId={user.id}
+								senderId={user.id}
+							/>
+						</>
 					)}
 				</VStack>
 			</Box>

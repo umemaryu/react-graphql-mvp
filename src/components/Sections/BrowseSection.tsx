@@ -32,7 +32,7 @@ export const BrowseSection: React.FC<Props> = ({
 						<>
 							<Search actions={actions} />
 							<UserInfoList user={user} />
-							<Posts posts={posts} />
+							{posts && <Posts posts={posts} />}
 							<Post
 								actions={actions}
 								senderEmail={senderEmail}
