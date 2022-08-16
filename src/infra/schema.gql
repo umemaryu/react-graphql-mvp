@@ -6,7 +6,7 @@ type User {
 	country: String!
 	city: String!
 	nickName: String!
-	posts: [Post!]
+	posts: [Post!]!
 }
 
 type Post {

@@ -89,7 +89,7 @@ export type User = {
   id: Scalars['ID'];
   nickName: Scalars['String'];
   password: Scalars['String'];
-  posts?: Maybe<Array<Post>>;
+  posts: Array<Post>;
   token?: Maybe<Scalars['String']>;
 };
 
@@ -216,7 +216,7 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   nickName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  posts?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>;
+  posts?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
