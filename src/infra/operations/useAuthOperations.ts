@@ -24,11 +24,11 @@ export const useAuthOperations: () => {
 	mutations: Mutations;
 } = () => {
 	const { data, loading } = useFetchUserByTokenQuery();
-	if (!authStore() && data) {
-		const id = parseInt(data.fetchUserByToken.id);
+	const user: User | undefined = data?.fetchUserByToken;
+	if (!authStore() && user) {
+		const id = parseInt(user.id);
 		authStore(id);
 	}
-	const user: User | undefined = data?.fetchUserByToken;
 
 	const [UPDATE_TOKEN_BY_LOGIN] = useUpdateTokenByLoginMutation();
 	const updateTokenByLogin = async (args: MutationUpdateTokenByLoginArgs) => {

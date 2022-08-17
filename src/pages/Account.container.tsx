@@ -8,11 +8,11 @@ type Props = {
 export const Account = ({ id }: Props) => {
 	const { operations: authOperations } = useAuth();
 	const { error, operations: userOperations } = useUser();
-	const { singOut } = authOperations;
+	const { signOut } = authOperations;
 	const { changePassword } = userOperations;
 	return (
 		<AccountSection
-			actions={{ singOut, changePassword }}
+			actions={{ signOut, changePassword }}
 			id={id}
 			error={error}
 		/>

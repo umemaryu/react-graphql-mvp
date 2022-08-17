@@ -19,7 +19,7 @@ export const useAuth = () => {
 		const errorMessage = emailError || passwordError;
 		if (errorMessage) {
 			setError(errorMessage);
-			throw new Error(errorMessage);
+			return;
 		}
 		await mutations.updateTokenByLogin(args);
 	};
@@ -31,18 +31,18 @@ export const useAuth = () => {
 		const errorMessage = inputError || emailError || passwordError;
 		if (errorMessage) {
 			setError(errorMessage);
-			throw new Error(errorMessage);
+			return;
 		}
 		await mutations.createUser(args);
 	};
 
-	const singOut = async (args: MutationUpdateTokenToNullArgs) => {
+	const signOut = async (args: MutationUpdateTokenToNullArgs) => {
 		await mutations.updateTokenToNull(args);
 	};
 
 	return {
 		models: { user },
-		operations: { signUp, singOut, login },
+		operations: { signUp, signOut, login },
 		loading,
 		error,
 	};
