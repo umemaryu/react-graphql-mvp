@@ -15,6 +15,7 @@ export type UserPost = {
 	senderId: number;
 	body: string;
 	createdAt: number;
+	date: string;
 };
 
 export type Context = {

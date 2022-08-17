@@ -3,4 +3,5 @@ export type Post = {
 	body: string;
 	createdAt: number;
 	senderEmail: string;
+	date: string;
 };
