@@ -1,15 +1,16 @@
-# Working in progress
+# About
+This app has been created with MVP. 
+Blog - React & GraphQL with MVP](https://dev.to/ryutaro/react-graphql-with-mvp-3gj8-temp-slug-727791?preview=091619d5e94351c22539417eae70cbea47b6e54611af08513afe6f9ba065f8878b33fe8ed3a6a1c9570a9dd7c728d4a9cfedd0c2a8a635dac55558e0)
 
-## Source
+# Check in your local environment
+Don't forget run `yarn start` and `yarn server` command on your terminal.
 
-- <a href="https://github.com/alan2207/bulletproof-react">bulletproof-react</a>
+# Contributing
+Contributions are welcome. If you have opinions, let me know!!
 
-## Design
+# License
+MIT - Feel free to use it😆
 
-- <a href="https://khalilstemmler.com/articles/client-side-architecture/introduction/">Client-Side Architecture Basics [Guide]</a>
-  <a href="https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0">Presentational and Container Components</a>
-  <a href="https://shinesolutions.com/2021/06/30/automatically-handling-apollo-client-errors-in-your-react-ui/">Automatically handling Apollo Client errors in your React UI</a>
-  <a href=""></a>
-  <a href=""></a>
-  <a href=""></a>
-  <a href=""></a>
+[
+
+
