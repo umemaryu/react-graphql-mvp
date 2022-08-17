@@ -17,6 +17,7 @@ type Post {
 	createdAt: Int!
 	user: User!
 	userId: Int!
+	date: String!
 }
 
 type Query {

@@ -10,6 +10,7 @@ query FetchUserByToken {
 			body
 			createdAt
 			senderEmail
+			date @client
 		}
 	}
 }
@@ -26,6 +27,7 @@ query FetchUserByEmail($email: String!) {
 			body
 			createdAt
 			senderEmail
+			date @client
 		}
 	}
 }

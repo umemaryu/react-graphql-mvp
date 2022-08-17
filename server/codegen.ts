@@ -63,6 +63,7 @@ export type Post = {
   __typename?: 'Post';
   body: Scalars['String'];
   createdAt: Scalars['Int'];
+  date: Scalars['String'];
   id: Scalars['ID'];
   senderEmail: Scalars['String'];
   senderId: Scalars['Int'];
@@ -196,6 +197,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 export type PostResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   senderEmail?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   senderId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;

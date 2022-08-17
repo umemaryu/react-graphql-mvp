@@ -63,6 +63,7 @@ export type Post = {
   __typename?: 'Post';
   body: Scalars['String'];
   createdAt: Scalars['Int'];
+  date: Scalars['String'];
   id: Scalars['ID'];
   senderEmail: Scalars['String'];
   senderId: Scalars['Int'];
@@ -141,14 +142,14 @@ export type UpdateTokenToNullMutation = { __typename?: 'Mutation', updateTokenTo
 export type FetchUserByTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> } };
+export type FetchUserByTokenQuery = { __typename?: 'Query', fetchUserByToken: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string, date: string }> } };
 
 export type FetchUserByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string }> } };
+export type FetchUserByEmailQuery = { __typename?: 'Query', fetchUserByEmail: { __typename?: 'User', id: string, email: string, country: string, city: string, nickName: string, posts: Array<{ __typename?: 'Post', id: string, body: string, createdAt: number, senderEmail: string, date: string }> } };
 
 
 export const CreatePostDocument = gql`
@@ -345,6 +346,7 @@ export const FetchUserByTokenDocument = gql`
       body
       createdAt
       senderEmail
+      date @client
     }
   }
 }
@@ -389,6 +391,7 @@ export const FetchUserByEmailDocument = gql`
       body
       createdAt
       senderEmail
+      date @client
     }
   }
 }
