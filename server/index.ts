@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { ApolloServer, UserInputError, ValidationError } from "apollo-server";
 import { readFileSync } from "fs";
-import { Context } from "infra/models";
+import { Context } from "../server/models";
 import {
 	MutationCreatePostArgs,
 	MutationCreateUserArgs,
@@ -70,14 +70,13 @@ const resolvers: Resolvers = {
 				throw new UserInputError("The password must be over 6 letters");
 			emailValidation(args.email);
 			const token = createToken();
-			await prisma.user.create({
+			return await prisma.user.create({
 				data: {
 					token: token,
 					...args,
 					posts: {},
 				},
 			});
-			return token;
 		},
 		updateTokenByLogin: async (
 			_parent: unknown,

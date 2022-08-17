@@ -45,8 +45,9 @@ export const useAuthOperations: () => {
 		await CREATE_USER({
 			variables: args,
 		}).then((res) => {
-			if (!res.data) throw new Error("Response data is undefined");
-			storage.setToken(res.data.createUser);
+			if (!res.data || !res.data.createUser.token)
+				throw new Error("Response data is undefined");
+			storage.setToken(res.data.createUser.token);
 		});
 	};
 

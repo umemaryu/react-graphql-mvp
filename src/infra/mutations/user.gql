@@ -15,7 +15,9 @@ mutation CreateUser(
 		country: $country
 		city: $city
 		nickName: $nickName
-	)
+	) {
+		token
+	}
 }
 
 mutation UpdatePassword(
