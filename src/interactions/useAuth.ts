@@ -36,13 +36,13 @@ export const useAuth = () => {
 		await mutations.createUser(args);
 	};
 
-	const singOut = async (args: MutationUpdateTokenToNullArgs) => {
+	const signOut = async (args: MutationUpdateTokenToNullArgs) => {
 		await mutations.updateTokenToNull(args);
 	};
 
 	return {
 		models: { user },
-		operations: { signUp, singOut, login },
+		operations: { signUp, signOut, login },
 		loading,
 		error,
 	};

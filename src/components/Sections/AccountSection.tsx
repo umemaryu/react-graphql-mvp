@@ -9,7 +9,7 @@ import useCustomToast from "hooks/useCustomToast";
 type Input = {
 	id: number;
 	actions: {
-		singOut: SignOut;
+		signOut: SignOut;
 		changePassword: ChangePassword;
 	};
 };
@@ -50,7 +50,7 @@ const useAccount = ({ id, actions }: Input) => {
 	};
 
 	const handleSignOut = useCallback(async () => {
-		await actions.singOut({ id: id });
+		await actions.signOut({ id: id });
 		window.location.reload();
 	}, [actions, id]);
 	return {
@@ -62,7 +62,7 @@ const useAccount = ({ id, actions }: Input) => {
 type Props = {
 	id: number;
 	actions: {
-		singOut: SignOut;
+		signOut: SignOut;
 		changePassword: ChangePassword;
 	};
 	error: string;
