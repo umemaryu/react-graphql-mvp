@@ -11,10 +11,10 @@ generates:
   server/codegen.ts:
     config:
       useIndexSignature: true
-      contextType: infra/models#Context
+      contextType: server/models#Context
       mappers:
-        Post: infra/models#UserPost
-        User: infra/models#UserModel
+        Post: server/models#UserPost
+        User: server/models#UserModel
     plugins:
       - typescript
       - typescript-resolvers
